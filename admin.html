@@ -11,6 +11,8 @@
 <body>
 
   <div class="portal-layout">
+    
+    <!-- SIDEBAR / MENU -->
     <aside class="sidebar">
       <a href="index.html" class="sidebar-brand">
         <span class="brand-mark">SH</span>
@@ -27,7 +29,15 @@
       <button class="sidebar-logout" onclick="logoutAdmin()">🚪 Logout Admin</button>
     </aside>
 
+    <!-- KONTEN UTAMA -->
     <main class="portal-main">
+      
+      <!-- HEADER MOBILE (LOGOUT JELAS) -->
+      <div class="mobile-header">
+        <h3>Panel Admin</h3>
+        <a href="index.html" onclick="logoutAdmin()" class="btn-logout-top">Keluar 🚪</a>
+      </div>
+
       <!-- TAB KELOLA -->
       <div id="tab-kelola" class="tab-panel">
         <div class="portal-topbar">
@@ -76,18 +86,40 @@
         </div>
       </div>
     </main>
+
   </div>
 
   <script>
-    // Login Admin
-    const ADMIN_PASS = 'admin123';
-    if (localStorage.getItem('adminLoggedIn') !== 'true') {
-      if (prompt('Password Admin:') !== ADMIN_PASS) { window.location.href = 'index.html'; }
-      else { localStorage.setItem('adminLoggedIn', 'true'); }
-    }
-    function logoutAdmin() { localStorage.removeItem('adminLoggedIn'); window.location.href = 'index.html'; }
+    // ==========================================
+    // LOGIKA LOGIN ADMIN (WAJIB KETIK PASSWORD)
+    // ==========================================
+    const ADMIN_PASS = 'admin123'; // Ganti password admin di sini jika perlu
 
-    // Tab Switch
+    // Cek apakah sesi login ada di tab browser ini (sessionStorage)
+    // Jika tidak ada, paksa munculkan prompt password
+    if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
+      
+      const pass = prompt('KEAMANAN ADMIN:\nSilakan masukkan password admin untuk melanjutkan:');
+      
+      if (pass === ADMIN_PASS) {
+        // Jika password benar, izinkan akses untuk sesi tab ini
+        sessionStorage.setItem('adminAuthenticated', 'true');
+      } else {
+        // Jika password salah atau klik Cancel, tendang keluar
+        alert('Akses Ditolak! Password salah.');
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Fungsi Logout Admin (Menghapus sesi agar besok wajib login lagi)
+    function logoutAdmin() { 
+      sessionStorage.removeItem('adminAuthenticated');
+      window.location.href = 'index.html'; 
+    }
+
+    // ==========================================
+    // LOGIKA TAB & DATA (Tidak ada yang berubah)
+    // ==========================================
     function showTab(tab, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + tab).hidden = false;
@@ -95,13 +127,11 @@
       if(el) el.classList.add('active');
     }
 
-    // Data Helper
     const getAkun = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setAkun = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
     const getPending = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
     const setPending = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
 
-    // Render Tables
     function renderAkun() {
       const list = getAkun();
       document.getElementById('akunTable').innerHTML = list.length ? list.map((a, i) => `
@@ -132,12 +162,10 @@
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Tidak ada pendaftar.</td></tr>';
     }
 
-    // Actions
     function hapusAkun(i) { if(confirm('Hapus akun ini?')) { const l = getAkun(); l.splice(i,1); setAkun(l); renderAkun(); } }
-    function setuju(i) { const p = getPending(); const a = getAkun(); a.push(p[i]); setAkun(a); p.splice(i,1); setPending(p); renderAkun(); renderPending(); alert('Disetujui!'); showTab('kelola'); }
+    function setuju(i) { const p = getPending(); const a = getAkun(); a.push(p[i]); setAkun(a); p.splice(i,1); setPending(p); renderAkun(); renderPending(); alert('Disetujui!'); showTab('kelola', document.querySelector('.sidebar-menu a')); }
     function tolak(i) { const p = getPending(); p.splice(i,1); setPending(p); renderPending(); }
 
-    // Form Buat Akun
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getAkun();
@@ -146,7 +174,6 @@
       document.getElementById('alertBuat').hidden = false; renderAkun();
     });
 
-    // Init
     renderAkun(); renderPending();
   </script>
 </body>

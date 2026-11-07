@@ -9,8 +9,6 @@
 </head>
 <body>
   <div class="portal-layout">
-    
-    <!-- SIDEBAR / MENU -->
     <aside class="sidebar">
       <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Admin Area</span></div>
       <ul class="sidebar-menu">
@@ -24,16 +22,9 @@
       <button class="sidebar-logout" onclick="logout()">🚪 Logout Admin</button>
     </aside>
 
-    <!-- KONTEN UTAMA -->
     <main class="portal-main">
-      
-      <!-- TAB 1: MONITORING -->
       <div id="tab-monitor" class="tab-panel">
-        <div class="portal-topbar">
-          <h1>Data & Dokumen Klien</h1>
-          <p>Pantau semua perkara dan file yang diunggah oleh klien.</p>
-        </div>
-        
+        <div class="portal-topbar"><h1>Data & Dokumen Klien</h1><p>Pantau semua perkara dan file yang diunggah oleh klien.</p></div>
         <div class="panel">
           <div class="panel-head"><h3>📄 Dokumen & Bukti Pembayaran</h3></div>
           <div class="panel-body">
@@ -43,7 +34,6 @@
             </table>
           </div>
         </div>
-
         <div class="panel">
           <div class="panel-head"><h3>📋 Data Perkara Klien</h3></div>
           <div class="panel-body">
@@ -55,7 +45,6 @@
         </div>
       </div>
 
-      <!-- TAB 2: KELOLA AKUN (DENGAN TOMBOL EDIT) -->
       <div id="tab-kelola" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Akun Klien Aktif</h1><p>Daftar klien yang bisa login. Anda dapat mengedit nama atau password mereka.</p></div>
         <div class="panel">
@@ -68,7 +57,6 @@
         </div>
       </div>
 
-      <!-- TAB 3: PENDAFTAR BARU -->
       <div id="tab-pending" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Pendaftar Baru</h1><p>Verifikasi pendaftar mandiri.</p></div>
         <div class="panel">
@@ -81,7 +69,6 @@
         </div>
       </div>
 
-      <!-- TAB 4: BUAT AKUN -->
       <div id="tab-buat" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Buat Akun Manual</h1></div>
         <div class="panel">
@@ -97,7 +84,6 @@
         </div>
       </div>
 
-      <!-- TAB 5: PENGATURAN ADMIN (GANTI PASSWORD) -->
       <div id="tab-setting" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Pengaturan Admin</h1></div>
         <div class="panel">
@@ -115,45 +101,41 @@
           </div>
         </div>
       </div>
-
     </main>
   </div>
 
   <script>
-    // ==========================================
-    // LOGIKA LOGIN ADMIN
-    // ==========================================
-    // Cek password tersimpan, jika belum ada gunakan 'admin123'
-    let PASS_ADMIN = localStorage.getItem('demoAdminPass') || 'admin123';
+    // PENGECEKAN ULANG (DOUBLE VERIFICATION)
+    const PASS_ADMIN = localStorage.getItem('demoAdminPass') || 'admin123';
+    const tiketTahap1 = sessionStorage.getItem('adminVerifikasiTahap1');
 
-    if (sessionStorage.getItem('authAdmin') !== 'true') {
-      if (prompt('Masukkan Password Admin:') === PASS_ADMIN) {
+    if (tiketTahap1 !== 'true') {
+      alert('Akses Ditolak. Silakan login melalui halaman utama.');
+      window.location.href = 'login.html';
+    } else {
+      const verifikasiUlang = prompt('🔒 KEAMANAN EKSTRA:\nSilakan ketik ulang password Admin untuk melanjutkan:');
+      if (verifikasiUlang !== PASS_ADMIN) {
+        alert('Verifikasi ulang gagal. Sesi Anda dihentikan.');
+        sessionStorage.removeItem('adminVerifikasiTahap1');
+        window.location.href = 'login.html';
+      } else {
         sessionStorage.setItem('authAdmin', 'true');
-      } else { 
-        alert('Akses Ditolak!'); 
-        window.location.href = 'index.html'; 
       }
     }
-    
+
     function logout() { 
       sessionStorage.removeItem('authAdmin'); 
+      sessionStorage.removeItem('adminVerifikasiTahap1'); 
       window.location.href = 'index.html'; 
     }
 
-    // ==========================================
-    // LOGIKA NAVIGASI TAB
-    // ==========================================
     function showTab(id, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + id).hidden = false;
-      
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
       if (el) el.classList.add('active');
     }
 
-    // ==========================================
-    // DATA HELPERS
-    // ==========================================
     const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
     const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
@@ -161,11 +143,7 @@
     const getD = () => JSON.parse(localStorage.getItem('demoDokumen') || '[]');
     const getPr = () => JSON.parse(localStorage.getItem('demoPerkara') || '[]');
 
-    // ==========================================
-    // RENDER SEMUA TABEL
-    // ==========================================
     function renderAll() {
-      // 1. Tabel Dokumen
       const dokumen = getD();
       document.getElementById('tblDok').innerHTML = dokumen.length ? dokumen.map(d => `
         <tr>
@@ -177,7 +155,6 @@
         </tr>
       `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada dokumen yang diunggah.</td></tr>';
 
-      // 2. Tabel Perkara
       const perkara = getPr();
       document.getElementById('tblPrk').innerHTML = perkara.length ? perkara.map(p => `
         <tr>
@@ -189,7 +166,6 @@
         </tr>
       `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada data perkara.</td></tr>';
 
-      // 3. Tabel Akun Klien (DENGAN TOMBOL EDIT & HAPUS)
       const akun = getA();
       document.getElementById('tblAkun').innerHTML = akun.length ? akun.map((a, i) => `
         <tr>
@@ -203,82 +179,6 @@
         </tr>
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada akun aktif.</td></tr>';
 
-      // 4. Tabel Pendaftar Baru
       const pending = getP();
       document.getElementById('badge').hidden = pending.length === 0;
-      document.getElementById('badge').textContent = pending.length;
-      document.getElementById('tblPending').innerHTML = pending.length ? pending.map((x, i) => `
-        <tr>
-          <td>${x.nama}</td><td>${x.email}</td>
-          <td style="white-space:nowrap;">
-            <button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-right:4px;">✓ Setujui</button>
-            <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;">✕ Tolak</button>
-          </td>
-        </tr>
-      `).join('') : '<tr><td colspan="3" style="text-align:center;">Tidak ada pendaftar baru.</td></tr>';
-    }
-
-    // ==========================================
-    // FUNGSI AKSI (EDIT, UPDATE, HAPUS)
-    // ==========================================
-    
-    // FITUR BARU: EDIT AKUN KLIEN
-    function editAkun(i) {
-      const a = getA();
-      const klien = a[i];
-      
-      const newNama = prompt('Ubah Nama Klien:', klien.nama);
-      if(newNama === null) return; // Batal
-      
-      const newPass = prompt('Ubah Password Klien:', klien.password);
-      if(newPass === null) return; // Batal
-      
-      a[i].nama = newNama;
-      a[i].password = newPass;
-      
-      setA(a);
-      renderAll();
-      alert('Data akun klien berhasil diperbarui!');
-    }
-
-    function updatePerkara(id) {
-      const all = getPr(); const p = all.find(x => x.id === id); if(!p) return;
-      const newNomor = prompt('Masukkan Nomor Perkara Pengadilan (Biarkan "-" jika belum):', p.nomor);
-      if(newNomor === null) return; 
-      const newStatus = prompt('Masukkan Status Baru (Contoh: "Berjalan", "Selesai", "Menunggu Review"):', p.status);
-      if(newStatus === null) return;
-      p.nomor = newNomor; p.status = newStatus;
-      localStorage.setItem('demoPerkara', JSON.stringify(all));
-      renderAll(); alert('Data perkara klien berhasil diperbarui!');
-    }
-
-    function delA(i) { if(confirm('Hapus akun ini secara permanen?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
-    function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Pendaftar berhasil disetujui!'); }
-    function tolak(i) { if(confirm('Tolak pendaftaran ini?')) { const p = getP(); p.splice(i, 1); setP(p); renderAll(); } }
-
-    // ==========================================
-    // FORM BUAT AKUN BARU
-    // ==========================================
-    document.getElementById('formBuat').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const a = getA();
-      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value, password: document.getElementById('bp').value });
-      setA(a); e.target.reset(); document.getElementById('okBuat').hidden = false; renderAll();
-    });
-
-    // ==========================================
-    // FORM GANTI PASSWORD ADMIN
-    // ==========================================
-    document.getElementById('formPass').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const newPass = document.getElementById('newPassAdmin').value;
-      localStorage.setItem('demoAdminPass', newPass);
-      alert('Password Admin berhasil diubah! Silakan ingat password baru Anda.');
-      e.target.reset();
-    });
-
-    // JALANKAN SAAT HALAMAN DIBUKA
-    renderAll();
-  </script>
-</body>
-</html>
+      document.getElementById('badge').textContent = pending.length

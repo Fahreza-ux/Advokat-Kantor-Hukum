@@ -3,29 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — Portal Klien</title>
+  <title>Login — Portal Firma Hukum</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh; background: var(--bg);">
-
-  <!-- HEADER LOGIN -->
   <header style="padding: 20px; text-align: center; border-bottom: 1px solid var(--line); background: var(--white);">
     <a href="index.html" class="brand" style="justify-content: center;">
       <span class="brand-mark">SH</span>
       <span class="brand-text">Setyo Hantoro <em>&</em> Associates</span>
     </a>
   </header>
-
-  <!-- KARTU LOGIN -->
+  
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
     <div style="background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; width: 100%; max-width: 420px; box-shadow: var(--shadow-md);">
-      
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Portal Klien</h1>
+        <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Login Portal</h1>
         <p style="color: var(--ink-mute); font-size: 0.9rem;">Masuk untuk memantau perkembangan perkara.</p>
       </div>
-
+      
       <form id="loginForm">
         <div style="margin-bottom: 16px;">
           <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email</label>
@@ -39,22 +35,21 @@
           <input type="checkbox" id="remember" style="width: auto;">
           <label for="remember" style="font-weight: 400; font-size: 0.85rem; margin: 0;">Ingat saya</label>
         </div>
-
+        
         <div id="errorBox" style="display: none; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
-
+        
         <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px;">Masuk</button>
       </form>
-
+      
       <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute);">
         Belum punya akun? <a href="daftar.html" style="color: var(--gold); font-weight: bold;">Daftar di sini</a><br><br>
-        <small>Demo: klien@demo.com / demo123</small>
+        <small>Demo Klien: klien@demo.com / demo123</small>
       </div>
     </div>
   </main>
 
   <script>
-    // Cek jika sudah login (Remember Me), langsung lempar ke portal
-    if (localStorage.getItem('demoLoggedIn') === 'true') {
+    if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') {
       window.location.href = 'portal.html';
     }
 
@@ -63,11 +58,27 @@
       const email = document.getElementById('email').value.toLowerCase();
       const pass = document.getElementById('password').value;
       const rem = document.getElementById('remember').checked;
-      
+      const errorBox = document.getElementById('errorBox');
+
+      // 1. LOGIKA ADMIN
+      if (email === 'admin@setyohantoro.com') {
+        if (pass === 'admin123') {
+          sessionStorage.setItem('adminVerifikasiTahap1', 'true');
+          window.location.href = 'admin.html';
+          return;
+        } else {
+          errorBox.textContent = 'Password Admin salah.';
+          errorBox.style.display = 'block';
+          return;
+        }
+      }
+
+      // 2. LOGIKA KLIEN
       const list = JSON.parse(localStorage.getItem('demoAkun') || '[]');
       list.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
       
       const acc = list.find(a => a.email === email && a.password === pass);
+      
       if (acc) {
         if(rem) localStorage.setItem('demoLoggedIn', 'true');
         else sessionStorage.setItem('demoLoggedIn', 'true');
@@ -75,9 +86,8 @@
         localStorage.setItem('demoNamaKlien', acc.nama);
         window.location.href = 'portal.html';
       } else {
-        const err = document.getElementById('errorBox');
-        err.textContent = 'Email atau password salah.';
-        err.style.display = 'block';
+        errorBox.textContent = 'Email atau password klien salah.';
+        errorBox.style.display = 'block';
       }
     });
   </script>

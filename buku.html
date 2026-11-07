@@ -3,72 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Katalog Buku — Setyo Hantoro & Associates</title>
+  <title>Katalog Buku — SAKRI & Associates</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body style="background: var(--bg-alt);">
+<body style="background: #0a0a0a; color: #ffffff;">
 
-  <!-- NAVBAR DENGAN LOGO -->
-  <header class="navbar">
+  <!-- NAVBAR -->
+  <header class="navbar" style="background: rgba(10, 10, 10, 0.9); border-bottom: 1px solid #27272a;">
     <div class="container nav-inner">
-      <a href="index.html" class="brand" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
-        <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain;">
-        <span class="brand-text" style="font-size: 1.1rem; font-weight: bold; color: var(--ink);">Setyo Hantoro <em>&</em> Associates</span>
+      <a href="index.html" class="brand" style="display: flex; align-items: center; gap: 10px; text-decoration: none;">
+        <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; max-height: 45px;">
+        <span style="font-size: 1rem; font-weight: bold; color: #ffffff;">SAKRI <em style="color: #d4af37; font-style: normal;">&</em> Associates</span>
       </a>
       <nav class="nav-menu" style="display: block;">
-        <a href="index.html">← Kembali ke Beranda</a>
+        <a href="index.html" style="color: #a1a1aa; text-decoration: none;">← Kembali ke Beranda</a>
       </nav>
     </div>
   </header>
 
-  <section class="section" style="background: var(--white); padding-bottom: 40px;">
+  <!-- HEADER KATALOG -->
+  <section class="section" style="background: #0a0a0a; padding-bottom: 40px;">
     <div class="container text-center">
-      <div class="badge">📚 Katalog Buku</div>
-      <h1 style="font-size: 2.5rem; margin-bottom: 16px; margin-top: 16px;">Koleksi Buku Firma Hukum Kami</h1>
-      <p style="font-size: 1.1rem; color: var(--ink-soft); max-width: 600px; margin: 0 auto;">
+      <div class="badge" style="background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; color: #d4af37;">📚 Katalog Buku</div>
+      <h1 style="font-size: 2.5rem; margin-bottom: 16px; margin-top: 16px; color: #ffffff;">Koleksi Buku Firma Hukum Kami</h1>
+      <p style="font-size: 1.1rem; color: #a1a1aa; max-width: 600px; margin: 0 auto;">
         Klik pada buku untuk melihat detail sinopsis dan informasi penulis.
       </p>
     </div>
   </section>
 
-  <section class="section">
+  <!-- DAFTAR BUKU -->
+  <section class="section" style="background: #0a0a0a; padding-top: 0;">
     <div class="container">
       <div class="services-grid">
         
         <!-- BUKU 1 -->
-        <div class="service-card" style="display: flex; flex-direction: column; padding: 20px;">
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 20px; display: flex; flex-direction: column;">
           <a href="buku-detail-1.html">
-            <img src="cover-buku.jpg" alt="Manajemen Investasi" style="width: 100%; height: 350px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="cover-buku.jpg" alt="Manajemen Investasi" style="width: 100%; height: 350px; object-fit: contain; background: #0a0a0a; border-radius: 8px; margin-bottom: 20px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
           </a>
           <a href="buku-detail-1.html" style="text-decoration: none; color: inherit;">
-            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Manajemen Investasi</h3>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #d4af37;">Manajemen Investasi</h3>
           </a>
-          <p style="color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Teori, Studi Kasus, dan Project-Based Learning.</p>
+          <p style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Teori, Studi Kasus, dan Project-Based Learning.</p>
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <span style="font-weight: 800; font-size: 1.2rem;">Rp 125.000</span>
-            <span class="badge" style="background: #dcfce7; color: #166534; border: none; font-size: 0.7rem;">Hemat 15%</span>
+            <span style="font-weight: 800; font-size: 1.2rem; color: #ffffff;">Rp 125.000</span>
+            <span class="badge" style="background: rgba(22, 101, 52, 0.2); color: #4ade80; border: none; font-size: 0.7rem;">Hemat 15%</span>
           </div>
           
-          <a href="buku-detail-1.html" class="btn-primary" style="width: 100%;">Lihat Detail Buku</a>
+          <a href="buku-detail-1.html" class="btn-primary" style="width: 100%; text-decoration: none;">Lihat Detail Buku</a>
         </div>
 
         <!-- BUKU 2 -->
-        <div class="service-card" style="display: flex; flex-direction: column; padding: 20px;">
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 20px; display: flex; flex-direction: column;">
           <a href="buku-detail-2.html">
-            <img src="https://via.placeholder.com/300x400/0d1b2a/b8860b?text=Cover+Buku+Baru" alt="Hukum Korporasi" style="width: 100%; height: 350px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
+            <img src="https://via.placeholder.com/300x400/0d1b2a/b8860b?text=Cover+Buku+Baru" alt="Hukum Korporasi" style="width: 100%; height: 350px; object-fit: contain; background: #0a0a0a; border-radius: 8px; margin-bottom: 20px;">
           </a>
           <a href="buku-detail-2.html" style="text-decoration: none; color: inherit;">
-            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Hukum Korporasi Terapan</h3>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px; color: #d4af37;">Hukum Korporasi Terapan</h3>
           </a>
-          <p style="color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Panduan praktis pendirian PT dan kepatuhan OSS.</p>
+          <p style="color: #a1a1aa; font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Panduan praktis pendirian PT dan kepatuhan OSS.</p>
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <span style="font-weight: 800; font-size: 1.2rem;">Rp 99.000</span>
+            <span style="font-weight: 800; font-size: 1.2rem; color: #ffffff;">Rp 99.000</span>
           </div>
           
-          <a href="buku-detail-2.html" class="btn-primary" style="width: 100%;">Lihat Detail Buku</a>
+          <a href="buku-detail-2.html" class="btn-primary" style="width: 100%; text-decoration: none;">Lihat Detail Buku</a>
         </div>
 
       </div>

@@ -50,14 +50,17 @@
       const rem = document.getElementById('remember').checked;
       const errorBox = document.getElementById('errorBox');
 
-      // AMBIL DARI 2 SUMBER (Admin & Pendaftar Mandiri)
+      // Ambil dari 2 sumber: Buatan Admin (demoAkun) dan Pendaftar (demoPending)
       let akunAdmin = JSON.parse(localStorage.getItem('demoAkun') || '[]');
       let akunPending = JSON.parse(localStorage.getItem('demoPending') || '[]');
+      
+      // GABUNGKAN KEDUANYA
       let semuaDataKlien = [...akunAdmin, ...akunPending];
 
-      // Tambahkan akun demo
+      // Akun demo
       semuaDataKlien.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
 
+      // Pencarian akun: menyesuaikan properti 'password' untuk admin dan pending
       const akunDitemukan = semuaDataKlien.find(a => a.email === email && a.password === pass);
       
       if (akunDitemukan) {

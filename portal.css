@@ -1,14 +1,13 @@
 :root {
   --bg: #fbfaf7; --bg-alt: #f3efe7; --ink: #0d1b2a; --ink-soft: #4a5568;
   --ink-mute: #6b7280; --gold: #b8860b; --line: #e8e3d9; --white: #ffffff;
-  --radius: 20px; --radius-sm: 12px; --shadow-sm: 0 4px 12px rgba(13, 27, 42, 0.04);
+  --radius: 20px; --shadow-sm: 0 4px 12px rgba(13, 27, 42, 0.04);
 }
 body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; }
 h1, h2, h3 { font-family: 'Fraunces', serif; margin: 0; color: var(--ink); }
 a { text-decoration: none; color: inherit; }
 * { box-sizing: border-box; }
 
-/* LAYOUT UTAMA (FLEXBOX KIRI-KANAN) */
 .portal-layout { display: flex; min-height: 100vh; width: 100%; overflow-x: hidden; }
 
 /* SIDEBAR KIRI */
@@ -47,13 +46,14 @@ a { text-decoration: none; color: inherit; }
 /* FORM & UPLOAD */
 .portal-form .form-group { margin-bottom: 20px; }
 .portal-form label { display: block; font-size: 0.88rem; font-weight: 600; margin-bottom: 8px; }
-.portal-form input, .portal-form select, .portal-form textarea { width: 100%; padding: 13px 16px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.92rem; background: var(--bg); }
+.portal-form input, .portal-form select, .portal-form textarea { width: 100%; padding: 13px 16px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.92rem; background: var(--bg); font-family: inherit; }
 .portal-form input:focus, .portal-form select:focus { outline: none; border-color: var(--gold); }
 .dropzone { border: 2px dashed var(--line); border-radius: var(--radius); padding: 40px 24px; text-align: center; background: var(--bg-alt); cursor: pointer; }
 .dropzone .icon { font-size: 2.4rem; margin-bottom: 12px; }
 .alert-success { background: #dcfce7; color: #166534; padding: 14px 16px; border-radius: 8px; font-size: 0.88rem; margin-bottom: 20px; border-left: 4px solid #16a34a; }
+.badge-count { background: #dc2626; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 100px; margin-left: auto; }
 
-/* TAMPILAN MOBILE (KIRI-KANAN MINI) */
+/* RESPONSIVE HP (KIRI-KANAN MINI) */
 @media (max-width: 800px) {
   .sidebar { width: 75px; padding: 16px 4px; }
   .sidebar-brand { justify-content: center; margin-bottom: 16px; padding-bottom: 16px; }

@@ -16,7 +16,7 @@ h1 span, h2 span { color: var(--gold); }
 .navbar { position: sticky; top: 0; z-index: 50; background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(15px); border-bottom: 1px solid var(--line); }
 .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 1rem; }
-.brand-logo { height: 50px !important; width: auto !important; max-height: 50px; object-fit: contain; }
+.brand-logo { height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain; }
 .brand-text { color: var(--white); }
 .brand-text em { color: var(--gold); font-style: normal; }
 .nav-menu { display: flex; align-items: center; gap: 32px; font-size: 0.95rem; font-weight: 600; }

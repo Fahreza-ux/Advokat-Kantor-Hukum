@@ -90,7 +90,7 @@
   font-weight: 600; font-size: 0.8rem; text-transform: uppercase;
   letter-spacing: 0.5px; border-bottom: 1px solid var(--line);
 }
-.data-table td { padding: 16px 8px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.data-table td { padding: 16px 8px; border-bottom: 1px solid var(--line); color: var(--ink-soft); vertical-align: middle; }
 .data-table tr:last-child td { border-bottom: none; }
 
 .status-pill { display: inline-block; padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 700; }
@@ -123,18 +123,18 @@
   margin-bottom: 20px; border-left: 4px solid #16a34a;
 }
 
+.badge-count { background: #dc2626; color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 100px; margin-left: auto; }
+
 /* =========================================
    RESPONSIVE — MOBILE FIX (BOTTOM NAV)
    ========================================= */
 .mobile-logout { display: none; }
 
 @media (max-width: 800px) {
-  /* Layout jadi 1 kolom, posisi terbalik agar sidebar turun ke bawah */
-  .portal-layout {
-    display: flex; flex-direction: column-reverse; 
-  }
+  /* Ubah layout menjadi block agar tidak tabrakan */
+  .portal-layout { display: block; }
 
-  /* Sidebar jadi Bottom Nav */
+  /* Fixed Bottom Nav */
   .sidebar {
     position: fixed; bottom: 0; left: 0; width: 100%;
     height: auto; padding: 10px 12px;
@@ -178,7 +178,7 @@
 
   /* Tabel Scroll */
   .panel-body { overflow-x: auto; padding: 8px 16px 16px; }
-  .data-table { min-width: 500px; }
+  .data-table { min-width: 450px; }
   
   .dropzone { padding: 24px 16px; }
 }
@@ -186,4 +186,4 @@
 @media (max-width: 400px) {
   .portal-stats { grid-template-columns: 1fr; }
   .sidebar-menu a { font-size: 0.65rem; }
-                      }
+}

@@ -181,4 +181,55 @@
 
       const pending = getP();
       document.getElementById('badge').hidden = pending.length === 0;
-      document.getElementById('badge').textContent = pending.length
+      document.getElementById('badge').textContent = pending.length;
+      document.getElementById('tblPending').innerHTML = pending.length ? pending.map((x, i) => `
+        <tr>
+          <td>${x.nama}</td><td>${x.email}</td>
+          <td style="white-space:nowrap;">
+            <button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-right:4px;">✓ Setujui</button>
+            <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;">✕ Tolak</button>
+          </td>
+        </tr>
+      `).join('') : '<tr><td colspan="3" style="text-align:center;">Tidak ada pendaftar baru.</td></tr>';
+    }
+
+    function editAkun(i) {
+      const a = getA(); const klien = a[i];
+      const newNama = prompt('Ubah Nama Klien:', klien.nama); if(newNama === null) return;
+      const newPass = prompt('Ubah Password Klien:', klien.password); if(newPass === null) return;
+      a[i].nama = newNama; a[i].password = newPass;
+      setA(a); renderAll(); alert('Data akun klien berhasil diperbarui!');
+    }
+
+    function updatePerkara(id) {
+      const all = getPr(); const p = all.find(x => x.id === id); if(!p) return;
+      const newNomor = prompt('Masukkan Nomor Perkara Pengadilan (Biarkan "-" jika belum):', p.nomor); if(newNomor === null) return; 
+      const newStatus = prompt('Masukkan Status Baru (Contoh: "Berjalan", "Selesai", "Menunggu Review"):', p.status); if(newStatus === null) return;
+      p.nomor = newNomor; p.status = newStatus;
+      localStorage.setItem('demoPerkara', JSON.stringify(all));
+      renderAll(); alert('Data perkara klien berhasil diperbarui!');
+    }
+
+    function delA(i) { if(confirm('Hapus akun ini secara permanen?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
+    function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Pendaftar berhasil disetujui!'); }
+    function tolak(i) { if(confirm('Tolak pendaftaran ini?')) { const p = getP(); p.splice(i, 1); setP(p); renderAll(); } }
+
+    document.getElementById('formBuat').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const a = getA();
+      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value, password: document.getElementById('bp').value });
+      setA(a); e.target.reset(); document.getElementById('okBuat').hidden = false; renderAll();
+    });
+
+    document.getElementById('formPass').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newPass = document.getElementById('newPassAdmin').value;
+      localStorage.setItem('demoAdminPass', newPass);
+      alert('Password Admin berhasil diubah! Silakan ingat password baru Anda.');
+      e.target.reset();
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>

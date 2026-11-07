@@ -9,11 +9,14 @@
 </head>
 <body>
   <div class="portal-layout">
+    
+    <!-- SIDEBAR / MENU -->
     <aside class="sidebar">
       <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Admin Area</span></div>
       <ul class="sidebar-menu">
-        <li><a href="#" class="active" onclick="showTab('monitor', this)"><span class="emoji">📊</span> Monitoring</a></li>
-        <li><a href="#" onclick="showTab('kelola', this)"><span class="emoji">👥</span> Klien</a></li>
+        <!-- MENU MONITORING DIBUAT SANGAT JELAS -->
+        <li><a href="#" class="active" onclick="showTab('monitor', this)"><span class="emoji">📊</span> Data & Dokumen</a></li>
+        <li><a href="#" onclick="showTab('kelola', this)"><span class="emoji">👥</span> Akun Klien</a></li>
         <li><a href="#" onclick="showTab('pending', this)"><span class="emoji">⏳</span> Pendaftar <span id="badge" class="badge-count" hidden>0</span></a></li>
         <li><a href="#" onclick="showTab('buat', this)"><span class="emoji">➕</span> Buat Akun</a></li>
         <li class="mobile-logout"><a href="index.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
@@ -21,21 +24,30 @@
       <button class="sidebar-logout" onclick="logout()">🚪 Logout Admin</button>
     </aside>
 
+    <!-- KONTEN UTAMA -->
     <main class="portal-main">
-      <!-- TAB MONITORING -->
+      
+      <!-- TAB 1: DATA & DOKUMEN KLIEN -->
       <div id="tab-monitor" class="tab-panel">
-        <div class="portal-topbar"><h1>Data Klien (Pusat)</h1><p>Pantau data perkara, pembayaran, dan dokumen.</p></div>
+        <div class="portal-topbar">
+          <h1>Data & Dokumen Klien</h1>
+          <p>Pantau semua perkara dan file yang diunggah oleh klien.</p>
+        </div>
+        
+        <!-- Tabel Dokumen/Pembayaran -->
         <div class="panel">
-          <div class="panel-head"><h3>Dokumen & Pembayaran</h3></div>
+          <div class="panel-head"><h3>📄 Dokumen & Bukti Pembayaran</h3></div>
           <div class="panel-body">
             <table class="data-table">
-              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th></tr></thead>
+              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Tanggal</th></tr></thead>
               <tbody id="tblDok"></tbody>
             </table>
           </div>
         </div>
+
+        <!-- Tabel Perkara -->
         <div class="panel">
-          <div class="panel-head"><h3>Data Perkara</h3></div>
+          <div class="panel-head"><h3>📋 Data Perkara</h3></div>
           <div class="panel-body">
             <table class="data-table">
               <thead><tr><th>Email Klien</th><th>No. Perkara</th><th>Jenis</th></tr></thead>
@@ -45,9 +57,9 @@
         </div>
       </div>
 
-      <!-- TAB KELOLA AKUN -->
+      <!-- TAB 2: KELOLA AKUN -->
       <div id="tab-kelola" class="tab-panel" hidden>
-        <div class="portal-topbar"><h1>Akun Klien Aktif</h1></div>
+        <div class="portal-topbar"><h1>Akun Klien Aktif</h1><p>Daftar klien yang bisa login.</p></div>
         <div class="panel">
           <div class="panel-body">
             <table class="data-table">
@@ -58,7 +70,7 @@
         </div>
       </div>
 
-      <!-- TAB PENDING (PENDAFTAR BARU) -->
+      <!-- TAB 3: PENDAFTAR BARU -->
       <div id="tab-pending" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Pendaftar Baru</h1><p>Verifikasi pendaftar mandiri.</p></div>
         <div class="panel">
@@ -71,81 +83,111 @@
         </div>
       </div>
 
-      <!-- TAB BUAT -->
+      <!-- TAB 4: BUAT AKUN -->
       <div id="tab-buat" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Buat Akun Manual</h1></div>
         <div class="panel">
           <div class="panel-body">
-            <div id="okBuat" class="alert-success" hidden>✓ Akun aktif dibuat!</div>
+            <div id="okBuat" class="alert-success" hidden>✓ Akun aktif berhasil dibuat!</div>
             <form id="formBuat" class="portal-form">
-              <div class="form-group"><label>Nama</label><input type="text" id="bn" required></div>
+              <div class="form-group"><label>Nama Klien</label><input type="text" id="bn" required></div>
               <div class="form-group"><label>Email</label><input type="email" id="be" required></div>
-              <div class="form-group"><label>Pass</label><input type="text" id="bp" required></div>
+              <div class="form-group"><label>Password</label><input type="text" id="bp" required></div>
               <button type="submit" class="btn-primary">Buat Akun</button>
             </form>
           </div>
         </div>
       </div>
+
     </main>
   </div>
 
   <script>
-    // LOGIKA LOGIN ADMIN
+    // ==========================================
+    // LOGIKA LOGIN ADMIN (WAJIB KETIK PASSWORD)
+    // ==========================================
     const PASS = 'admin123';
     if (sessionStorage.getItem('authAdmin') !== 'true') {
-      if (prompt('Masukkan Password Admin:') === PASS) sessionStorage.setItem('authAdmin', 'true');
-      else { alert('Ditolak!'); window.location.href = 'index.html'; }
+      if (prompt('Masukkan Password Admin:') === PASS) {
+        sessionStorage.setItem('authAdmin', 'true');
+      } else { 
+        alert('Akses Ditolak!'); 
+        window.location.href = 'index.html'; 
+      }
     }
-    function logout() { sessionStorage.removeItem('authAdmin'); window.location.href = 'index.html'; }
+    
+    function logout() { 
+      sessionStorage.removeItem('authAdmin'); 
+      window.location.href = 'index.html'; 
+    }
 
-    // LOGIKA TAB
+    // ==========================================
+    // LOGIKA NAVIGASI TAB
+    // ==========================================
     function showTab(id, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + id).hidden = false;
+      
+      // Hapus class active dari semua menu
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-      el.classList.add('active');
+      // Tambahkan class active ke menu yang diklik
+      if (el) el.classList.add('active');
     }
 
-    // DATA HELPERS
+    // ==========================================
+    // DATA HELPERS (Ambil dari localStorage)
+    // ==========================================
     const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
+    
     const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
     const setP = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
+    
     const getD = () => JSON.parse(localStorage.getItem('demoDokumen') || '[]');
     const getPr = () => JSON.parse(localStorage.getItem('demoPerkara') || '[]');
 
+    // ==========================================
     // RENDER SEMUA TABEL
+    // ==========================================
     function renderAll() {
-      // 1. Tabel Dokumen
-      document.getElementById('tblDok').innerHTML = getD().map(d => `
+      // 1. Tabel Dokumen Klien (Menampilkan siapa yang upload apa)
+      const dokumen = getD();
+      document.getElementById('tblDok').innerHTML = dokumen.length ? dokumen.map(d => `
         <tr>
           <td><strong>${d.owner}</strong></td>
-          <td>${d.nama}</td>
+          <td>📎 ${d.nama}</td>
           <td><span class="status-pill ${d.kategori==='Bukti Pembayaran'?'aktif':'pending'}">${d.kategori}</span></td>
+          <td>${d.tanggal}</td>
         </tr>
-      `).join('') || '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
+      `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada dokumen yang diunggah.</td></tr>';
 
-      // 2. Tabel Perkara
-      document.getElementById('tblPrk').innerHTML = getPr().map(p => `
-        <tr><td><strong>${p.owner}</strong></td><td>${p.nomor}</td><td>${p.jenis}</td></tr>
-      `).join('') || '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
+      // 2. Tabel Perkara Klien
+      const perkara = getPr();
+      document.getElementById('tblPrk').innerHTML = perkara.length ? perkara.map(p => `
+        <tr>
+          <td><strong>${p.owner}</strong></td>
+          <td>${p.nomor}</td>
+          <td>${p.jenis}</td>
+        </tr>
+      `).join('') : '<tr><td colspan="3" style="text-align:center;">Belum ada data perkara.</td></tr>';
 
-      // 3. Tabel Akun Klien
-      document.getElementById('tblAkun').innerHTML = getA().map((a, i) => `
+      // 3. Tabel Akun Klien Aktif
+      const akun = getA();
+      document.getElementById('tblAkun').innerHTML = akun.length ? akun.map((a, i) => `
         <tr>
           <td>${a.nama}</td>
           <td>${a.email}</td>
           <td>${a.password}</td>
           <td><button onclick="delA(${i})" style="color:#dc2626;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button></td>
         </tr>
-      `).join('') || '<tr><td colspan="4" style="text-align:center;">Kosong</td></tr>';
+      `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada akun aktif.</td></tr>';
 
-      // 4. Tabel Pending (DENGAN TOMBOL TOLAK)
-      const p = getP();
-      document.getElementById('badge').hidden = p.length === 0;
-      document.getElementById('badge').textContent = p.length;
+      // 4. Tabel Pendaftar Baru
+      const pending = getP();
+      document.getElementById('badge').hidden = pending.length === 0;
+      document.getElementById('badge').textContent = pending.length;
       
-      document.getElementById('tblPending').innerHTML = p.map((x, i) => `
+      document.getElementById('tblPending').innerHTML = pending.length ? pending.map((x, i) => `
         <tr>
           <td>${x.nama}</td>
           <td>${x.email}</td>
@@ -154,10 +196,12 @@
             <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;">✕ Tolak</button>
           </td>
         </tr>
-      `).join('') || '<tr><td colspan="3" style="text-align:center;">Tidak ada pendaftar baru.</td></tr>';
+      `).join('') : '<tr><td colspan="3" style="text-align:center;">Tidak ada pendaftar baru.</td></tr>';
     }
 
-    // FUNGSI AKSI
+    // ==========================================
+    // FUNGSI AKSI (Setujui, Tolak, Hapus)
+    // ==========================================
     function delA(i) { 
       if(confirm('Hapus akun ini secara permanen?')) { 
         const a = getA(); a.splice(i, 1); setA(a); renderAll(); 
@@ -177,7 +221,9 @@
       }
     }
 
+    // ==========================================
     // FORM BUAT AKUN
+    // ==========================================
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getA();
@@ -191,7 +237,7 @@
       renderAll();
     });
 
-    // JALANKAN RENDER SAAT HALAMAN DIBUKA
+    // JALANKAN SAAT HALAMAN DIBUKA
     renderAll();
   </script>
 </body>

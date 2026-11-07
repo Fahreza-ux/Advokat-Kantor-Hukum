@@ -149,3 +149,11 @@ h1 span, h2 span { color: var(--gold); }
     margin-top: 10px;
   }
 }
+/* PENGAMAN LOGO AGAR TIDAK RAKSASA */
+.navbar .brand img, 
+.footer .brand img {
+  height: 45px !important;
+  width: auto !important;
+  max-width: 200px !important;
+  object-fit: contain !important;
+}

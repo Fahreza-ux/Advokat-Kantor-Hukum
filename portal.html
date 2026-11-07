@@ -14,13 +14,15 @@
     <aside class="sidebar">
       <a href="index.html" class="sidebar-brand">
         <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro & Associates</span>
+        <span>Setyo Hantoro</span>
       </a>
       <ul class="sidebar-menu">
-        <li><a href="portal.html" class="active">🏠 Dashboard</a></li>
-        <li><a href="portal-perkara.html">📋 Perkara Saya</a></li>
-        <li><a href="portal-upload.html">📄 Upload Dokumen</a></li>
-        <li><a href="login.html">🚪 Keluar</a></li>
+        <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
+        <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
+        <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
+        <li class="mobile-logout">
+          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
+        </li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
@@ -28,56 +30,23 @@
     <main class="portal-main">
       <div class="portal-topbar">
         <div>
-          <h1>Selamat datang, Klien</h1>
-          <p>klien@demo.com · PT Cahaya Mitra Sejahtera</p>
+          <h1>Selamat datang, <span id="namaKlien">Klien</span></h1>
+          <p id="emailKlien">klien@demo.com</p>
         </div>
       </div>
 
       <div class="portal-stats">
-        <div class="stat-card"><div class="num" id="statPerkara">2</div><div class="lbl">Perkara Aktif</div></div>
         <div class="stat-card"><div class="num" id="statDokumen">0</div><div class="lbl">Dokumen Diunggah</div></div>
+        <div class="stat-card"><div class="num" id="statPerkara">0</div><div class="lbl">Perkara Aktif</div></div>
         <div class="stat-card"><div class="num">1</div><div class="lbl">Sidang Mendatang</div></div>
       </div>
 
       <div class="panel">
-        <div class="panel-head">
-          <h3>Perkara Saya</h3>
-          <a href="portal-perkara.html" class="link-small">Lihat semua →</a>
-        </div>
+        <div class="panel-head"><h3>Perkara Terbaru</h3><a href="portal-perkara.html" style="color:var(--gold);font-size:0.85rem;font-weight:bold;">Lihat semua →</a></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead>
-              <tr><th>No. Perkara</th><th>Jenis</th><th>Status</th></tr>
-            </thead>
-            <tbody id="perkaraPreview">
-              <tr>
-                <td><strong>045/Pdt.G/2026/PN.Tng</strong></td>
-                <td>Sengketa Bisnis</td>
-                <td><span class="status-pill aktif">Aktif</span></td>
-              </tr>
-              <tr>
-                <td><strong>012/PDT/2024/PT.BTN</strong></td>
-                <td>Mediasi</td>
-                <td><span class="status-pill selesai">Selesai</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="panel">
-        <div class="panel-head">
-          <h3>Dokumen Terbaru</h3>
-          <a href="portal-upload.html" class="link-small">Upload baru →</a>
-        </div>
-        <div class="panel-body">
-          <table class="data-table">
-            <thead>
-              <tr><th>Nama File</th><th>Kategori</th><th>Tanggal</th></tr>
-            </thead>
-            <tbody id="dokumenPreview">
-              <tr><td colspan="3" style="text-align:center; color:var(--ink-mute);">Belum ada dokumen diunggah.</td></tr>
-            </tbody>
+            <thead><tr><th>No. Perkara</th><th>Jenis</th><th>Status</th></tr></thead>
+            <tbody id="perkaraPreview"></tbody>
           </table>
         </div>
       </div>
@@ -85,29 +54,26 @@
   </div>
 
   <script>
-    if (localStorage.getItem('demoLoggedIn') !== 'true') {
-      window.location.href = 'login.html';
-    }
+    if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
+    function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
 
-    function logout() {
-      localStorage.removeItem('demoLoggedIn');
-      window.location.href = 'login.html';
-    }
+    document.getElementById('namaKlien').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
+    document.getElementById('emailKlien').textContent = localStorage.getItem('demoEmailKlien') || '';
 
-    const dokumen = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-    document.getElementById('statDokumen').textContent = dokumen.length;
+    const dok = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+    document.getElementById('statDokumen').textContent = dok.length;
 
-    const preview = document.getElementById('dokumenPreview');
-    if (dokumen.length > 0) {
-      preview.innerHTML = dokumen.slice(0, 3).map(d => `
-        <tr>
-          <td>${d.nama}</td>
-          <td>${d.kategori}</td>
-          <td>${d.tanggal}</td>
-        </tr>
+    const prk = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+    document.getElementById('statPerkara').textContent = prk.length;
+
+    const prev = document.getElementById('perkaraPreview');
+    if(prk.length > 0) {
+      prev.innerHTML = prk.slice(0, 3).map(p => `
+        <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><span class="status-pill ${p.status}">${p.status}</span></td></tr>
       `).join('');
+    } else {
+      prev.innerHTML = '<tr><td colspan="3" style="text-align:center;">Belum ada perkara.</td></tr>';
     }
   </script>
-
 </body>
 </html>

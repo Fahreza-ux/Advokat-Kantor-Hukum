@@ -3,44 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daftar Akun Klien</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <title>Daftar Akun Klien — SAKRI & Associates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body style="display: flex; flex-direction: column; min-height: 100vh; background: var(--bg);">
+<body style="display: flex; flex-direction: column; min-height: 100vh; background: #0a0a0a;">
   
-  <header style="padding: 16px 20px; text-align: center; border-bottom: 1px solid var(--line); background: var(--white);">
+  <header style="padding: 16px 20px; text-align: center; border-bottom: 1px solid #27272a; background: #0a0a0a;">
     <a href="index.html" class="brand" style="justify-content: center; display: flex; align-items: center; gap: 10px; text-decoration: none;">
-      <!-- LOGO DIKUNCI KECIL DI SINI -->
-      <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain;">
-      <span class="brand-text" style="font-size: 1rem; font-weight: bold; color: var(--ink);">Setyo Hantoro <em>&</em> Associates</span>
+      <img src="logo.png" style="height: 45px !important;">
+      <span style="font-size: 1rem; font-weight: bold; color: #ffffff;">SAKRI <em style="color: #d4af37; font-style: normal;">&</em> Associates</span>
     </a>
   </header>
 
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
     <div class="login-card">
       <div style="text-align: center; margin-bottom: 24px;">
-        <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Daftar Akun</h1>
-        <p style="color: var(--ink-mute); font-size: 0.9rem;">Isi data diri Anda untuk diverifikasi Admin.</p>
+        <h1 style="font-size: 1.8rem; margin-bottom: 8px; color: #d4af37;">Daftar Akun</h1>
+        <p style="color: #a1a1aa; font-size: 0.9rem;">Isi data diri Anda untuk diverifikasi Admin.</p>
       </div>
-      <div id="successBox" style="display: none; background: #dcfce7; color: #166534; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;">Pendaftaran berhasil! Tunggu verifikasi admin.</div>
+      
+      <div id="successBox" style="display: none; background: rgba(22, 101, 52, 0.2); color: #4ade80; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center; border-left: 4px solid #16a34a;">Pendaftaran berhasil! Tunggu verifikasi admin.</div>
+      
       <form id="daftarForm">
-        <div class="form-group"><label>Nama Perusahaan / Klien</label><input type="text" id="nama" required></div>
-        <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
-        <div class="form-group"><label>Password</label><input type="password" id="pass" required minlength="6"></div>
-        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px;">Daftar Sekarang</button>
+        <div class="form-group">
+          <label>Nama Perusahaan / Klien</label>
+          <input type="text" id="nama" placeholder="PT Maju Jaya" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="klien@perusahaan.com" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="pass" placeholder="Min. 6 karakter" required minlength="6">
+        </div>
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; margin-top: 10px;">Daftar Sekarang</button>
       </form>
-      <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute);">Sudah punya akun? <a href="login.html" style="color: var(--gold); font-weight: bold;">Login di sini</a></div>
+
+      <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: #a1a1aa;">
+        Sudah punya akun? <a href="login.html" style="color: #d4af37; font-weight: bold; text-decoration: none;">Login di sini</a>
+      </div>
     </div>
   </main>
 
   <script>
     document.getElementById('daftarForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value.toLowerCase();
+      const email = document.getElementById('email').value.toLowerCase().trim();
       const pending = JSON.parse(localStorage.getItem('demoPending') || '[]');
-      if(pending.find(p => p.email === email)) { alert('Email sudah terdaftar, tunggu verifikasi.'); return; }
-      pending.push({ nama: document.getElementById('nama').value, email: email, password: document.getElementById('pass').value, tanggal: new Date().toLocaleDateString('id-ID') });
+      
+      if(pending.find(p => p.email === email)) { 
+        alert('Email sudah terdaftar, tunggu verifikasi.'); 
+        return; 
+      }
+      
+      pending.push({ 
+        nama: document.getElementById('nama').value.trim(), 
+        email: email, 
+        password: document.getElementById('pass').value.trim(), 
+        tanggal: new Date().toLocaleDateString('id-ID') 
+      });
+      
       localStorage.setItem('demoPending', JSON.stringify(pending));
       e.target.reset();
       document.getElementById('successBox').style.display = 'block';

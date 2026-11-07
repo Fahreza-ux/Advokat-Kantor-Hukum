@@ -11,7 +11,6 @@
   
   <header style="padding: 16px 20px; text-align: center; border-bottom: 1px solid var(--line); background: var(--white);">
     <a href="index.html" class="brand" style="justify-content: center; display: flex; align-items: center; gap: 10px; text-decoration: none;">
-      <!-- LOGO DIKUNCI KECIL -->
       <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain;">
       <span class="brand-text" style="font-size: 1rem; font-weight: bold; color: var(--ink);">Setyo Hantoro <em>&</em> Associates</span>
     </a>
@@ -23,15 +22,19 @@
         <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Portal Klien</h1>
         <p style="color: var(--ink-mute); font-size: 0.9rem;">Masuk untuk memantau perkembangan perkara.</p>
       </div>
+      
       <form id="loginForm">
         <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
         <div class="form-group"><label>Password</label><input type="password" id="password" required></div>
         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 24px;">
           <input type="checkbox" id="remember" style="width: auto;"><label for="remember" style="font-weight: 400; font-size: 0.85rem; margin: 0;">Ingat saya</label>
         </div>
+        
         <div id="errorBox" style="display: none; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
+        
         <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px;">Masuk</button>
       </form>
+      
       <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute);">
         Belum punya akun? <a href="daftar.html" style="color: var(--gold); font-weight: bold;">Daftar di sini</a>
       </div>
@@ -40,22 +43,46 @@
 
   <script>
     if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') window.location.href = 'portal.html';
+    
     document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value.toLowerCase();
+      const email = document.getElementById('email').value.toLowerCase().trim();
       const pass = document.getElementById('password').value;
       const rem = document.getElementById('remember').checked;
       const errorBox = document.getElementById('errorBox');
-      const list = JSON.parse(localStorage.getItem('demoAkun') || '[]');
-      list.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
-      const acc = list.find(a => a.email === email && a.password === pass);
-      if (acc) {
-        if(rem) localStorage.setItem('demoLoggedIn', 'true'); else sessionStorage.setItem('demoLoggedIn', 'true');
-        localStorage.setItem('demoEmailKlien', acc.email);
-        localStorage.setItem('demoNamaKlien', acc.nama);
+
+      // ==========================================
+      // PERBAIKAN: BACA DATA DARI SEMUA KEMUNGKINAN
+      // ==========================================
+      // 1. Ambil data dari Admin (menu Buat Akun)
+      let listAkun = JSON.parse(localStorage.getItem('demoAkun') || '[]');
+      
+      // 2. Ambil data dari Pendaftar Mandiri yang sudah disetujui admin
+      let listPending = JSON.parse(localStorage.getItem('demoPending') || '[]');
+      
+      // Gabungkan semua data untuk dicari
+      let semuaKlien = [...listAkun, ...listPending];
+
+      // Tambahkan akun demo bawaan agar selalu bisa tes
+      semuaKlien.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
+
+      // Cari kecocokan Email dan Password
+      const akunDitemukan = semuaKlien.find(a => a.email === email && a.password === pass);
+      
+      if (akunDitemukan) {
+        if(rem) {
+          localStorage.setItem('demoLoggedIn', 'true');
+        } else {
+          sessionStorage.setItem('demoLoggedIn', 'true');
+        }
+        
+        // Simpan nama dan email untuk ditampilkan di Dashboard
+        localStorage.setItem('demoEmailKlien', akunDitemukan.email);
+        localStorage.setItem('demoNamaKlien', akunDitemukan.nama);
+        
         window.location.href = 'portal.html';
       } else {
-        errorBox.textContent = 'Email atau password klien salah.';
+        errorBox.textContent = 'Email atau password klien salah. Pastikan akun sudah didaftarkan oleh Admin.';
         errorBox.style.display = 'block';
       }
     });

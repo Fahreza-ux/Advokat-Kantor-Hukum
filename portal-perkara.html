@@ -30,16 +30,13 @@
         <div class="panel-head"><h3>Formulir Pengajuan Kasus</h3></div>
         <div class="panel-body">
           <form id="form" class="portal-form">
-            
-            <!-- FORM NOMOR PERKARA (OPSIONAL) -->
             <div class="form-group">
               <label>Nomor Perkara (Opsional)</label>
               <input type="text" id="nomor" placeholder="mis. 045/Pdt.G/2026/PN.Tng">
               <small style="color:var(--ink-mute); font-size:0.75rem; display:block; margin-top:6px;">
-                *Kosongkan jika Anda belum pernah melaporkan ini ke Pengadilan. Biarkan tim kami yang mengurus pendaftarannya.
+                *Kosongkan jika Anda belum pernah melaporkan ini ke Pengadilan.
               </small>
             </div>
-            
             <div class="form-group">
               <label>Klasifikasi Masalah</label>
               <select id="jenis" required>
@@ -51,17 +48,14 @@
                 <option value="Lainnya">Lainnya (Konsultasi)</option>
               </select>
             </div>
-
             <div class="form-group">
               <label>Pihak yang Bermasalah (Lawan)</label>
               <input type="text" id="pihakLawan" placeholder="Nama Perusahaan / Individu" required>
             </div>
-
             <div class="form-group">
               <label>Ceritakan Masalah Anda (Kronologi)</label>
               <textarea id="deskripsi" rows="4" placeholder="Jelaskan sedetail mungkin masalah yang Anda hadapi..." required></textarea>
             </div>
-
             <button type="submit" class="btn-primary">Kirim Data ke Advokat</button>
           </form>
         </div>
@@ -71,14 +65,7 @@
         <div class="panel-head"><h3>Daftar Perkara Anda</h3></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead>
-              <tr>
-                <th>No. Perkara</th>
-                <th>Klasifikasi</th>
-                <th>Status</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
+            <thead><tr><th>No. Perkara</th><th>Klasifikasi</th><th>Status</th><th>Aksi</th></tr></thead>
             <tbody id="tbl"></tbody>
           </table>
         </div>
@@ -90,18 +77,12 @@
     if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') {
       window.location.href = 'login.html';
     }
-    function logout() { 
-      localStorage.removeItem('demoLoggedIn'); 
-      sessionStorage.removeItem('demoLoggedIn'); 
-      window.location.href = 'login.html'; 
-    }
+    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
     
     const user = localStorage.getItem('demoEmailKlien') || 'demo';
 
-    // Render Tabel
     function render() {
       const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.owner === user);
-      
       document.getElementById('tbl').innerHTML = d.length ? d.map(p => `
         <tr>
           <td><strong>${p.nomor}</strong></td>
@@ -112,18 +93,12 @@
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada perkara yang didaftarkan.</td></tr>';
     }
 
-    // Simpan Data
     document.getElementById('form').addEventListener('submit', (e) => {
       e.preventDefault();
-      
-      // LOGIKA PENGECEKAN NOMOR PERKARA
       let nomorInput = document.getElementById('nomor').value.trim();
-      if (nomorInput === "") {
-        nomorInput = "Belum Ada Nomor"; // Jika klien kosongkan
-      }
+      if (nomorInput === "") { nomorInput = "Belum Ada Nomor"; }
 
       const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      
       d.unshift({ 
         id: Date.now().toString(), 
         owner: user, 
@@ -147,7 +122,6 @@
       localStorage.setItem('demoPerkara', JSON.stringify(d)); 
       render();
     }
-
     render();
   </script>
 </body>

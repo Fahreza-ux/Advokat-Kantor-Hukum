@@ -10,9 +10,26 @@
 </head>
 <body>
 
-  <div class="portal-layout">
+  <div class="portal-wrapper">
     
-    <!-- KONTEN UTAMA (Ditaruh paling atas agar muncul di HP) -->
+    <!-- SIDEBAR / MENU -->
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <span class="brand-mark">SH</span>
+        <span>Setyo Hantoro</span>
+      </a>
+      <ul class="sidebar-menu">
+        <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
+        <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
+        <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
+        <li class="mobile-logout">
+          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
+        </li>
+      </ul>
+      <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <!-- KONTEN UTAMA -->
     <main class="portal-main">
       <div class="portal-topbar">
         <div>
@@ -37,23 +54,6 @@
         </div>
       </div>
     </main>
-
-    <!-- SIDEBAR / MENU (Ditaruh di bawah konten) -->
-    <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro</span>
-      </a>
-      <ul class="sidebar-menu">
-        <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
-        <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
-        <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
-        <li class="mobile-logout">
-          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
-      </ul>
-      <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
-    </aside>
 
   </div>
 

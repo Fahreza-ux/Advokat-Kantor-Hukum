@@ -11,7 +11,7 @@
   
   <header style="padding: 16px 20px; text-align: center; border-bottom: 1px solid var(--line); background: var(--white);">
     <a href="index.html" class="brand" style="justify-content: center; display: flex; align-items: center; gap: 10px; text-decoration: none;">
-      <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain;">
+      <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important;">
       <span class="brand-text" style="font-size: 1rem; font-weight: bold; color: var(--ink);">Setyo Hantoro <em>&</em> Associates</span>
     </a>
   </header>
@@ -29,12 +29,9 @@
         <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 24px;">
           <input type="checkbox" id="remember" style="width: auto;"><label for="remember" style="font-weight: 400; font-size: 0.85rem; margin: 0;">Ingat saya</label>
         </div>
-        
         <div id="errorBox" style="display: none; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
-        
         <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px;">Masuk</button>
       </form>
-      
       <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute);">
         Belum punya akun? <a href="daftar.html" style="color: var(--gold); font-weight: bold;">Daftar di sini</a>
       </div>
@@ -42,7 +39,6 @@
   </main>
 
   <script>
-    // Jika sudah login, langsung ke portal
     if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') {
       window.location.href = 'portal.html';
     }
@@ -54,41 +50,24 @@
       const rem = document.getElementById('remember').checked;
       const errorBox = document.getElementById('errorBox');
 
-      // ==========================================
-      // PERBAIKAN LOGIKA: GABUNGKAN SEMUA DATA KLIEN
-      // ==========================================
-      
-      // 1. Ambil data dari Admin (menu Buat Akun)
+      // AMBIL DARI 2 SUMBER (Admin & Pendaftar Mandiri)
       let akunAdmin = JSON.parse(localStorage.getItem('demoAkun') || '[]');
-      
-      // 2. Ambil data dari Pendaftar mandiri
       let akunPending = JSON.parse(localStorage.getItem('demoPending') || '[]');
-      
-      // Gabungkan keduanya
       let semuaDataKlien = [...akunAdmin, ...akunPending];
 
-      // Tambahkan akun demo bawaan
+      // Tambahkan akun demo
       semuaDataKlien.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
 
-      // Cari apakah email dan password cocok
       const akunDitemukan = semuaDataKlien.find(a => a.email === email && a.password === pass);
       
       if (akunDitemukan) {
-        // Jika cocok, izinkan login
-        if(rem) {
-          localStorage.setItem('demoLoggedIn', 'true');
-        } else {
-          sessionStorage.setItem('demoLoggedIn', 'true');
-        }
-        
-        // Simpan info klien untuk ditampilkan di dashboard
+        if(rem) localStorage.setItem('demoLoggedIn', 'true');
+        else sessionStorage.setItem('demoLoggedIn', 'true');
         localStorage.setItem('demoEmailKlien', akunDitemukan.email);
         localStorage.setItem('demoNamaKlien', akunDitemukan.nama);
-        
         window.location.href = 'portal.html';
       } else {
-        // Jika gagal
-        errorBox.textContent = 'Email atau password klien salah. Pastikan akun sudah didaftarkan.';
+        errorBox.textContent = 'Email atau password klien salah.';
         errorBox.style.display = 'block';
       }
     });

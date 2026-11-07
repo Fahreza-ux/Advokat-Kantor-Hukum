@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perkara — Klien</title>
+  <title>Perkara Saya — Portal Klien</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="portal.css">
 </head>
@@ -19,54 +19,135 @@
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
+
     <main class="portal-main">
-      <div class="portal-topbar"><h1>Perkara Saya</h1><p>Daftar perkara Anda.</p></div>
+      <div class="portal-topbar">
+        <h1>Registrasi Perkara</h1>
+        <p>Silakan lengkapi data di bawah ini. Tim Advokat kami akan segera menindaklanjuti.</p>
+      </div>
+
       <div class="panel">
-        <div class="panel-head"><h3>Tambah Perkara</h3></div>
+        <div class="panel-head"><h3>Formulir Pengajuan Kasus</h3></div>
         <div class="panel-body">
           <form id="form" class="portal-form">
-            <div class="form-group"><label>Nomor Perkara</label><input type="text" id="nomor" required></div>
+            
+            <!-- FORM NOMOR PERKARA (OPSIONAL) -->
             <div class="form-group">
-              <label>Jenis</label>
-              <select id="jenis" required><option value="Sengketa Bisnis">Sengketa Bisnis</option><option value="Mediasi">Mediasi</option></select>
+              <label>Nomor Perkara (Opsional)</label>
+              <input type="text" id="nomor" placeholder="mis. 045/Pdt.G/2026/PN.Tng">
+              <small style="color:var(--ink-mute); font-size:0.75rem; display:block; margin-top:6px;">
+                *Kosongkan jika Anda belum pernah melaporkan ini ke Pengadilan. Biarkan tim kami yang mengurus pendaftarannya.
+              </small>
             </div>
-            <button type="submit" class="btn-primary">Simpan</button>
+            
+            <div class="form-group">
+              <label>Klasifikasi Masalah</label>
+              <select id="jenis" required>
+                <option value="">-- Pilih Klasifikasi --</option>
+                <option value="Sengketa Bisnis">Sengketa Bisnis / Wanprestasi</option>
+                <option value="Hak Kekayaan Intelektual">Hak Kekayaan Intelektual (HKI)</option>
+                <option value="Kepailitan & PKPU">Kepailitan & PKPU</option>
+                <option value="Perdata Umum">Perdata Umum</option>
+                <option value="Lainnya">Lainnya (Konsultasi)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Pihak yang Bermasalah (Lawan)</label>
+              <input type="text" id="pihakLawan" placeholder="Nama Perusahaan / Individu" required>
+            </div>
+
+            <div class="form-group">
+              <label>Ceritakan Masalah Anda (Kronologi)</label>
+              <textarea id="deskripsi" rows="4" placeholder="Jelaskan sedetail mungkin masalah yang Anda hadapi..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary">Kirim Data ke Advokat</button>
           </form>
         </div>
       </div>
+
       <div class="panel">
+        <div class="panel-head"><h3>Daftar Perkara Anda</h3></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead><tr><th>No</th><th>Jenis</th><th>Aksi</th></tr></thead>
+            <thead>
+              <tr>
+                <th>No. Perkara</th>
+                <th>Klasifikasi</th>
+                <th>Status</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
             <tbody id="tbl"></tbody>
           </table>
         </div>
       </div>
     </main>
   </div>
+
   <script>
-    if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
-    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
+    if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+    function logout() { 
+      localStorage.removeItem('demoLoggedIn'); 
+      sessionStorage.removeItem('demoLoggedIn'); 
+      window.location.href = 'login.html'; 
+    }
     
     const user = localStorage.getItem('demoEmailKlien') || 'demo';
+
+    // Render Tabel
     function render() {
       const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.owner === user);
+      
       document.getElementById('tbl').innerHTML = d.length ? d.map(p => `
-        <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><button onclick="hapus('${p.id}')" style="color:red;border:none;background:none;cursor:pointer;">Hapus</button></td></tr>
-      `).join('') : '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
+        <tr>
+          <td><strong>${p.nomor}</strong></td>
+          <td>${p.jenis}</td>
+          <td><span class="status-pill ${p.status === 'pending' || p.status === 'Menunggu Review' ? 'pending' : 'aktif'}">${p.status}</span></td>
+          <td><button onclick="hapus('${p.id}')" style="color:#dc2626;border:none;background:none;font-weight:bold;cursor:pointer;">Hapus</button></td>
+        </tr>
+      `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada perkara yang didaftarkan.</td></tr>';
     }
+
+    // Simpan Data
     document.getElementById('form').addEventListener('submit', (e) => {
       e.preventDefault();
+      
+      // LOGIKA PENGECEKAN NOMOR PERKARA
+      let nomorInput = document.getElementById('nomor').value.trim();
+      if (nomorInput === "") {
+        nomorInput = "Belum Ada Nomor"; // Jika klien kosongkan
+      }
+
       const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      d.unshift({ id: Date.now().toString(), owner: user, nomor: document.getElementById('nomor').value, jenis: document.getElementById('jenis').value, status: 'pending' });
+      
+      d.unshift({ 
+        id: Date.now().toString(), 
+        owner: user, 
+        nomor: nomorInput, 
+        jenis: document.getElementById('jenis').value, 
+        pihakLawan: document.getElementById('pihakLawan').value,
+        deskripsi: document.getElementById('deskripsi').value,
+        status: 'Menunggu Review', 
+        tanggalDaftar: new Date().toLocaleDateString('id-ID')
+      });
+      
       localStorage.setItem('demoPerkara', JSON.stringify(d));
-      e.target.reset(); render();
+      e.target.reset(); 
+      render();
+      alert('Laporan berhasil dikirim! Tim Advokat kami akan segera meninjau perkara Anda.');
     });
+
     function hapus(id) {
-      if(!confirm('Hapus?')) return;
+      if(!confirm('Yakin ingin menghapus data perkara ini?')) return;
       let d = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.id !== id);
-      localStorage.setItem('demoPerkara', JSON.stringify(d)); render();
+      localStorage.setItem('demoPerkara', JSON.stringify(d)); 
+      render();
     }
+
     render();
   </script>
 </body>

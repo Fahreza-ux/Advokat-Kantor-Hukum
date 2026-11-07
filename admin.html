@@ -3,51 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel — Kelola Akun Klien</title>
+  <title>Admin Panel</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="portal.css">
 </head>
 <body>
-
   <div class="portal-layout">
-    
-    <!-- SIDEBAR / MENU -->
     <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Admin Area</span>
-      </a>
+      <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Admin Area</span></div>
       <ul class="sidebar-menu">
-        <li><a href="#" class="active" onclick="showTab('kelola', this)"><span class="emoji">👥</span> Akun Klien</a></li>
-        <li><a href="#" onclick="showTab('pending', this)"><span class="emoji">⏳</span> Pendaftar <span id="pendingBadge" class="badge-count" hidden>0</span></a></li>
+        <li><a href="#" class="active" onclick="showTab('monitor', this)"><span class="emoji">📊</span> Monitoring</a></li>
+        <li><a href="#" onclick="showTab('kelola', this)"><span class="emoji">👥</span> Klien</a></li>
+        <li><a href="#" onclick="showTab('pending', this)"><span class="emoji">⏳</span> Pendaftar <span id="badge" class="badge-count" hidden>0</span></a></li>
         <li><a href="#" onclick="showTab('buat', this)"><span class="emoji">➕</span> Buat Akun</a></li>
-        <li class="mobile-logout">
-          <a href="index.html" onclick="logoutAdmin()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
+        <li class="mobile-logout"><a href="index.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
-      <button class="sidebar-logout" onclick="logoutAdmin()">🚪 Logout Admin</button>
+      <button class="sidebar-logout" onclick="logout()">🚪 Logout Admin</button>
     </aside>
 
-    <!-- KONTEN UTAMA -->
     <main class="portal-main">
-      
-      <!-- HEADER MOBILE (LOGOUT JELAS) -->
-      <div class="mobile-header">
-        <h3>Panel Admin</h3>
-        <a href="index.html" onclick="logoutAdmin()" class="btn-logout-top">Keluar 🚪</a>
+      <!-- TAB MONITORING -->
+      <div id="tab-monitor" class="tab-panel">
+        <div class="portal-topbar"><h1>Data Klien (Pusat)</h1><p>Pantau semua data perkara, pembayaran, dan dokumen.</p></div>
+        <div class="panel">
+          <div class="panel-head"><h3>Dokumen & Pembayaran</h3></div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th></tr></thead>
+              <tbody id="tblDok"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>Data Perkara</h3></div>
+          <div class="panel-body">
+            <table class="data-table">
+              <thead><tr><th>Email Klien</th><th>No. Perkara</th><th>Jenis</th></tr></thead>
+              <tbody id="tblPrk"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
 
-      <!-- TAB KELOLA -->
-      <div id="tab-kelola" class="tab-panel">
-        <div class="portal-topbar">
-          <div><h1>Akun Klien Aktif</h1><p>Klien yang bisa login ke portal.</p></div>
-        </div>
+      <!-- TAB KELOLA AKUN -->
+      <div id="tab-kelola" class="tab-panel" hidden>
+        <div class="portal-topbar"><h1>Akun Klien Aktif</h1></div>
         <div class="panel">
           <div class="panel-body">
             <table class="data-table">
               <thead><tr><th>Nama</th><th>Email</th><th>Pass</th><th>Aksi</th></tr></thead>
-              <tbody id="akunTable"></tbody>
+              <tbody id="tblAkun"></tbody>
             </table>
           </div>
         </div>
@@ -55,14 +60,12 @@
 
       <!-- TAB PENDING -->
       <div id="tab-pending" class="tab-panel" hidden>
-        <div class="portal-topbar">
-          <div><h1>Pendaftar Baru</h1><p>Verifikasi pendaftar mandiri.</p></div>
-        </div>
+        <div class="portal-topbar"><h1>Pendaftar Baru</h1></div>
         <div class="panel">
           <div class="panel-body">
             <table class="data-table">
-              <thead><tr><th>Nama</th><th>Email</th><th>Tanggal</th><th>Aksi</th></tr></thead>
-              <tbody id="pendingTable"></tbody>
+              <thead><tr><th>Nama</th><th>Email</th><th>Aksi</th></tr></thead>
+              <tbody id="tblPending"></tbody>
             </table>
           </div>
         </div>
@@ -70,111 +73,71 @@
 
       <!-- TAB BUAT -->
       <div id="tab-buat" class="tab-panel" hidden>
-        <div class="portal-topbar">
-          <div><h1>Buat Akun Baru</h1><p>Akun langsung aktif.</p></div>
-        </div>
+        <div class="portal-topbar"><h1>Buat Akun Manual</h1></div>
         <div class="panel">
           <div class="panel-body">
-            <div id="alertBuat" class="alert-success" hidden>✓ Akun berhasil dibuat!</div>
+            <div id="okBuat" class="alert-success" hidden>✓ Akun aktif dibuat!</div>
             <form id="formBuat" class="portal-form">
-              <div class="form-group"><label>Nama Klien</label><input type="text" id="buatNama" required></div>
-              <div class="form-group"><label>Email</label><input type="text" id="buatEmail" required></div>
-              <div class="form-group"><label>Password</label><input type="text" id="buatPass" required></div>
-              <button type="submit" class="btn-primary">Buat Akun</button>
+              <div class="form-group"><label>Nama</label><input type="text" id="bn" required></div>
+              <div class="form-group"><label>Email</label><input type="email" id="be" required></div>
+              <div class="form-group"><label>Pass</label><input type="text" id="bp" required></div>
+              <button type="submit" class="btn-primary">Buat</button>
             </form>
           </div>
         </div>
       </div>
     </main>
-
   </div>
 
   <script>
-    // ==========================================
-    // LOGIKA LOGIN ADMIN (WAJIB KETIK PASSWORD)
-    // ==========================================
-    const ADMIN_PASS = 'admin123'; // Ganti password admin di sini jika perlu
-
-    // Cek apakah sesi login ada di tab browser ini (sessionStorage)
-    // Jika tidak ada, paksa munculkan prompt password
-    if (sessionStorage.getItem('adminAuthenticated') !== 'true') {
-      
-      const pass = prompt('KEAMANAN ADMIN:\nSilakan masukkan password admin untuk melanjutkan:');
-      
-      if (pass === ADMIN_PASS) {
-        // Jika password benar, izinkan akses untuk sesi tab ini
-        sessionStorage.setItem('adminAuthenticated', 'true');
-      } else {
-        // Jika password salah atau klik Cancel, tendang keluar
-        alert('Akses Ditolak! Password salah.');
-        window.location.href = 'index.html';
-      }
+    const PASS = 'admin123';
+    if (sessionStorage.getItem('authAdmin') !== 'true') {
+      if (prompt('Masukkan Password Admin:') === PASS) sessionStorage.setItem('authAdmin', 'true');
+      else { alert('Ditolak!'); window.location.href = 'index.html'; }
     }
+    function logout() { sessionStorage.removeItem('authAdmin'); window.location.href = 'index.html'; }
 
-    // Fungsi Logout Admin (Menghapus sesi agar besok wajib login lagi)
-    function logoutAdmin() { 
-      sessionStorage.removeItem('adminAuthenticated');
-      window.location.href = 'index.html'; 
-    }
-
-    // ==========================================
-    // LOGIKA TAB & DATA (Tidak ada yang berubah)
-    // ==========================================
-    function showTab(tab, el) {
+    function showTab(id, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
-      document.getElementById('tab-' + tab).hidden = false;
+      document.getElementById('tab-' + id).hidden = false;
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-      if(el) el.classList.add('active');
+      el.classList.add('active');
     }
 
-    const getAkun = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
-    const setAkun = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
-    const getPending = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
-    const setPending = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
+    const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
+    const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
+    const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
+    const setP = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
+    const getD = () => JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+    const getPr = () => JSON.parse(localStorage.getItem('demoPerkara') || '[]');
 
-    function renderAkun() {
-      const list = getAkun();
-      document.getElementById('akunTable').innerHTML = list.length ? list.map((a, i) => `
-        <tr>
-          <td><strong>${a.nama}</strong></td>
-          <td>${a.email}</td>
-          <td>${a.password}</td>
-          <td><button onclick="hapusAkun(${i})" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
-        </tr>
-      `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada akun.</td></tr>';
+    function renderAll() {
+      // Monitor
+      document.getElementById('tblDok').innerHTML = getD().map(d => `<tr><td><strong>${d.owner}</strong></td><td>${d.nama}</td><td><span class="status-pill ${d.kategori==='Bukti Pembayaran'?'aktif':'pending'}">${d.kategori}</span></td></tr>`).join('') || '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
+      document.getElementById('tblPrk').innerHTML = getPr().map(p => `<tr><td><strong>${p.owner}</strong></td><td>${p.nomor}</td><td>${p.jenis}</td></tr>`).join('') || '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
+
+      // Akun
+      document.getElementById('tblAkun').innerHTML = getA().map((a, i) => `<tr><td>${a.nama}</td><td>${a.email}</td><td>${a.password}</td><td><button onclick="delA(${i})" style="color:red;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button></td></tr>`).join('') || '<tr><td colspan="4" style="text-align:center;">Kosong</td></tr>';
+
+      // Pending
+      const p = getP();
+      document.getElementById('badge').hidden = p.length === 0;
+      document.getElementById('badge').textContent = p.length;
+      document.getElementById('tblPending').innerHTML = p.map((x, i) => `<tr><td>${x.nama}</td><td>${x.email}</td><td><button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:4px 8px;border-radius:8px;font-weight:bold;cursor:pointer;">Setujui</button></td></tr>`).join('') || '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
     }
 
-    function renderPending() {
-      const list = getPending();
-      const badge = document.getElementById('pendingBadge');
-      if(list.length) { badge.hidden = false; badge.textContent = list.length; } else { badge.hidden = true; }
-
-      document.getElementById('pendingTable').innerHTML = list.length ? list.map((p, i) => `
-        <tr>
-          <td><strong>${p.nama}</strong></td>
-          <td>${p.email}</td>
-          <td>${p.tanggal}</td>
-          <td style="white-space:nowrap;">
-            <button onclick="setuju(${i})" style="background:#dcfce7;color:#166534;border:none;padding:6px 10px;border-radius:10px;font-weight:bold;margin-right:4px;cursor:pointer;">Setujui</button>
-            <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 10px;border-radius:10px;font-weight:bold;cursor:pointer;">Tolak</button>
-          </td>
-        </tr>
-      `).join('') : '<tr><td colspan="4" style="text-align:center;">Tidak ada pendaftar.</td></tr>';
-    }
-
-    function hapusAkun(i) { if(confirm('Hapus akun ini?')) { const l = getAkun(); l.splice(i,1); setAkun(l); renderAkun(); } }
-    function setuju(i) { const p = getPending(); const a = getAkun(); a.push(p[i]); setAkun(a); p.splice(i,1); setPending(p); renderAkun(); renderPending(); alert('Disetujui!'); showTab('kelola', document.querySelector('.sidebar-menu a')); }
-    function tolak(i) { const p = getPending(); p.splice(i,1); setPending(p); renderPending(); }
+    function delA(i) { if(confirm('Hapus?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
+    function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Disetujui!'); }
 
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
-      const a = getAkun();
-      a.push({ nama: document.getElementById('buatNama').value, email: document.getElementById('buatEmail').value.toLowerCase(), password: document.getElementById('buatPass').value });
-      setAkun(a); e.target.reset();
-      document.getElementById('alertBuat').hidden = false; renderAkun();
+      const a = getA();
+      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value, password: document.getElementById('bp').value });
+      setA(a); e.target.reset();
+      document.getElementById('okBuat').hidden = false; renderAll();
     });
 
-    renderAkun(); renderPending();
+    renderAll();
   </script>
 </body>
 </html>

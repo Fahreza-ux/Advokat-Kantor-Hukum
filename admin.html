@@ -9,82 +9,39 @@
 </head>
 <body>
   <div class="portal-layout">
-    
-    <!-- SIDEBAR KIRI -->
     <aside class="sidebar">
-      <!-- LOGO ADMIN DIPAKSA KECIL -->
       <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px;">
-        <img src="logo.png" alt="Logo SAKRI" style="height: 35px !important; width: auto !important; max-height: 35px; object-fit: contain;">
-        <span style="font-size: 0.85rem; font-weight: 700; color: white; line-height: 1.2;">Admin Area</span>
+        <img src="logo.png" alt="Logo SAKRI" style="height: 35px !important; width: auto !important;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: white;">Admin Area</span>
       </div>
-
       <ul class="sidebar-menu">
         <li><a href="javascript:void(0)" class="active" onclick="bukaMenu('monitor', this)"><span class="emoji">📊</span> Data & Dokumen</a></li>
         <li><a href="javascript:void(0)" onclick="bukaMenu('kelola', this)"><span class="emoji">👥</span> Akun Klien</a></li>
         <li><a href="javascript:void(0)" onclick="bukaMenu('pending', this)"><span class="emoji">⏳</span> Pendaftar <span id="badge" class="badge-count" hidden>0</span></a></li>
         <li><a href="javascript:void(0)" onclick="bukaMenu('buat', this)"><span class="emoji">➕</span> Buat Akun Klien</a></li>
         <li><a href="javascript:void(0)" onclick="bukaMenu('staff', this)"><span class="emoji">👨‍💼</span> Staff & Partner</a></li>
-        <li><a href="javascript:void(0)" onclick="bukaMenu('setting', this)"><span class="emoji">⚙️</span> Pengaturan</a></li>
         <li class="mobile-logout"><a href="login-admin.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout Admin</button>
     </aside>
 
-    <!-- KONTEN UTAMA -->
     <main class="portal-main">
-      
-      <!-- TAB 1: MONITORING -->
       <div id="tab-monitor" class="tab-panel">
-        <div class="portal-topbar"><h1>Data & Dokumen Klien</h1><p>Pantau semua perkara dan file yang diunggah oleh klien.</p></div>
-        
-        <div class="panel">
-          <div class="panel-head"><h3>📄 Dokumen & Bukti Pembayaran</h3></div>
-          <div class="panel-body">
-            <table class="data-table">
-              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Catatan Klien</th><th>Tanggal</th></tr></thead>
-              <tbody id="tblDok"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head"><h3>📋 Data Perkara Klien</h3></div>
-          <div class="panel-body">
-            <table class="data-table">
-              <thead><tr><th>Klien</th><th>No. Perkara</th><th>Klasifikasi</th><th>Status</th><th>Aksi</th></tr></thead>
-              <tbody id="tblPrk"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="portal-topbar"><h1>Data & Dokumen Klien</h1></div>
+        <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Catatan</th><th>Tanggal</th></tr></thead><tbody id="tblDok"></tbody></table></div></div>
+        <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Klien</th><th>No. Perkara</th><th>Klasifikasi</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tblPrk"></tbody></table></div></div>
       </div>
 
-      <!-- TAB 2: KELOLA KLIEN -->
       <div id="tab-kelola" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Akun Klien Aktif</h1></div>
-        <div class="panel">
-          <div class="panel-body">
-            <table class="data-table">
-              <thead><tr><th>Nama</th><th>Email</th><th>Pass</th><th>Aksi</th></tr></thead>
-              <tbody id="tblAkun"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Pass</th><th>Aksi</th></tr></thead><tbody id="tblAkun"></tbody></table></div></div>
       </div>
 
-      <!-- TAB 3: PENDAFTAR BARU -->
       <div id="tab-pending" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Pendaftar Baru</h1></div>
-        <div class="panel">
-          <div class="panel-body">
-            <table class="data-table">
-              <thead><tr><th>Nama</th><th>Email</th><th>Aksi</th></tr></thead>
-              <tbody id="tblPending"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tblPending"></tbody></table></div></div>
       </div>
 
-      <!-- TAB 4: BUAT AKUN KLIEN -->
       <div id="tab-buat" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Buat Akun Klien Manual</h1></div>
         <div class="panel">
@@ -100,73 +57,31 @@
         </div>
       </div>
 
-      <!-- TAB 5: STAFF & OWNER -->
       <div id="tab-staff" class="tab-panel" hidden>
-        <div class="portal-topbar"><h1>Kelola Staff & Partner</h1><p>Tambahkan akun untuk Owner ke-2, Owner ke-3, atau karyawan Anda.</p></div>
-        
+        <div class="portal-topbar"><h1>Kelola Staff & Partner</h1></div>
         <div class="panel">
-          <div class="panel-head"><h3>➕ Tambah Akun Internal Baru</h3></div>
           <div class="panel-body">
             <div id="okStaff" class="alert-success" hidden>✓ Akun Internal berhasil ditambahkan!</div>
             <form id="formStaff" class="portal-form">
               <div class="form-group"><label>Nama Lengkap</label><input type="text" id="sn" required></div>
               <div class="form-group"><label>Email Internal</label><input type="email" id="se" required></div>
               <div class="form-group"><label>Password</label><input type="text" id="sp" required></div>
-              <div class="form-group">
-                <label>Jabatan / Role</label>
-                <select id="sr">
-                  <option value="Staff Legal">Staff Legal</option>
-                  <option value="Admin IT">Admin IT</option>
-                  <option value="Sekretaris">Sekretaris</option>
-                  <option value="Owner / Partner">Owner / Partner (Founding)</option>
-                </select>
-              </div>
+              <div class="form-group"><label>Jabatan</label><select id="sr"><option value="Staff Legal">Staff Legal</option><option value="Owner / Partner">Owner / Partner</option></select></div>
               <button type="submit" class="btn-primary">Tambahkan Akun</button>
             </form>
           </div>
         </div>
-
-        <div class="panel">
-          <div class="panel-head"><h3>📋 Daftar Owner & Staff Aktif</h3></div>
-          <div class="panel-body">
-            <table class="data-table">
-              <thead><tr><th>Nama</th><th>Email</th><th>Jabatan</th><th>Aksi</th></tr></thead>
-              <tbody id="tblStaff"></tbody>
-            </table>
-          </div>
-        </div>
+        <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Jabatan</th><th>Aksi</th></tr></thead><tbody id="tblStaff"></tbody></table></div></div>
       </div>
-
-      <!-- TAB 6: PENGATURAN -->
-      <div id="tab-setting" class="tab-panel" hidden>
-        <div class="portal-topbar"><h1>Pengaturan Admin</h1></div>
-        <div class="panel">
-          <div class="panel-body">
-            <div class="alert-success" style="background:#fef3c7; color:#92400e; border-color:#f59e0b;">
-              ℹ️ Fitur ubah password mandiri dinonaktifkan agar antar staff tidak bisa saling mengubah password. Hubungi Super Admin (Owner Utama) jika ada yang lupa password.
-            </div>
-          </div>
-        </div>
-      </div>
-
     </main>
   </div>
 
   <script>
-    // 1. SATPAM: CEK LOGIN
     if (sessionStorage.getItem('authAdmin') !== 'true') {
       alert('Akses Ditolak. Silakan login melalui halaman internal admin.');
       window.location.href = 'login-admin.html';
     }
-
-    function logout() { 
-      sessionStorage.removeItem('authAdmin'); 
-      sessionStorage.removeItem('adminNama');
-      sessionStorage.removeItem('adminRole');
-      window.location.href = 'login-admin.html'; 
-    }
-
-    // 2. LOGIKA NAVIGASI TAB
+    function logout() { sessionStorage.removeItem('authAdmin'); window.location.href = 'login-admin.html'; }
     function bukaMenu(id, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + id).hidden = false;
@@ -174,128 +89,66 @@
       if (el) el.classList.add('active');
     }
 
-    // 3. DATA HELPERS
     const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
     const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
     const setP = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
     const getD = () => JSON.parse(localStorage.getItem('demoDokumen') || '[]');
     const getPr = () => JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-    
-    const getStaff = () => {
-      let s = JSON.parse(localStorage.getItem('adminStaff') || '[]');
-      if(s.length === 0) {
-        s = [{ nama: 'Setyo Hantoro (Owner Utama)', email: 'admin@setyohantoro.com', pass: 'admin123', role: 'Super Admin' }];
-        localStorage.setItem('adminStaff', JSON.stringify(s));
-      }
-      return s;
-    };
+    const getStaff = () => JSON.parse(localStorage.getItem('adminStaff') || '[]');
     const setStaff = (l) => localStorage.setItem('adminStaff', JSON.stringify(l));
 
-    // 4. RENDER SEMUA TABEL
     function renderAll() {
-      // Tabel Dokumen
       const dokumen = getD();
       document.getElementById('tblDok').innerHTML = dokumen.length ? dokumen.map(d => `
-        <tr>
-          <td><strong>${d.owner}</strong></td>
-          <td>📎 ${d.nama}</td>
-          <td><span class="status-pill ${d.kategori.includes('Pembayaran')?'aktif':'pending'}">${d.kategori}</span></td>
-          <td><small style="color:var(--ink-mute);">${d.catatan || '-'}</small></td>
-          <td>${d.tanggal}</td>
-        </tr>
+        <tr><td><strong>${d.owner}</strong></td><td>📎 ${d.nama}</td><td>${d.kategori}</td><td>${d.catatan || '-'}</td><td>${d.tanggal}</td></tr>
       `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada dokumen.</td></tr>';
 
-      // Tabel Perkara
       const perkara = getPr();
       document.getElementById('tblPrk').innerHTML = perkara.length ? perkara.map(p => `
-        <tr>
-          <td><strong>${p.owner}</strong></td>
-          <td>${p.nomor}</td>
-          <td>${p.jenis}</td>
-          <td><span class="status-pill ${p.status === 'Berjalan' ? 'aktif' : 'pending'}">${p.status}</span></td>
-          <td><button onclick="updatePerkara('${p.id}')" style="background:#b8860b;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer;">Update</button></td>
-        </tr>
+        <tr><td><strong>${p.owner}</strong></td><td>${p.nomor}</td><td>${p.jenis}</td><td>${p.status}</td><td><button onclick="updatePerkara('${p.id}')" style="background:#b8860b;color:white;border:none;padding:4px 8px;border-radius:4px;">Update</button></td></tr>
       `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada perkara.</td></tr>';
 
-      // Tabel Akun Klien
       const akun = getA();
       document.getElementById('tblAkun').innerHTML = akun.length ? akun.map((a, i) => `
-        <tr>
-          <td>${a.nama}</td><td>${a.email}</td><td>${a.password}</td>
-          <td><button onclick="delA(${i})" style="color:#dc2626;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button></td>
-        </tr>
+        <tr><td>${a.nama}</td><td>${a.email}</td><td>${a.password}</td><td><button onclick="delA(${i})" style="color:red;background:none;border:none;">Hapus</button></td></tr>
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada akun klien.</td></tr>';
 
-      // Tabel Pending Klien
       const pending = getP();
       document.getElementById('badge').hidden = pending.length === 0;
       document.getElementById('badge').textContent = pending.length;
       document.getElementById('tblPending').innerHTML = pending.length ? pending.map((x, i) => `
-        <tr>
-          <td>${x.nama}</td><td>${x.email}</td>
-          <td style="white-space:nowrap;">
-            <button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-right:4px;">✓ Setujui</button>
-            <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;">✕ Tolak</button>
-          </td>
-        </tr>
+        <tr><td>${x.nama}</td><td>${x.email}</td><td><button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:4px 8px;border-radius:4px;">Setujui</button></td></tr>
       `).join('') : '<tr><td colspan="3" style="text-align:center;">Tidak ada pendaftar.</td></tr>';
 
-      // Tabel Staff & Owner
       const staff = getStaff();
       document.getElementById('tblStaff').innerHTML = staff.length ? staff.map((s, i) => `
-        <tr>
-          <td><strong>${s.nama}</strong></td>
-          <td>${s.email}</td>
-          <td><span class="status-pill ${s.role.includes('Owner') || s.role.includes('Super') ? 'aktif' : 'pending'}">${s.role}</span></td>
-          <td>
-            ${s.role === 'Super Admin' ? '<small style="color:var(--ink-mute); font-weight:bold;">🔒 Terkunci</small>' : `<button onclick="delStaff(${i})" style="color:#dc2626;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button>`}
-          </td>
-        </tr>
+        <tr><td>${s.nama}</td><td>${s.email}</td><td>${s.role}</td><td><button onclick="delStaff(${i})" style="color:red;background:none;border:none;">Hapus</button></td></tr>
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada staff.</td></tr>';
     }
 
-    // 5. FUNGSI AKSI
-    function delA(i) { if(confirm('Hapus klien ini?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
+    function delA(i) { if(confirm('Hapus?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
     function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Disetujui!'); }
-    function tolak(i) { if(confirm('Tolak pendaftaran?')) { const p = getP(); p.splice(i, 1); setP(p); renderAll(); } }
-    
-    function delStaff(i) { 
-      if(confirm('Hapus akun internal ini? Akses login mereka akan dicabut.')) { 
-        const s = getStaff(); s.splice(i, 1); setStaff(s); renderAll(); 
-      } 
-    }
+    function delStaff(i) { if(confirm('Hapus?')) { const s = getStaff(); s.splice(i, 1); setStaff(s); renderAll(); } }
 
     function updatePerkara(id) {
-      const all = getPr(); const p = all.find(x => x.id === id); if(!p) return;
-      const newNomor = prompt('Nomor Perkara:', p.nomor); if(newNomor === null) return; 
-      const newStatus = prompt('Status (Berjalan/Selesai):', p.status); if(newStatus === null) return;
-      p.nomor = newNomor; p.status = newStatus;
-      localStorage.setItem('demoPerkara', JSON.stringify(all));
-      renderAll(); alert('Perkara diperbarui!');
+      const all = getPr(); const p = all.find(x => x.id === id);
+      const n = prompt('Nomor Perkara:', p.nomor); if(n === null) return;
+      const s = prompt('Status (Berjalan/Selesai):', p.status); if(s === null) return;
+      p.nomor = n; p.status = s; localStorage.setItem('demoPerkara', JSON.stringify(all)); renderAll();
     }
 
-    // 6. FORM SUBMISSIONS
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getA();
-      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value, password: document.getElementById('bp').value });
+      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value.toLowerCase(), password: document.getElementById('bp').value });
       setA(a); e.target.reset(); document.getElementById('okBuat').hidden = false; renderAll();
     });
 
     document.getElementById('formStaff').addEventListener('submit', (e) => {
       e.preventDefault();
       const s = getStaff();
-      const emailBaru = document.getElementById('se').value.toLowerCase();
-      if(s.find(x => x.email === emailBaru)) { alert('Email sudah terdaftar!'); return; }
-
-      s.push({ 
-        nama: document.getElementById('sn').value, 
-        email: emailBaru, 
-        pass: document.getElementById('sp').value, 
-        role: document.getElementById('sr').value 
-      });
-      
+      s.push({ nama: document.getElementById('sn').value, email: document.getElementById('se').value.toLowerCase(), pass: document.getElementById('sp').value, role: document.getElementById('sr').value });
       setStaff(s); e.target.reset(); document.getElementById('okStaff').hidden = false; renderAll();
     });
 

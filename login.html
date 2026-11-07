@@ -12,7 +12,6 @@
 </head>
 <body class="login-page">
 
-  <!-- Navbar sederhana -->
   <header class="navbar">
     <div class="container nav-inner">
       <a href="index.html" class="brand">
@@ -25,28 +24,18 @@
     </div>
   </header>
 
-  <!-- Login Section -->
   <main class="login-wrap">
     <div class="login-card">
-
       <div class="login-head">
         <div class="login-icon">🔒</div>
         <h1>Portal Klien</h1>
         <p>Masuk untuk memantau perkembangan perkara Anda secara transparan.</p>
       </div>
 
-      <!-- Form Login -->
       <form id="loginForm" class="login-form" autocomplete="on">
-
         <div class="form-group">
           <label for="email">Email Terdaftar</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="nama@perusahaan.com"
-            required
-            autocomplete="username">
+          <input type="email" id="email" name="email" placeholder="nama@perusahaan.com" required autocomplete="username">
         </div>
 
         <div class="form-group">
@@ -55,13 +44,7 @@
             <a href="#" class="link-small">Lupa sandi?</a>
           </div>
           <div class="password-wrap">
-            <input
-              type="password"
-              id="password"
-              name="password"
-              placeholder="••••••••"
-              required
-              autocomplete="current-password">
+            <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
             <button type="button" class="toggle-pass" id="togglePass" aria-label="Tampilkan sandi">👁</button>
           </div>
         </div>
@@ -73,7 +56,6 @@
           </label>
         </div>
 
-        <!-- Pesan error -->
         <div id="loginError" class="alert-error" hidden>
           ⚠ Email atau kata sandi salah. Silakan coba lagi.
         </div>
@@ -88,11 +70,12 @@
         <div class="login-note">
           🔐 Koneksi aman &amp; terenkripsi. Data perkara Anda bersifat rahasia.
         </div>
+        <div style="margin-top:12px; font-size:0.75rem; color:var(--ink-mute);">
+          Akun demo: <strong>klien@demo.com</strong> / <strong>demo123</strong>
+        </div>
       </div>
-
     </div>
 
-    <!-- Panel samping dekoratif -->
     <aside class="login-aside">
       <div class="aside-content">
         <span class="eyebrow">Portal Klien</span>
@@ -103,15 +86,12 @@
           <li>✓ Unduh dokumen legal kapan saja</li>
           <li>✓ Catatan langsung dari advokat penanggung jawab</li>
         </ul>
-        <div class="aside-quote">
-          "Fiat Justitia Ruat Caelum"
-        </div>
+        <div class="aside-quote">"Fiat Justitia Ruat Caelum"</div>
       </div>
     </aside>
   </main>
 
   <script>
-    // Toggle tampil/sembunyi password
     const togglePass = document.getElementById('togglePass');
     const passInput = document.getElementById('password');
     togglePass.addEventListener('click', () => {
@@ -120,8 +100,6 @@
       togglePass.textContent = isPass ? '🙈' : '👁';
     });
 
-    // Simulasi login (demo statis)
-    // Akun demo: klien@demo.com / demo123
     const form = document.getElementById('loginForm');
     const errorBox = document.getElementById('loginError');
 

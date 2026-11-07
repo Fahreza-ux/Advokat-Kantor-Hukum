@@ -3,147 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload Dokumen — Portal Klien</title>
+  <title>Upload — Klien</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="portal.css">
 </head>
 <body>
-
   <div class="portal-layout">
     <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro</span>
-      </a>
+      <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Setyo Hantoro</span></div>
       <ul class="sidebar-menu">
         <li><a href="portal.html"><span class="emoji">🏠</span> Dashboard</a></li>
         <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
         <li><a href="portal-upload.html" class="active"><span class="emoji">📄</span> Upload</a></li>
-        <li class="mobile-logout">
-          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
+        <li class="mobile-logout"><a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
-
     <main class="portal-main">
-      <div class="portal-topbar">
-        <div><h1>Upload Dokumen</h1><p>Unggah dokumen pendukung (Mode Demo).</p></div>
-      </div>
-
+      <div class="portal-topbar"><h1>Upload Dokumen</h1><p>Unggah dokumen atau bukti transfer.</p></div>
       <div class="panel">
-        <div class="panel-head"><h3>Form Upload</h3></div>
         <div class="panel-body">
-          <div id="alertSuccess" class="alert-success" hidden>✓ Dokumen berhasil disimpan (demo).</div>
-          
-          <form id="uploadForm" class="portal-form">
+          <div id="ok" class="alert-success" hidden>✓ Berhasil diunggah (Demo).</div>
+          <form id="form" class="portal-form">
             <div class="form-group">
               <label>Kategori</label>
-              <select id="kategori" required>
-                <option value="">-- Pilih --</option>
+              <select id="kat" required>
                 <option value="KTP">KTP</option>
                 <option value="Kontrak">Kontrak</option>
-                <option value="Bukti">Bukti Transaksi</option>
+                <option value="Bukti Pembayaran">Bukti Pembayaran / Transfer</option>
               </select>
             </div>
-
             <div class="form-group">
-              <label>Pilih File</label>
-              <div class="dropzone" onclick="document.getElementById('fileInput').click()">
-                <div class="icon">📄</div>
-                <p id="dropText">Klik untuk memilih file</p>
-                <small>PDF, JPG, DOCX (Demo)</small>
+              <div class="dropzone" onclick="document.getElementById('file').click()">
+                <p id="dropTxt">Klik untuk pilih file</p>
               </div>
-              <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.docx" hidden>
+              <input type="file" id="file" hidden required>
             </div>
-
-            <button type="submit" class="btn-primary">Upload Dokumen</button>
+            <button type="submit" class="btn-primary">Upload</button>
           </form>
         </div>
       </div>
-
       <div class="panel">
-        <div class="panel-head"><h3>Dokumen Saya</h3></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead><tr><th>Nama File</th><th>Kategori</th><th>Tanggal</th><th>Aksi</th></tr></thead>
-            <tbody id="dokumenTable"></tbody>
+            <thead><tr><th>File</th><th>Kategori</th><th>Aksi</th></tr></thead>
+            <tbody id="tbl"></tbody>
           </table>
         </div>
       </div>
     </main>
   </div>
-
   <script>
-    // Cek Login
-    if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
-    function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
-
-    // Ambil Email Klien sebagai Kunci Data
-    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
-    const fileInput = document.getElementById('fileInput');
-    const dropText = document.getElementById('dropText');
-    const table = document.getElementById('dokumenTable');
-
-    fileInput.addEventListener('change', () => {
-      if (fileInput.files.length > 0) dropText.textContent = '✓ ' + fileInput.files[0].name;
+    if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
+    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
+    
+    const user = localStorage.getItem('demoEmailKlien') || 'demo';
+    document.getElementById('file').addEventListener('change', function() {
+      if(this.files.length > 0) document.getElementById('dropTxt').textContent = '✓ ' + this.files[0].name;
     });
 
-    function renderDokumen() {
-      const allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      // Filter: Hanya tampilkan dokumen milik email ini
-      const myDokumen = allData.filter(d => d.owner === userEmail);
-
-      if (myDokumen.length === 0) {
-        table.innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada dokumen.</td></tr>';
-        return;
-      }
-      table.innerHTML = myDokumen.map((d) => `
-        <tr>
-          <td>${d.nama}</td>
-          <td>${d.kategori}</td>
-          <td>${d.tanggal}</td>
-          <td><button onclick="hapusDokumen('${d.id}')" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
-        </tr>
-      `).join('');
+    function render() {
+      const d = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(p => p.owner === user);
+      document.getElementById('tbl').innerHTML = d.length ? d.map(p => `
+        <tr><td>${p.nama}</td><td><span class="status-pill ${p.kategori==='Bukti Pembayaran'?'aktif':'pending'}">${p.kategori}</span></td><td><button onclick="hapus('${p.id}')" style="color:red;border:none;background:none;cursor:pointer;">Hapus</button></td></tr>
+      `).join('') : '<tr><td colspan="3" style="text-align:center;">Belum ada file.</td></tr>';
     }
 
-    document.getElementById('uploadForm').addEventListener('submit', (e) => {
+    document.getElementById('form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const file = fileInput.files[0];
-      const kategori = document.getElementById('kategori').value;
-      if (!file || !kategori) { alert('Pilih file & kategori!'); return; }
-
-      const allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      
-      // Simpan dengan owner: userEmail
-      allData.unshift({
-        id: Date.now().toString(), // ID unik
-        owner: userEmail,
-        nama: file.name,
-        kategori: kategori,
-        tanggal: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
-      });
-      
-      localStorage.setItem('demoDokumen', JSON.stringify(allData));
-
-      document.getElementById('alertSuccess').hidden = false;
-      e.target.reset();
-      dropText.textContent = 'Klik untuk memilih file';
-      renderDokumen();
+      const f = document.getElementById('file').files[0];
+      if(!f) return;
+      const d = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      d.unshift({ id: Date.now().toString(), owner: user, nama: f.name, kategori: document.getElementById('kat').value, tanggal: new Date().toLocaleDateString('id-ID') });
+      localStorage.setItem('demoDokumen', JSON.stringify(d));
+      document.getElementById('ok').hidden = false;
+      e.target.reset(); document.getElementById('dropTxt').textContent = 'Klik untuk pilih file';
+      render();
     });
 
-    function hapusDokumen(id) {
-      if(!confirm('Hapus dokumen ini?')) return;
-      let allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      // Buang data dengan ID tersebut
-      allData = allData.filter(d => d.id !== id);
-      localStorage.setItem('demoDokumen', JSON.stringify(allData));
-      renderDokumen();
+    function hapus(id) {
+      if(!confirm('Hapus?')) return;
+      let d = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(p => p.id !== id);
+      localStorage.setItem('demoDokumen', JSON.stringify(d)); render();
     }
-
-    renderDokumen();
+    render();
   </script>
 </body>
 </html>

@@ -54,21 +54,30 @@
   </div>
 
   <script>
+    // Cek Login
     if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
     function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
 
+    // Tampilkan Profil
     document.getElementById('namaKlien').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
     document.getElementById('emailKlien').textContent = localStorage.getItem('demoEmailKlien') || '';
 
-    const dok = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-    document.getElementById('statDokumen').textContent = dok.length;
+    // Kunci Email untuk Filter Data
+    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
 
-    const prk = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-    document.getElementById('statPerkara').textContent = prk.length;
+    // 1. Hitung Statistik (Hanya milik sendiri)
+    const allDok = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+    const myDok = allDok.filter(d => d.owner === userEmail);
+    document.getElementById('statDokumen').textContent = myDok.length;
 
+    const allPrk = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+    const myPrk = allPrk.filter(p => p.owner === userEmail);
+    document.getElementById('statPerkara').textContent = myPrk.length;
+
+    // 2. Tampilkan Preview Perkara (Hanya milik sendiri)
     const prev = document.getElementById('perkaraPreview');
-    if(prk.length > 0) {
-      prev.innerHTML = prk.slice(0, 3).map(p => `
+    if(myPrk.length > 0) {
+      prev.innerHTML = myPrk.slice(0, 3).map(p => `
         <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><span class="status-pill ${p.status}">${p.status}</span></td></tr>
       `).join('');
     } else {

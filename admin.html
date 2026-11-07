@@ -14,11 +14,11 @@
     <aside class="sidebar">
       <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Admin Area</span></div>
       <ul class="sidebar-menu">
-        <!-- MENU MONITORING DIBUAT SANGAT JELAS -->
         <li><a href="#" class="active" onclick="showTab('monitor', this)"><span class="emoji">📊</span> Data & Dokumen</a></li>
         <li><a href="#" onclick="showTab('kelola', this)"><span class="emoji">👥</span> Akun Klien</a></li>
         <li><a href="#" onclick="showTab('pending', this)"><span class="emoji">⏳</span> Pendaftar <span id="badge" class="badge-count" hidden>0</span></a></li>
         <li><a href="#" onclick="showTab('buat', this)"><span class="emoji">➕</span> Buat Akun</a></li>
+        <li><a href="#" onclick="showTab('setting', this)"><span class="emoji">⚙️</span> Pengaturan</a></li>
         <li class="mobile-logout"><a href="index.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout Admin</button>
@@ -27,39 +27,37 @@
     <!-- KONTEN UTAMA -->
     <main class="portal-main">
       
-      <!-- TAB 1: DATA & DOKUMEN KLIEN -->
+      <!-- TAB 1: MONITORING -->
       <div id="tab-monitor" class="tab-panel">
         <div class="portal-topbar">
           <h1>Data & Dokumen Klien</h1>
           <p>Pantau semua perkara dan file yang diunggah oleh klien.</p>
         </div>
         
-        <!-- Tabel Dokumen/Pembayaran -->
         <div class="panel">
           <div class="panel-head"><h3>📄 Dokumen & Bukti Pembayaran</h3></div>
           <div class="panel-body">
             <table class="data-table">
-              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Tanggal</th></tr></thead>
+              <thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Catatan Klien</th><th>Tanggal</th></tr></thead>
               <tbody id="tblDok"></tbody>
             </table>
           </div>
         </div>
 
-        <!-- Tabel Perkara -->
         <div class="panel">
-          <div class="panel-head"><h3>📋 Data Perkara</h3></div>
+          <div class="panel-head"><h3>📋 Data Perkara Klien</h3></div>
           <div class="panel-body">
             <table class="data-table">
-              <thead><tr><th>Email Klien</th><th>No. Perkara</th><th>Jenis</th></tr></thead>
+              <thead><tr><th>Klien</th><th>No. Perkara</th><th>Klasifikasi</th><th>Status</th><th>Aksi</th></tr></thead>
               <tbody id="tblPrk"></tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: KELOLA AKUN -->
+      <!-- TAB 2: KELOLA AKUN (DENGAN TOMBOL EDIT) -->
       <div id="tab-kelola" class="tab-panel" hidden>
-        <div class="portal-topbar"><h1>Akun Klien Aktif</h1><p>Daftar klien yang bisa login.</p></div>
+        <div class="portal-topbar"><h1>Akun Klien Aktif</h1><p>Daftar klien yang bisa login. Anda dapat mengedit nama atau password mereka.</p></div>
         <div class="panel">
           <div class="panel-body">
             <table class="data-table">
@@ -99,16 +97,37 @@
         </div>
       </div>
 
+      <!-- TAB 5: PENGATURAN ADMIN (GANTI PASSWORD) -->
+      <div id="tab-setting" class="tab-panel" hidden>
+        <div class="portal-topbar"><h1>Pengaturan Admin</h1></div>
+        <div class="panel">
+          <div class="panel-body">
+            <div class="alert-success" style="background:#fef3c7; color:#92400e; border-color:#f59e0b;">
+              ℹ️ Di mode Demo GitHub ini, perubahan password admin hanya berlaku di browser ini saja.
+            </div>
+            <form id="formPass" class="portal-form">
+              <div class="form-group">
+                <label>Password Admin Baru</label>
+                <input type="text" id="newPassAdmin" placeholder="Masukkan password baru" required>
+              </div>
+              <button type="submit" class="btn-primary">Simpan Password Admin</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 
   <script>
     // ==========================================
-    // LOGIKA LOGIN ADMIN (WAJIB KETIK PASSWORD)
+    // LOGIKA LOGIN ADMIN
     // ==========================================
-    const PASS = 'admin123';
+    // Cek password tersimpan, jika belum ada gunakan 'admin123'
+    let PASS_ADMIN = localStorage.getItem('demoAdminPass') || 'admin123';
+
     if (sessionStorage.getItem('authAdmin') !== 'true') {
-      if (prompt('Masukkan Password Admin:') === PASS) {
+      if (prompt('Masukkan Password Admin:') === PASS_ADMIN) {
         sessionStorage.setItem('authAdmin', 'true');
       } else { 
         alert('Akses Ditolak!'); 
@@ -128,21 +147,17 @@
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + id).hidden = false;
       
-      // Hapus class active dari semua menu
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-      // Tambahkan class active ke menu yang diklik
       if (el) el.classList.add('active');
     }
 
     // ==========================================
-    // DATA HELPERS (Ambil dari localStorage)
+    // DATA HELPERS
     // ==========================================
     const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
-    
     const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
     const setP = (l) => localStorage.setItem('demoPending', JSON.stringify(l));
-    
     const getD = () => JSON.parse(localStorage.getItem('demoDokumen') || '[]');
     const getPr = () => JSON.parse(localStorage.getItem('demoPerkara') || '[]');
 
@@ -150,35 +165,41 @@
     // RENDER SEMUA TABEL
     // ==========================================
     function renderAll() {
-      // 1. Tabel Dokumen Klien (Menampilkan siapa yang upload apa)
+      // 1. Tabel Dokumen
       const dokumen = getD();
       document.getElementById('tblDok').innerHTML = dokumen.length ? dokumen.map(d => `
         <tr>
           <td><strong>${d.owner}</strong></td>
           <td>📎 ${d.nama}</td>
-          <td><span class="status-pill ${d.kategori==='Bukti Pembayaran'?'aktif':'pending'}">${d.kategori}</span></td>
+          <td><span class="status-pill ${d.kategori.includes('Pembayaran')?'aktif':'pending'}">${d.kategori}</span></td>
+          <td><small style="color:var(--ink-mute);">${d.catatan || '-'}</small></td>
           <td>${d.tanggal}</td>
         </tr>
-      `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada dokumen yang diunggah.</td></tr>';
+      `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada dokumen yang diunggah.</td></tr>';
 
-      // 2. Tabel Perkara Klien
+      // 2. Tabel Perkara
       const perkara = getPr();
       document.getElementById('tblPrk').innerHTML = perkara.length ? perkara.map(p => `
         <tr>
           <td><strong>${p.owner}</strong></td>
           <td>${p.nomor}</td>
           <td>${p.jenis}</td>
+          <td><span class="status-pill ${p.status === 'Berjalan' ? 'aktif' : 'pending'}">${p.status}</span></td>
+          <td><button onclick="updatePerkara('${p.id}')" style="background:#b8860b;color:white;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer;">Update</button></td>
         </tr>
-      `).join('') : '<tr><td colspan="3" style="text-align:center;">Belum ada data perkara.</td></tr>';
+      `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada data perkara.</td></tr>';
 
-      // 3. Tabel Akun Klien Aktif
+      // 3. Tabel Akun Klien (DENGAN TOMBOL EDIT & HAPUS)
       const akun = getA();
       document.getElementById('tblAkun').innerHTML = akun.length ? akun.map((a, i) => `
         <tr>
           <td>${a.nama}</td>
           <td>${a.email}</td>
           <td>${a.password}</td>
-          <td><button onclick="delA(${i})" style="color:#dc2626;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button></td>
+          <td style="white-space:nowrap;">
+            <button onclick="editAkun(${i})" style="background:#e0e7ff;color:#3730a3;border:none;padding:6px 10px;border-radius:8px;font-weight:bold;cursor:pointer;margin-right:4px;">Edit</button>
+            <button onclick="delA(${i})" style="color:#dc2626;background:none;border:none;font-weight:bold;cursor:pointer;">Hapus</button>
+          </td>
         </tr>
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada akun aktif.</td></tr>';
 
@@ -186,11 +207,9 @@
       const pending = getP();
       document.getElementById('badge').hidden = pending.length === 0;
       document.getElementById('badge').textContent = pending.length;
-      
       document.getElementById('tblPending').innerHTML = pending.length ? pending.map((x, i) => `
         <tr>
-          <td>${x.nama}</td>
-          <td>${x.email}</td>
+          <td>${x.nama}</td><td>${x.email}</td>
           <td style="white-space:nowrap;">
             <button onclick="acc(${i})" style="background:#dcfce7;color:#166534;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;margin-right:4px;">✓ Setujui</button>
             <button onclick="tolak(${i})" style="background:#fee2e2;color:#991b1b;border:none;padding:6px 12px;border-radius:8px;font-weight:bold;cursor:pointer;">✕ Tolak</button>
@@ -200,41 +219,62 @@
     }
 
     // ==========================================
-    // FUNGSI AKSI (Setujui, Tolak, Hapus)
+    // FUNGSI AKSI (EDIT, UPDATE, HAPUS)
     // ==========================================
-    function delA(i) { 
-      if(confirm('Hapus akun ini secara permanen?')) { 
-        const a = getA(); a.splice(i, 1); setA(a); renderAll(); 
-      } 
-    }
     
-    function acc(i) { 
-      const p = getP(); const a = getA(); 
-      a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); 
-      alert('Pendaftar berhasil disetujui!'); 
-    }
-    
-    function tolak(i) { 
-      if(confirm('Tolak pendaftaran ini?')) {
-        const p = getP(); 
-        p.splice(i, 1); setP(p); renderAll(); 
-      }
+    // FITUR BARU: EDIT AKUN KLIEN
+    function editAkun(i) {
+      const a = getA();
+      const klien = a[i];
+      
+      const newNama = prompt('Ubah Nama Klien:', klien.nama);
+      if(newNama === null) return; // Batal
+      
+      const newPass = prompt('Ubah Password Klien:', klien.password);
+      if(newPass === null) return; // Batal
+      
+      a[i].nama = newNama;
+      a[i].password = newPass;
+      
+      setA(a);
+      renderAll();
+      alert('Data akun klien berhasil diperbarui!');
     }
 
+    function updatePerkara(id) {
+      const all = getPr(); const p = all.find(x => x.id === id); if(!p) return;
+      const newNomor = prompt('Masukkan Nomor Perkara Pengadilan (Biarkan "-" jika belum):', p.nomor);
+      if(newNomor === null) return; 
+      const newStatus = prompt('Masukkan Status Baru (Contoh: "Berjalan", "Selesai", "Menunggu Review"):', p.status);
+      if(newStatus === null) return;
+      p.nomor = newNomor; p.status = newStatus;
+      localStorage.setItem('demoPerkara', JSON.stringify(all));
+      renderAll(); alert('Data perkara klien berhasil diperbarui!');
+    }
+
+    function delA(i) { if(confirm('Hapus akun ini secara permanen?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
+    function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Pendaftar berhasil disetujui!'); }
+    function tolak(i) { if(confirm('Tolak pendaftaran ini?')) { const p = getP(); p.splice(i, 1); setP(p); renderAll(); } }
+
     // ==========================================
-    // FORM BUAT AKUN
+    // FORM BUAT AKUN BARU
     // ==========================================
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getA();
-      a.push({ 
-        nama: document.getElementById('bn').value, 
-        email: document.getElementById('be').value, 
-        password: document.getElementById('bp').value 
-      });
-      setA(a); e.target.reset();
-      document.getElementById('okBuat').hidden = false; 
-      renderAll();
+      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value, password: document.getElementById('bp').value });
+      setA(a); e.target.reset(); document.getElementById('okBuat').hidden = false; renderAll();
+    });
+
+    // ==========================================
+    // FORM GANTI PASSWORD ADMIN
+    // ==========================================
+    document.getElementById('formPass').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const newPass = document.getElementById('newPassAdmin').value;
+      localStorage.setItem('demoAdminPass', newPass);
+      alert('Password Admin berhasil diubah! Silakan ingat password baru Anda.');
+      e.target.reset();
     });
 
     // JALANKAN SAAT HALAMAN DIBUKA

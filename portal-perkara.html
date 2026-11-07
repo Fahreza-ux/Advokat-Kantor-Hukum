@@ -3,128 +3,71 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perkara Saya — Portal Klien</title>
+  <title>Perkara — Klien</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="portal.css">
 </head>
 <body>
-
   <div class="portal-layout">
     <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro</span>
-      </a>
+      <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Setyo Hantoro</span></div>
       <ul class="sidebar-menu">
         <li><a href="portal.html"><span class="emoji">🏠</span> Dashboard</a></li>
         <li><a href="portal-perkara.html" class="active"><span class="emoji">📋</span> Perkara</a></li>
         <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
-        <li class="mobile-logout">
-          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
+        <li class="mobile-logout"><a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
-
     <main class="portal-main">
-      <div class="portal-topbar">
-        <div><h1>Perkara Saya</h1><p>Daftar perkara yang ditangani.</p></div>
-      </div>
-
+      <div class="portal-topbar"><h1>Perkara Saya</h1><p>Daftar perkara Anda.</p></div>
       <div class="panel">
         <div class="panel-head"><h3>Tambah Perkara</h3></div>
         <div class="panel-body">
-          <form id="perkaraForm" class="portal-form">
-            <div class="form-group">
-              <label>Nomor Perkara</label>
-              <input type="text" id="nomor" placeholder="mis. 045/Pdt.G/2026/PN.Tng" required>
-            </div>
+          <form id="form" class="portal-form">
+            <div class="form-group"><label>Nomor Perkara</label><input type="text" id="nomor" required></div>
             <div class="form-group">
               <label>Jenis</label>
-              <select id="jenis" required>
-                <option value="">-- Pilih --</option>
-                <option>Sengketa Bisnis</option>
-                <option>Mediasi</option>
-                <option>Arbitrase</option>
-              </select>
+              <select id="jenis" required><option value="Sengketa Bisnis">Sengketa Bisnis</option><option value="Mediasi">Mediasi</option></select>
             </div>
             <button type="submit" class="btn-primary">Simpan</button>
           </form>
         </div>
       </div>
-
       <div class="panel">
-        <div class="panel-head"><h3>Daftar Perkara</h3></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead><tr><th>No. Perkara</th><th>Jenis</th><th>Status</th><th>Aksi</th></tr></thead>
-            <tbody id="perkaraTable"></tbody>
+            <thead><tr><th>No</th><th>Jenis</th><th>Aksi</th></tr></thead>
+            <tbody id="tbl"></tbody>
           </table>
         </div>
       </div>
     </main>
   </div>
-
   <script>
-    // Cek Login
-    if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
-    function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
-
-    // Ambil Email Klien yang sedang login sebagai Kunci Data
-    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
-    const table = document.getElementById('perkaraTable');
-
-    // Fungsi Render (Hanya ambil data milik userEmail ini)
-    function renderPerkara() {
-      const allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      // Filter: Hanya tampilkan perkara milik email ini
-      const myPerkara = allData.filter(p => p.owner === userEmail);
-
-      if (myPerkara.length === 0) {
-        table.innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada perkara.</td></tr>';
-        return;
-      }
-      table.innerHTML = myPerkara.map((p, i) => `
-        <tr>
-          <td><strong>${p.nomor}</strong></td>
-          <td>${p.jenis}</td>
-          <td><span class="status-pill ${p.status}">${p.status}</span></td>
-          <td><button onclick="hapusPerkara('${p.id}')" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
-        </tr>
-      `).join('');
+    if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
+    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
+    
+    const user = localStorage.getItem('demoEmailKlien') || 'demo';
+    function render() {
+      const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.owner === user);
+      document.getElementById('tbl').innerHTML = d.length ? d.map(p => `
+        <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><button onclick="hapus('${p.id}')" style="color:red;border:none;background:none;cursor:pointer;">Hapus</button></td></tr>
+      `).join('') : '<tr><td colspan="3" style="text-align:center;">Kosong</td></tr>';
     }
-
-    // Tambah Perkara
-    document.getElementById('perkaraForm').addEventListener('submit', (e) => {
+    document.getElementById('form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      
-      // Simpan dengan owner: userEmail
-      allData.unshift({ 
-        id: Date.now().toString(), // ID unik untuk hapus
-        owner: userEmail,
-        nomor: document.getElementById('nomor').value, 
-        jenis: document.getElementById('jenis').value, 
-        status: 'pending' 
-      });
-      
-      localStorage.setItem('demoPerkara', JSON.stringify(allData));
-      e.target.reset();
-      renderPerkara();
+      const d = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+      d.unshift({ id: Date.now().toString(), owner: user, nomor: document.getElementById('nomor').value, jenis: document.getElementById('jenis').value, status: 'pending' });
+      localStorage.setItem('demoPerkara', JSON.stringify(d));
+      e.target.reset(); render();
     });
-
-    // Hapus Perkara (Berdasarkan ID, dan pastikan hanya miliknya)
-    function hapusPerkara(id) {
-      if(!confirm('Hapus perkara ini?')) return;
-      let allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      // Buang data dengan ID tersebut
-      allData = allData.filter(p => p.id !== id);
-      localStorage.setItem('demoPerkara', JSON.stringify(allData));
-      renderPerkara();
+    function hapus(id) {
+      if(!confirm('Hapus?')) return;
+      let d = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.id !== id);
+      localStorage.setItem('demoPerkara', JSON.stringify(d)); render();
     }
-
-    renderPerkara();
+    render();
   </script>
 </body>
 </html>

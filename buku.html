@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Buku Manajemen Investasi — Setyo Hantoro & Associates</title>
+  <title>Katalog Buku — Setyo Hantoro & Associates</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body style="background: var(--bg-alt);">
 
-  <!-- NAVBAR SEDERHANA -->
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="container nav-inner">
       <a href="index.html" class="brand">
@@ -22,82 +22,58 @@
     </div>
   </header>
 
-  <!-- HERO BUKU -->
-  <section class="section" style="background: var(--white);">
-    <div class="container hero-grid" style="align-items: center;">
-      <div>
-        <!-- GAMBAR COVER BUKU -->
-        <!-- Pastikan nama file gambar Anda persis "cover-buku.jpg" -->
-        <img src="cover-buku.jpg" alt="Cover Buku Manajemen Investasi" style="width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); margin: 0 auto; display: block;">
-      </div>
-      <div>
-        <div class="badge">🔥 Buku Terbaru 2026</div>
-        <h1 style="font-size: 2.8rem; margin-bottom: 16px;">Manajemen Investasi: Teori, Studi Kasus, dan <span>Project-Based Learning</span></h1>
-        <p style="font-size: 1.1rem; color: var(--ink-soft); margin-bottom: 24px;">
-          Panduan komprehensif untuk memahami seluk-beluk investasi, dilengkapi dengan studi kasus nyata dan pendekatan praktis untuk masa depan finansial yang lebih baik.
-        </p>
-        
-        <div style="background: var(--bg); padding: 20px; border-radius: 12px; margin-bottom: 32px; border: 1px solid var(--line);">
-          <h3 style="margin-bottom: 10px;">Ditulis Oleh Para Ahli:</h3>
-          <ul style="list-style: none; color: var(--ink-soft); font-size: 0.95rem;">
-            <li>✓ Ahmad Ngudi Pranoto, S.Kom, M.M</li>
-            <li>✓ Gunawan, M. Pd</li>
-            <li>✓ Muhamad Khoirul Wafa, S.H., M.H</li>
-            <li style="margin-top: 10px; font-weight: 600;">Editor: Maemunah Syarifah Albaiti, S.H</li>
-          </ul>
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 32px;">
-          <div>
-            <span style="font-size: 0.9rem; color: var(--ink-mute); text-decoration: line-through;">Rp 150.000</span><br>
-            <span style="font-size: 2rem; font-weight: 800; color: var(--ink);">Rp 125.000</span>
-          </div>
-          <span class="badge" style="background: #dcfce7; color: #166534; border: none;">Hemat 15%</span>
-        </div>
-
-        <div class="hero-actions">
-          <!-- GANTI LINK WA DI BAWAH INI DENGAN NOMOR WHATSAPP ANDA -->
-          <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20membeli%20buku%20Manajemen%20Investasi" target="_blank" class="btn-primary" style="width: 100%; max-width: 300px;">Beli Sekarang via WhatsApp</a>
-        </div>
-        <p style="font-size: 0.8rem; color: var(--ink-mute); margin-top: 12px; text-align: center; max-width: 300px;">Pembayaran aman & pengiriman ke seluruh Indonesia.</p>
-      </div>
+  <!-- HEADER KATALOG -->
+  <section class="section" style="background: var(--white); padding-bottom: 40px;">
+    <div class="container text-center">
+      <div class="badge">📚 Katalog Buku</div>
+      <h1 style="font-size: 2.5rem; margin-bottom: 16px; margin-top: 16px;">Koleksi Buku Firma Hukum Kami</h1>
+      <p style="font-size: 1.1rem; color: var(--ink-soft); max-width: 600px; margin: 0 auto;">
+        Tingkatkan wawasan bisnis dan hukum Anda melalui buku-buku yang ditulis langsung oleh para praktisi dan akademisi kami.
+      </p>
     </div>
   </section>
 
-  <!-- SECTION DETAIL / KEUNGGULAN BUKU -->
+  <!-- DAFTAR BUKU (GRID) -->
   <section class="section">
     <div class="container">
-      <div class="section-head text-center">
-        <span class="eyebrow">Apa Isi Bukunya?</span>
-        <h2>Kenapa Anda Harus Membaca Buku Ini?</h2>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📈</div>
-          <h3>Teori & Konsep Dasar</h3>
-          <p>Pemahaman mendalam tentang pasar modal, obligasi, reksadana, hingga manajemen risiko portofolio.</p>
+      <div class="services-grid">
+        
+        <!-- BUKU 1 (Manajemen Investasi) -->
+        <div class="service-card" style="display: flex; flex-direction: column; padding: 20px;">
+          <img src="cover-buku.jpg" alt="Buku Manajemen Investasi" style="width: 100%; height: 350px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Manajemen Investasi</h3>
+          <p style="color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Teori, Studi Kasus, dan Project-Based Learning. Panduan komprehensif dunia investasi.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span style="font-weight: 800; font-size: 1.2rem;">Rp 125.000</span>
+            <span class="badge" style="background: #dcfce7; color: #166534; border: none; font-size: 0.7rem;">Hemat 15%</span>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20membeli%20buku%20Manajemen%20Investasi" target="_blank" class="btn-primary" style="width: 100%;">Beli via WhatsApp</a>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">💼</div>
-          <h3>Studi Kasus Nyata</h3>
-          <p>Belajar langsung dari kasus investasi di dunia nyata, baik skala nasional maupun internasional.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🎯</div>
-          <h3>Project-Based Learning</h3>
-          <p>Bukan sekadar teori! Anda dituntun untuk mempraktikkan langsung proyek analisis investasi.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER CTA -->
-  <section class="cta" style="background: var(--ink); padding: 60px 0; text-align: center;">
-    <div class="container">
-      <h2 style="color: white; margin-bottom: 16px;">Ambil Kendali atas Masa Depan Finansial Anda</h2>
-      <p style="color: #b0b8c8; margin-bottom: 32px;">Dapatkan buku fisik edisi terbatas 2026 sekarang.</p>
-      <a href="https://wa.me/6281234567890" target="_blank" class="btn-primary light" style="display: inline-block;">Hubungi Admin Pembelian</a>
+        <!-- BUKU 2 (Contoh Buku Lain) -->
+        <div class="service-card" style="display: flex; flex-direction: column; padding: 20px;">
+          <!-- Ganti gambar di bawah dengan cover buku kedua Anda -->
+          <img src="https://via.placeholder.com/300x400/0d1b2a/b8860b?text=Cover+Buku+Baru" alt="Buku Baru" style="width: 100%; height: 350px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Hukum Korporasi Terapan</h3>
+          <p style="color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Panduan praktis pendirian PT, kepatuhan OSS, dan penyelesaian sengketa.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span style="font-weight: 800; font-size: 1.2rem;">Rp 99.000</span>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20membeli%20Buku%20Hukum%20Korporasi" target="_blank" class="btn-primary" style="width: 100%;">Beli via WhatsApp</a>
+        </div>
+
+        <!-- BUKU 3 (Contoh Buku Lain) -->
+        <div class="service-card" style="display: flex; flex-direction: column; padding: 20px;">
+          <img src="https://via.placeholder.com/300x400/0d1b2a/b8860b?text=Cover+Buku+Baru" alt="Buku Baru" style="width: 100%; height: 350px; object-fit: contain; background: #f9f9f9; border-radius: 8px; margin-bottom: 20px;">
+          <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Negosiasi Kontrak Bisnis</h3>
+          <p style="color: var(--ink-soft); font-size: 0.85rem; margin-bottom: 16px; flex-grow: 1;">Teknik menyusun klausul kontrak yang kuat untuk mencegah wanprestasi.</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <span style="font-weight: 800; font-size: 1.2rem;">Rp 150.000</span>
+          </div>
+          <a href="https://wa.me/6281234567890?text=Halo,%20saya%20ingin%20membeli%20Buku%20Negosiasi%20Kontrak" target="_blank" class="btn-primary" style="width: 100%;">Beli via WhatsApp</a>
+        </div>
+
+      </div>
     </div>
   </section>
 

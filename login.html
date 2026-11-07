@@ -3,52 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Internal — Setyo Hantoro & Associates</title>
+  <title>Login Klien — Firma Hukum</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body style="display: flex; flex-direction: column; min-height: 100vh; background: #081220;">
+<body style="display: flex; flex-direction: column; min-height: 100vh; background: var(--bg);">
+  
+  <header style="padding: 16px 20px; text-align: center; border-bottom: 1px solid var(--line); background: var(--white);">
+    <a href="index.html" class="brand" style="justify-content: center; display: flex; align-items: center; gap: 10px; text-decoration: none;">
+      <!-- LOGO DIKUNCI KECIL -->
+      <img src="logo.png" alt="Logo SAKRI" style="height: 45px !important; width: auto !important; max-height: 45px; object-fit: contain;">
+      <span class="brand-text" style="font-size: 1rem; font-weight: bold; color: var(--ink);">Setyo Hantoro <em>&</em> Associates</span>
+    </a>
+  </header>
 
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-      
+    <div class="login-card">
       <div style="text-align: center; margin-bottom: 24px;">
-        <!-- LOGO DIKUNCI UKURANNYA -->
-        <img src="logo.png" alt="Logo SAKRI" style="height: 80px !important; width: auto !important; max-height: 80px; margin: 0 auto 16px; display: block; border-radius: 12px; object-fit: contain;">
-        <h1 style="font-size: 1.6rem; margin-bottom: 8px;">Internal System</h1>
-        <p style="color: var(--ink-mute); font-size: 0.85rem;">Akses khusus Owner, Partner & Staff.</p>
+        <h1 style="font-size: 1.8rem; margin-bottom: 8px;">Portal Klien</h1>
+        <p style="color: var(--ink-mute); font-size: 0.9rem;">Masuk untuk memantau perkembangan perkara.</p>
       </div>
-      
-      <form id="loginAdminForm">
-        <div style="margin-bottom: 16px;"><label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email Internal</label><input type="email" id="adminEmail" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);"></div>
-        <div style="margin-bottom: 24px;"><label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Password</label><input type="password" id="adminPass" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);"></div>
+      <form id="loginForm">
+        <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
+        <div class="form-group"><label>Password</label><input type="password" id="password" required></div>
+        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 24px;">
+          <input type="checkbox" id="remember" style="width: auto;"><label for="remember" style="font-weight: 400; font-size: 0.85rem; margin: 0;">Ingat saya</label>
+        </div>
         <div id="errorBox" style="display: none; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
-        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; background: var(--ink);">Masuk ke Sistem</button>
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px;">Masuk</button>
       </form>
-      <div style="text-align: center; margin-top: 24px; font-size: 0.8rem; color: var(--ink-mute);"><a href="index.html" style="color: var(--gold);">← Kembali ke Website Utama</a></div>
+      <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute);">
+        Belum punya akun? <a href="daftar.html" style="color: var(--gold); font-weight: bold;">Daftar di sini</a>
+      </div>
     </div>
   </main>
 
   <script>
-    document.getElementById('loginAdminForm').addEventListener('submit', (e) => {
+    if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') window.location.href = 'portal.html';
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = document.getElementById('adminEmail').value.toLowerCase();
-      const pass = document.getElementById('adminPass').value;
+      const email = document.getElementById('email').value.toLowerCase();
+      const pass = document.getElementById('password').value;
+      const rem = document.getElementById('remember').checked;
       const errorBox = document.getElementById('errorBox');
-      let staffList = JSON.parse(localStorage.getItem('adminStaff') || '[]');
-      if(staffList.length === 0) {
-        staffList.push({ nama: 'Setyo Hantoro (Owner Utama)', email: 'admin@setyohantoro.com', pass: 'admin123', role: 'Super Admin' });
-        localStorage.setItem('adminStaff', JSON.stringify(staffList));
+      const list = JSON.parse(localStorage.getItem('demoAkun') || '[]');
+      list.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
+      const acc = list.find(a => a.email === email && a.password === pass);
+      if (acc) {
+        if(rem) localStorage.setItem('demoLoggedIn', 'true'); else sessionStorage.setItem('demoLoggedIn', 'true');
+        localStorage.setItem('demoEmailKlien', acc.email);
+        localStorage.setItem('demoNamaKlien', acc.nama);
+        window.location.href = 'portal.html';
+      } else {
+        errorBox.textContent = 'Email atau password klien salah.';
+        errorBox.style.display = 'block';
       }
-      const akunDitemukan = staffList.find(s => s.email === email && s.pass === pass);
-      if (akunDitemukan) {
-        sessionStorage.setItem('authAdmin', 'true');
-        sessionStorage.setItem('adminNama', akunDitemukan.nama);
-        sessionStorage.setItem('adminRole', akunDitemukan.role);
-        const verifikasi = prompt(`🔒 Halo ${akunDitemukan.nama}.\nKetik ulang password Anda untuk melanjutkan:`);
-        if (verifikasi === pass) { window.location.href = 'admin.html'; } 
-        else { sessionStorage.removeItem('authAdmin'); errorBox.textContent = 'Verifikasi ulang gagal.'; errorBox.style.display = 'block'; }
-      } else { errorBox.textContent = 'Email atau password salah.'; errorBox.style.display = 'block'; }
     });
   </script>
 </body>

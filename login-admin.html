@@ -15,12 +15,12 @@
       <div style="text-align: center; margin-bottom: 24px;">
         <div style="width: 60px; height: 60px; background: var(--ink); color: var(--gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: bold; margin: 0 auto 16px;">SH</div>
         <h1 style="font-size: 1.6rem; margin-bottom: 8px;">Internal System</h1>
-        <p style="color: var(--ink-mute); font-size: 0.85rem;">Akses khusus Admin Firma Hukum.</p>
+        <p style="color: var(--ink-mute); font-size: 0.85rem;">Akses khusus Admin & Staff Firma Hukum.</p>
       </div>
       
       <form id="loginAdminForm">
         <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email Admin</label>
+          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email Staff</label>
           <input type="email" id="adminEmail" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);">
         </div>
         <div style="margin-bottom: 24px;">
@@ -40,28 +40,33 @@
   </main>
 
   <script>
-    // Kredensial Default Admin
-    const defaultEmail = 'admin@setyohantoro.com';
-    const defaultPass = 'admin123';
-
     document.getElementById('loginAdminForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('adminEmail').value.toLowerCase();
       const pass = document.getElementById('adminPass').value;
       const errorBox = document.getElementById('errorBox');
 
-      // Ambil email & pass terbaru (jika admin sudah pernah ganti di panel)
-      const currentEmail = localStorage.getItem('adminEmail') || defaultEmail;
-      const currentPass = localStorage.getItem('adminPass') || defaultPass;
+      // 1. Ambil daftar staff dari localStorage
+      let staffList = JSON.parse(localStorage.getItem('adminStaff') || '[]');
+      
+      // 2. Pastikan akun Super Admin selalu ada
+      if(staffList.length === 0) {
+        staffList.push({ nama: 'Super Admin', email: 'admin@setyohantoro.com', pass: 'admin123', role: 'Owner' });
+        localStorage.setItem('adminStaff', JSON.stringify(staffList));
+      }
 
-      if (email === currentEmail && pass === currentPass) {
-        // Beri tiket login utama
+      // 3. Cari kecocokan email & password
+      const akunDitemukan = staffList.find(s => s.email === email && s.pass === pass);
+
+      if (akunDitemukan) {
         sessionStorage.setItem('authAdmin', 'true');
+        sessionStorage.setItem('adminNama', akunDitemukan.nama);
+        sessionStorage.setItem('adminRole', akunDitemukan.role);
+
+        // Verifikasi ganda
+        const verifikasi = prompt(`🔒 Halo ${akunDitemukan.nama}.\nKetik ulang password Anda untuk melanjutkan:`);
         
-        // Pengecekan ulang (Double Verification)
-        const verifikasi = prompt('🔒 KEAMANAN EKSTRA:\nKetik ulang password Anda untuk melanjutkan:');
-        
-        if (verifikasi === currentPass) {
+        if (verifikasi === pass) {
           window.location.href = 'admin.html';
         } else {
           sessionStorage.removeItem('authAdmin');
@@ -69,7 +74,7 @@
           errorBox.style.display = 'block';
         }
       } else {
-        errorBox.textContent = 'Email atau password Admin salah.';
+        errorBox.textContent = 'Email atau password salah.';
         errorBox.style.display = 'block';
       }
     });

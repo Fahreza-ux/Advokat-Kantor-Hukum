@@ -17,30 +17,33 @@
   </header>
 
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
-    <div style="background: #18181b; border: 1px solid #27272a; border-radius: 24px; padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+    <div class="login-card">
       <div style="text-align: center; margin-bottom: 24px;">
         <h1 style="font-size: 1.8rem; margin-bottom: 8px; color: #d4af37;">Portal Klien</h1>
         <p style="color: #a1a1aa; font-size: 0.9rem;">Masuk untuk memantau perkembangan perkara.</p>
       </div>
       
       <form id="loginForm">
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; color: #a1a1aa;">Email</label>
-          <!-- WARNA INPUT DIPAKSA PUTIH -->
-          <input type="email" id="email" required style="width: 100%; padding: 12px; border: 1.5px solid #27272a; border-radius: 8px; font-size: 0.95rem; background: #0a0a0a; color: #ffffff;">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="nama@perusahaan.com" required>
         </div>
-        <div style="margin-bottom: 16px;">
+        <div class="form-group">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <label style="margin: 0; color: #a1a1aa;">Password</label>
+            <label style="margin: 0;">Password</label>
             <a href="#" style="font-size: 0.75rem; color: #d4af37; font-weight: 600; text-decoration: none;">Lupa Sandi?</a>
           </div>
-          <input type="password" id="password" required style="width: 100%; padding: 12px; border: 1.5px solid #27272a; border-radius: 8px; font-size: 0.95rem; background: #0a0a0a; color: #ffffff;">
+          <input type="password" id="password" placeholder="••••••••" required>
         </div>
         <div id="errorBox" style="display: none; background: #7f1d1d; color: #fca5a5; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
-        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; background: #d4af37; color: #0a0a0a; font-weight: bold;">Masuk</button>
+        <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; margin-top: 10px;">Masuk</button>
       </form>
+
       <div style="text-align: center; margin-top: 24px; font-size: 0.85rem; color: #a1a1aa;">
         Belum punya akun? <a href="daftar.html" style="color: #d4af37; font-weight: bold; text-decoration: none;">Daftar di sini</a>
+      </div>
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px dashed #27272a; text-align: center;">
+        <p style="font-size: 0.75rem; color: #71717a;">Demo Klien: <strong>klien@demo.com</strong> / <strong>demo123</strong></p>
       </div>
     </div>
   </main>

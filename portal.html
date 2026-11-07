@@ -3,80 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard — Portal Klien</title>
+  <title>Dashboard — Klien</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="portal.css">
 </head>
 <body>
   <div class="portal-layout">
     <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro</span>
-      </a>
+      <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Setyo Hantoro</span></div>
       <ul class="sidebar-menu">
         <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
         <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
         <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
-        <li class="mobile-logout">
-          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
+        <li class="mobile-logout"><a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a></li>
       </ul>
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
-
     <main class="portal-main">
-      <!-- Tambahkan Header Logout ini agar klien gampang keluar -->
-      <div class="mobile-header" style="display:none; justify-content:space-between; margin-bottom:16px;">
-        <h3 style="font-family:'Fraunces',serif;">Portal Klien</h3>
-        <a href="login.html" onclick="logout()" style="background:#fee2e2;color:#991b1b;padding:8px 16px;border-radius:100px;font-size:0.8rem;font-weight:bold;text-decoration:none;">Keluar 🚪</a>
-      </div>
-
       <div class="portal-topbar">
-        <div>
-          <h1>Selamat datang, <span id="namaKlien">Klien</span></h1>
-          <p id="emailKlien">klien@demo.com</p>
-        </div>
+        <h1>Halo, <span id="nm">Klien</span></h1>
+        <p id="em">email@klien.com</p>
       </div>
-
       <div class="portal-stats">
-        <div class="stat-card"><div class="num" id="statDokumen">0</div><div class="lbl">Dokumen</div></div>
-        <div class="stat-card"><div class="num" id="statPerkara">0</div><div class="lbl">Perkara</div></div>
+        <div class="stat-card"><div class="num" id="stDok">0</div><div class="lbl">Dokumen Saya</div></div>
+        <div class="stat-card"><div class="num" id="stPrk">0</div><div class="lbl">Perkara Saya</div></div>
       </div>
-
       <div class="panel">
-        <div class="panel-head"><h3>Perkara Terbaru</h3><a href="portal-perkara.html" style="color:var(--gold);font-size:0.85rem;font-weight:bold;">Lihat semua →</a></div>
+        <div class="panel-head"><h3>Perkara Terbaru</h3></div>
         <div class="panel-body">
           <table class="data-table">
             <thead><tr><th>No. Perkara</th><th>Jenis</th><th>Status</th></tr></thead>
-            <tbody id="perkaraPreview"></tbody>
+            <tbody id="tblPrk"></tbody>
           </table>
         </div>
       </div>
     </main>
   </div>
-
   <script>
-    if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
-    function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
-    document.getElementById('namaKlien').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
-    document.getElementById('emailKlien').textContent = localStorage.getItem('demoEmailKlien') || '';
-    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
-    const allDok = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-    document.getElementById('statDokumen').textContent = allDok.filter(d => d.owner === userEmail).length;
-    const allPrk = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-    const myPrk = allPrk.filter(p => p.owner === userEmail);
-    document.getElementById('statPerkara').textContent = myPrk.length;
-    const prev = document.getElementById('perkaraPreview');
-    if(myPrk.length > 0) {
-      prev.innerHTML = myPrk.slice(0, 3).map(p => `<tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><span class="status-pill ${p.status}">${p.status}</span></td></tr>`).join('');
-    } else {
-      prev.innerHTML = '<tr><td colspan="3" style="text-align:center;">Belum ada perkara.</td></tr>';
-    }
+    if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
+    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
+    
+    const em = localStorage.getItem('demoEmailKlien') || 'demo';
+    document.getElementById('nm').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
+    document.getElementById('em').textContent = em;
+    
+    const allDok = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(d => d.owner === em);
+    const allPrk = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.owner === em);
+    
+    document.getElementById('stDok').textContent = allDok.length;
+    document.getElementById('stPrk').textContent = allPrk.length;
+    
+    document.getElementById('tblPrk').innerHTML = allPrk.length ? allPrk.slice(0,3).map(p => `
+      <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><span class="status-pill ${p.status}">${p.status}</span></td></tr>
+    `).join('') : '<tr><td colspan="3" style="text-align:center;">Belum ada perkara.</td></tr>';
   </script>
-  <style>
-    @media (max-width: 800px) { .mobile-header { display: flex !important; } }
-  </style>
 </body>
 </html>

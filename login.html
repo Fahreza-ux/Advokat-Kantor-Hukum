@@ -42,7 +42,10 @@
   </main>
 
   <script>
-    if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') window.location.href = 'portal.html';
+    // Jika sudah login, langsung ke portal
+    if (localStorage.getItem('demoLoggedIn') === 'true' || sessionStorage.getItem('demoLoggedIn') === 'true') {
+      window.location.href = 'portal.html';
+    }
     
     document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
@@ -52,37 +55,40 @@
       const errorBox = document.getElementById('errorBox');
 
       // ==========================================
-      // PERBAIKAN: BACA DATA DARI SEMUA KEMUNGKINAN
+      // PERBAIKAN LOGIKA: GABUNGKAN SEMUA DATA KLIEN
       // ==========================================
+      
       // 1. Ambil data dari Admin (menu Buat Akun)
-      let listAkun = JSON.parse(localStorage.getItem('demoAkun') || '[]');
+      let akunAdmin = JSON.parse(localStorage.getItem('demoAkun') || '[]');
       
-      // 2. Ambil data dari Pendaftar Mandiri yang sudah disetujui admin
-      let listPending = JSON.parse(localStorage.getItem('demoPending') || '[]');
+      // 2. Ambil data dari Pendaftar mandiri
+      let akunPending = JSON.parse(localStorage.getItem('demoPending') || '[]');
       
-      // Gabungkan semua data untuk dicari
-      let semuaKlien = [...listAkun, ...listPending];
+      // Gabungkan keduanya
+      let semuaDataKlien = [...akunAdmin, ...akunPending];
 
-      // Tambahkan akun demo bawaan agar selalu bisa tes
-      semuaKlien.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
+      // Tambahkan akun demo bawaan
+      semuaDataKlien.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
 
-      // Cari kecocokan Email dan Password
-      const akunDitemukan = semuaKlien.find(a => a.email === email && a.password === pass);
+      // Cari apakah email dan password cocok
+      const akunDitemukan = semuaDataKlien.find(a => a.email === email && a.password === pass);
       
       if (akunDitemukan) {
+        // Jika cocok, izinkan login
         if(rem) {
           localStorage.setItem('demoLoggedIn', 'true');
         } else {
           sessionStorage.setItem('demoLoggedIn', 'true');
         }
         
-        // Simpan nama dan email untuk ditampilkan di Dashboard
+        // Simpan info klien untuk ditampilkan di dashboard
         localStorage.setItem('demoEmailKlien', akunDitemukan.email);
         localStorage.setItem('demoNamaKlien', akunDitemukan.nama);
         
         window.location.href = 'portal.html';
       } else {
-        errorBox.textContent = 'Email atau password klien salah. Pastikan akun sudah didaftarkan oleh Admin.';
+        // Jika gagal
+        errorBox.textContent = 'Email atau password klien salah. Pastikan akun sudah didaftarkan.';
         errorBox.style.display = 'block';
       }
     });

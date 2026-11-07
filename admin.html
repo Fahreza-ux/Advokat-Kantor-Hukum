@@ -26,22 +26,26 @@
     </aside>
 
     <main class="portal-main">
+      <!-- TAB 1: MONITORING -->
       <div id="tab-monitor" class="tab-panel">
         <div class="portal-topbar"><h1>Data & Dokumen Klien</h1></div>
         <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Email Klien</th><th>Nama File</th><th>Kategori</th><th>Catatan</th><th>Tanggal</th></tr></thead><tbody id="tblDok"></tbody></table></div></div>
         <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Klien</th><th>No. Perkara</th><th>Klasifikasi</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="tblPrk"></tbody></table></div></div>
       </div>
 
+      <!-- TAB 2: KELOLA KLIEN -->
       <div id="tab-kelola" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Akun Klien Aktif</h1></div>
         <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Pass</th><th>Aksi</th></tr></thead><tbody id="tblAkun"></tbody></table></div></div>
       </div>
 
+      <!-- TAB 3: PENDAFTAR BARU -->
       <div id="tab-pending" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Pendaftar Baru</h1></div>
         <div class="panel"><div class="panel-body"><table class="data-table"><thead><tr><th>Nama</th><th>Email</th><th>Aksi</th></tr></thead><tbody id="tblPending"></tbody></table></div></div>
       </div>
 
+      <!-- TAB 4: BUAT AKUN KLIEN -->
       <div id="tab-buat" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Buat Akun Klien Manual</h1></div>
         <div class="panel">
@@ -57,6 +61,7 @@
         </div>
       </div>
 
+      <!-- TAB 5: STAFF & OWNER -->
       <div id="tab-staff" class="tab-panel" hidden>
         <div class="portal-topbar"><h1>Kelola Staff & Partner</h1></div>
         <div class="panel">
@@ -82,6 +87,7 @@
       window.location.href = 'login-admin.html';
     }
     function logout() { sessionStorage.removeItem('authAdmin'); window.location.href = 'login-admin.html'; }
+    
     function bukaMenu(id, el) {
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
       document.getElementById('tab-' + id).hidden = false;
@@ -138,11 +144,19 @@
       p.nomor = n; p.status = s; localStorage.setItem('demoPerkara', JSON.stringify(all)); renderAll();
     }
 
+    // PERBAIKAN: Menyimpan akun dengan nama properti yang benar
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getA();
-      a.push({ nama: document.getElementById('bn').value, email: document.getElementById('be').value.toLowerCase(), password: document.getElementById('bp').value });
-      setA(a); e.target.reset(); document.getElementById('okBuat').hidden = false; renderAll();
+      a.push({ 
+        nama: document.getElementById('bn').value, 
+        email: document.getElementById('be').value.toLowerCase(), 
+        password: document.getElementById('bp').value 
+      });
+      setA(a); 
+      e.target.reset(); 
+      document.getElementById('okBuat').hidden = false; 
+      renderAll();
     });
 
     document.getElementById('formStaff').addEventListener('submit', (e) => {

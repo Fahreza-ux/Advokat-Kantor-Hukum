@@ -1,8 +1,16 @@
 :root {
-  --bg: #fbfaf7; --bg-alt: #f3efe7; --ink: #0d1b2a; --ink-soft: #4a5568;
-  --ink-mute: #6b7280; --gold: #b8860b; --line: #e8e3d9; --white: #ffffff;
-  --radius: 20px; --shadow-md: 0 12px 32px -12px rgba(13, 27, 42, 0.12);
+  --bg: #fbfaf7; 
+  --bg-alt: #f3efe7; 
+  --ink: #0d1b2a; 
+  --ink-soft: #4a5568;
+  --ink-mute: #6b7280; 
+  --gold: #b8860b; 
+  --line: #e8e3d9; 
+  --white: #ffffff;
+  --radius: 20px; 
+  --shadow-md: 0 12px 32px -12px rgba(13, 27, 42, 0.12);
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; }
 a { text-decoration: none; color: inherit; }
@@ -10,7 +18,7 @@ h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.15
 h1 span, h2 span { color: var(--gold); }
 .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 
-/* Navbar */
+/* NAVBAR */
 .navbar { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 247, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; }
 .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 0.95rem; }
@@ -19,7 +27,7 @@ h1 span, h2 span { color: var(--gold); }
 .nav-menu { display: flex; align-items: center; gap: 24px; font-size: 0.9rem; font-weight: 500; }
 .btn-nav { padding: 10px 20px; background: var(--ink); color: var(--white) !important; border-radius: 100px; font-weight: 600; }
 
-/* Hero */
+/* HERO */
 .hero { padding: 80px 0; }
 .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
 .badge { display: inline-block; padding: 8px 16px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 100px; font-size: 0.78rem; font-weight: 600; margin-bottom: 24px; }
@@ -33,7 +41,7 @@ h1 span, h2 span { color: var(--gold); }
 .profile-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-md); }
 .profile-photo { width: 80px; height: 80px; border-radius: 50%; background: var(--ink); color: var(--gold); display: grid; place-items: center; font-size: 1.8rem; font-family: 'Fraunces', serif; font-weight: bold; margin-bottom: 20px; }
 
-/* Section & Cards */
+/* SECTION & CARDS */
 .section { padding: 80px 0; }
 .section-alt { background: var(--bg-alt); }
 .section-head { max-width: 600px; margin-bottom: 40px; }
@@ -46,23 +54,7 @@ h1 span, h2 span { color: var(--gold); }
 .service-card h3 { font-size: 1.15rem; margin-bottom: 12px; color: var(--ink); }
 .service-card p { color: var(--ink-soft); font-size: 0.9rem; }
 
-/* Login Page */
-.login-page { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); padding: 20px; }
-.login-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; width: 100%; max-width: 420px; box-shadow: var(--shadow-md); }
-.login-head { text-align: center; margin-bottom: 24px; }
-.login-head h1 { font-size: 1.8rem; margin-bottom: 8px; }
-.login-head p { color: var(--ink-mute); font-size: 0.9rem; }
-.form-group { margin-bottom: 20px; }
-.form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px; }
-.form-group input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg); }
-.form-group input:focus { outline: none; border-color: var(--gold); background: var(--white); }
-.btn-block { width: 100%; padding: 14px; border-radius: 8px; }
-.alert-error { background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center; }
-.alert-success { background: #dcfce7; color: #166534; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center; }
-.login-footer { text-align: center; margin-top: 24px; font-size: 0.85rem; color: var(--ink-mute); }
-.link-gold { color: var(--gold); font-weight: bold; }
-
-/* Responsive HP */
+/* RESPONSIVE HP */
 @media (max-width: 768px) {
   .hero-grid { grid-template-columns: 1fr; gap: 40px; }
   .nav-menu { display: none; }

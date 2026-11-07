@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Dokumen — Portal Klien</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="portal.css">
+</head>
+<body>
+
+  <div class="portal-layout">
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <span class="brand-mark">SH</span>
+        <span>Setyo Hantoro & Associates</span>
+      </a>
+      <ul class="sidebar-menu">
+        <li><a href="portal.html">🏠 Dashboard</a></li>
+        <li><a href="portal-perkara.html">📋 Perkara Saya</a></li>
+        <li><a href="portal-upload.html" class="active">📄 Upload Dokumen</a></li>
+        <li><a href="login.html">🚪 Keluar</a></li>
+      </ul>
+      <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
+    </aside>
+
+    <main class="portal-main">
+      <div class="portal-topbar">
+        <div>
+          <h1>Upload Dokumen</h1>
+          <p>Unggah dokumen pendukung perkara Anda (demo — file tidak benar-benar dikirim).</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Form Upload</h3>
+        </div>
+        <div class="panel-body">
+          <div id="alertSuccess" class="alert-success" hidden>
+            ✓ Dokumen berhasil "diunggah" (demo). Nama file tersimpan di browser.
+          </div>
+          <div class="alert-success" style="background:#fef3c7;color:#92400e;border-color:#f59e0b;">
+            ℹ️ Mode demo GitHub Pages: file tidak dikirim ke server. Hanya nama file yang disimpan di browser.
+          </div>
+
+          <form id="uploadForm" class="portal-form">
+            <div class="form-group">
+              <label>Kategori Dokumen</label>
+              <select id="kategori" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="KTP">KTP</option>
+                <option value="NPWP">NPWP</option>
+                <option value="Kontrak">Kontrak</option>
+                <option value="Bukti Transaksi">Bukti Transaksi</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Pilih File</label>
+              <div class="dropzone" onclick="document.getElementById('fileInput').click()">
+                <div class="icon">📄</div>
+                <p id="dropText">Klik untuk memilih file</p>
+                <small>PDF, JPG, PNG, DOCX · Maks 5 MB (demo)</small>
+              </div>
+              <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png,.docx" hidden>
+            </div>
+
+            <button type="submit" class="btn-primary">Upload Dokumen</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h3>Dokumen Saya</h3>
+        </div>
+        <div class="panel-body">
+          <table class="data-table">
+            <thead>
+              <tr><th>Nama File</th><th>Kategori</th><th>Tanggal</th><th>Aksi</th></tr>
+            </thead>
+            <tbody id="dokumenTable">
+              <tr><td colspan="4" style="text-align:center; color:var(--ink-mute);">Belum ada dokumen.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    if (localStorage.getItem('demoLoggedIn') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    function logout() {
+      localStorage.removeItem('demoLoggedIn');
+      window.location.href = 'login.html';
+    }
+
+    const fileInput = document.getElementById('fileInput');
+    const dropText = document.getElementById('dropText');
+    const form = document.getElementById('uploadForm');
+    const alertSuccess = document.getElementById('alertSuccess');
+    const table = document.getElementById('dokumenTable');
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length > 0) {
+        dropText.textContent = '✓ ' + fileInput.files[0].name;
+      }
+    });
+
+    function renderDokumen() {
+      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      if (list.length === 0) {
+        table.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--ink-mute);">Belum ada dokumen.</td></tr>';
+        return;
+      }
+      table.innerHTML = list.map((d, i) => `
+        <tr>
+          <td>${d.nama}</td>
+          <td>${d.kategori}</td>
+          <td>${d.tanggal}</td>
+          <td><button onclick="hapusDokumen(${i})" style="background:none;border:none;color:#dc2626;cursor:pointer;font-weight:600;">Hapus</button></td>
+        </tr>
+      `).join('');
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const file = fileInput.files[0];
+      const kategori = document.getElementById('kategori').value;
+
+      if (!file || !kategori) {
+        alert('Pilih kategori dan file terlebih dahulu.');
+        return;
+      }
+
+      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      list.unshift({
+        nama: file.name,
+        kategori: kategori,
+        tanggal: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+      });
+      localStorage.setItem('demoDokumen', JSON.stringify(list));
+
+      alertSuccess.hidden = false;
+      form.reset();
+      dropText.textContent = 'Klik untuk memilih file';
+      renderDokumen();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    function hapusDokumen(i) {
+      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      list.splice(i, 1);
+      localStorage.setItem('demoDokumen', JSON.stringify(list));
+      renderDokumen();
+    }
+
+    renderDokumen();
+  </script>
+
+</body>
+</html>

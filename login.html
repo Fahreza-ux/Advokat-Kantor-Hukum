@@ -41,7 +41,6 @@
         <div class="form-group">
           <div class="label-row">
             <label for="password">Kata Sandi</label>
-            <a href="#" class="link-small">Lupa sandi?</a>
           </div>
           <div class="password-wrap">
             <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
@@ -49,27 +48,15 @@
           </div>
         </div>
 
-        <div class="form-group checkbox-row">
-          <label class="check-label">
-            <input type="checkbox" name="remember" id="remember">
-            <span>Ingat saya di perangkat ini</span>
-          </label>
-        </div>
-
-        <div id="loginError" class="alert-error" hidden>
-          ⚠ Email atau kata sandi salah. Silakan coba lagi.
-        </div>
+        <div id="loginError" class="alert-error" hidden></div>
 
         <button type="submit" class="btn-primary btn-block">Masuk ke Portal</button>
       </form>
 
       <div class="login-foot">
         <p>Belum memiliki akses portal?<br>
-          <a href="index.html#kontak" class="link-gold">Hubungi tim kami untuk aktivasi akun.</a>
+          <a href="daftar.html" class="link-gold">Daftar Akun Klien →</a>
         </p>
-        <div class="login-note">
-          🔐 Koneksi aman &amp; terenkripsi. Data perkara Anda bersifat rahasia.
-        </div>
         <div style="margin-top:12px; font-size:0.75rem; color:var(--ink-mute);">
           Akun demo: <strong>klien@demo.com</strong> / <strong>demo123</strong>
         </div>
@@ -108,15 +95,32 @@
       const email = document.getElementById('email').value.trim().toLowerCase();
       const pass  = document.getElementById('password').value;
 
-      if (email === 'klien@demo.com' && pass === 'demo123') {
+      const akunList = JSON.parse(localStorage.getItem('demoAkun') || '[]');
+      akunList.push({ email: 'klien@demo.com', password: 'demo123', nama: 'Klien Demo' });
+
+      const akun = akunList.find(a => a.email === email && a.password === pass);
+
+      if (akun) {
         errorBox.hidden = true;
         localStorage.setItem('demoLoggedIn', 'true');
+        localStorage.setItem('demoNamaKlien', akun.nama);
+        localStorage.setItem('demoEmailKlien', akun.email);
         window.location.href = 'portal.html';
-      } else {
-        errorBox.hidden = false;
+        return;
       }
+
+      const pendingList = JSON.parse(localStorage.getItem('demoPending') || '[]');
+      const pendingAkun = pendingList.find(p => p.email === email && p.password === pass);
+
+      if (pendingAkun) {
+        errorBox.textContent = '⏳ Akun Anda masih menunggu verifikasi admin.';
+        errorBox.hidden = false;
+        return;
+      }
+
+      errorBox.textContent = '⚠ Email atau kata sandi salah.';
+      errorBox.hidden = false;
     });
   </script>
-
 </body>
 </html>

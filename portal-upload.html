@@ -76,9 +76,12 @@
   </div>
 
   <script>
+    // Cek Login
     if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
     function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
 
+    // Ambil Email Klien sebagai Kunci Data
+    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
     const fileInput = document.getElementById('fileInput');
     const dropText = document.getElementById('dropText');
     const table = document.getElementById('dokumenTable');
@@ -88,17 +91,20 @@
     });
 
     function renderDokumen() {
-      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      if (list.length === 0) {
+      const allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      // Filter: Hanya tampilkan dokumen milik email ini
+      const myDokumen = allData.filter(d => d.owner === userEmail);
+
+      if (myDokumen.length === 0) {
         table.innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada dokumen.</td></tr>';
         return;
       }
-      table.innerHTML = list.map((d, i) => `
+      table.innerHTML = myDokumen.map((d) => `
         <tr>
           <td>${d.nama}</td>
           <td>${d.kategori}</td>
           <td>${d.tanggal}</td>
-          <td><button onclick="hapusDokumen(${i})" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
+          <td><button onclick="hapusDokumen('${d.id}')" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
         </tr>
       `).join('');
     }
@@ -109,13 +115,18 @@
       const kategori = document.getElementById('kategori').value;
       if (!file || !kategori) { alert('Pilih file & kategori!'); return; }
 
-      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      list.unshift({
+      const allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      
+      // Simpan dengan owner: userEmail
+      allData.unshift({
+        id: Date.now().toString(), // ID unik
+        owner: userEmail,
         nama: file.name,
         kategori: kategori,
         tanggal: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
       });
-      localStorage.setItem('demoDokumen', JSON.stringify(list));
+      
+      localStorage.setItem('demoDokumen', JSON.stringify(allData));
 
       document.getElementById('alertSuccess').hidden = false;
       e.target.reset();
@@ -123,10 +134,12 @@
       renderDokumen();
     });
 
-    function hapusDokumen(i) {
-      const list = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
-      list.splice(i, 1);
-      localStorage.setItem('demoDokumen', JSON.stringify(list));
+    function hapusDokumen(id) {
+      if(!confirm('Hapus dokumen ini?')) return;
+      let allData = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
+      // Buang data dengan ID tersebut
+      allData = allData.filter(d => d.id !== id);
+      localStorage.setItem('demoDokumen', JSON.stringify(allData));
       renderDokumen();
     }
 

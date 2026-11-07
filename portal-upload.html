@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="portal-layout">
-    
     <aside class="sidebar">
       <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Setyo Hantoro</span></div>
       <ul class="sidebar-menu">
@@ -37,13 +36,11 @@
               <label>Kategori Dokumen</label>
               <select id="kat" required>
                 <option value="">-- Pilih Kategori Dokumen --</option>
-                
                 <optgroup label="Identitas & Legalitas">
                   <option value="KTP / Identitas">KTP / Identitas Pribadi</option>
                   <option value="Legalitas Perusahaan">Legalitas Perusahaan (NIB, Akta, SK)</option>
                   <option value="NPWP">NPWP</option>
                 </optgroup>
-
                 <optgroup label="Dokumen Perkara & Sengketa">
                   <option value="Kontrak / Perjanjian">Kontrak / Perjanjian Kerja Sama</option>
                   <option value="Somasi / Surat Peringatan">Somasi / Surat Peringatan (SP)</option>
@@ -51,13 +48,11 @@
                   <option value="Invoice / Tagihan">Invoice / Tagihan</option>
                   <option value="Sertifikat / Aset">Sertifikat Tanah / Bukti Aset</option>
                 </optgroup>
-
                 <optgroup label="Proses Hukum & Administrasi">
                   <option value="Surat Kuasa">Surat Kuasa Khusus</option>
                   <option value="Gugatan / Jawaban">Draft Gugatan / Jawaban</option>
                   <option value="Bukti Pembayaran">Bukti Pembayaran / Transfer Fee</option>
                 </optgroup>
-
                 <optgroup label="Lainnya">
                   <option value="Lainnya">Dokumen Lainnya</option>
                 </optgroup>
@@ -88,15 +83,7 @@
         <div class="panel-head"><h3>Dokumen yang Sudah Diunggah</h3></div>
         <div class="panel-body">
           <table class="data-table">
-            <thead>
-              <tr>
-                <th>Nama File</th>
-                <th>Kategori</th>
-                <th>Catatan</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Nama File</th><th>Kategori</th><th>Catatan</th><th>Tanggal</th><th>Aksi</th></tr></thead>
             <tbody id="tbl"></tbody>
           </table>
         </div>
@@ -105,30 +92,19 @@
   </div>
 
   <script>
-    // Proteksi Login
     if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') {
       window.location.href = 'login.html';
     }
-    function logout() { 
-      localStorage.removeItem('demoLoggedIn'); 
-      sessionStorage.removeItem('demoLoggedIn'); 
-      window.location.href = 'login.html'; 
-    }
+    function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
     
-    // Ambil Data Klien
     const user = localStorage.getItem('demoEmailKlien') || 'demo';
 
-    // Efek Nama File Terpilih
     document.getElementById('file').addEventListener('change', function() {
-      if(this.files.length > 0) {
-        document.getElementById('dropTxt').textContent = '✓ ' + this.files[0].name;
-      }
+      if(this.files.length > 0) { document.getElementById('dropTxt').textContent = '✓ ' + this.files[0].name; }
     });
 
-    // Render Tabel Dokumen
     function render() {
       const d = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(p => p.owner === user);
-      
       document.getElementById('tbl').innerHTML = d.length ? d.map(p => `
         <tr>
           <td><strong>${p.nama}</strong></td>
@@ -140,7 +116,6 @@
       `).join('') : '<tr><td colspan="5" style="text-align:center;">Belum ada dokumen yang diunggah.</td></tr>';
     }
 
-    // Simpan Data
     document.getElementById('form').addEventListener('submit', (e) => {
       e.preventDefault();
       const f = document.getElementById('file').files[0];
@@ -157,21 +132,18 @@
       });
       
       localStorage.setItem('demoDokumen', JSON.stringify(d));
-      
       document.getElementById('ok').hidden = false;
       e.target.reset(); 
       document.getElementById('dropTxt').textContent = 'Klik area ini untuk memilih file';
       render();
     });
 
-    // Hapus Data
     function hapus(id) {
       if(!confirm('Hapus dokumen ini dari daftar?')) return;
       let d = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(p => p.id !== id);
       localStorage.setItem('demoDokumen', JSON.stringify(d)); 
       render();
     }
-
     render();
   </script>
 </body>

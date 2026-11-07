@@ -8,75 +8,42 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body style="display: flex; flex-direction: column; min-height: 100vh; background: #081220;">
-
   <main style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 20px;">
     <div style="background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
-      
       <div style="text-align: center; margin-bottom: 24px;">
         <div style="width: 60px; height: 60px; background: var(--ink); color: var(--gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: bold; margin: 0 auto 16px;">SH</div>
         <h1 style="font-size: 1.6rem; margin-bottom: 8px;">Internal System</h1>
-        <p style="color: var(--ink-mute); font-size: 0.85rem;">Akses khusus Admin & Staff Firma Hukum.</p>
+        <p style="color: var(--ink-mute); font-size: 0.85rem;">Akses khusus Owner, Partner & Staff.</p>
       </div>
-      
       <form id="loginAdminForm">
-        <div style="margin-bottom: 16px;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email Staff</label>
-          <input type="email" id="adminEmail" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);">
-        </div>
-        <div style="margin-bottom: 24px;">
-          <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Password</label>
-          <input type="password" id="adminPass" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);">
-        </div>
-        
+        <div style="margin-bottom: 16px;"><label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Email Internal</label><input type="email" id="adminEmail" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);"></div>
+        <div style="margin-bottom: 24px;"><label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">Password</label><input type="password" id="adminPass" required style="width: 100%; padding: 12px; border: 1.5px solid var(--line); border-radius: 8px; font-size: 0.95rem; background: var(--bg);"></div>
         <div id="errorBox" style="display: none; background: #fee2e2; color: #991b1b; padding: 12px; border-radius: 8px; font-size: 0.85rem; margin-bottom: 16px; text-align: center;"></div>
-        
         <button type="submit" class="btn-primary" style="width: 100%; padding: 14px; border-radius: 8px; background: var(--ink);">Masuk ke Sistem</button>
       </form>
-      
-      <div style="text-align: center; margin-top: 24px; font-size: 0.8rem; color: var(--ink-mute);">
-        <a href="index.html" style="color: var(--gold);">← Kembali ke Website Utama</a>
-      </div>
+      <div style="text-align: center; margin-top: 24px; font-size: 0.8rem; color: var(--ink-mute);"><a href="index.html" style="color: var(--gold);">← Kembali ke Website Utama</a></div>
     </div>
   </main>
-
   <script>
     document.getElementById('loginAdminForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const email = document.getElementById('adminEmail').value.toLowerCase();
       const pass = document.getElementById('adminPass').value;
       const errorBox = document.getElementById('errorBox');
-
-      // 1. Ambil daftar staff dari localStorage
       let staffList = JSON.parse(localStorage.getItem('adminStaff') || '[]');
-      
-      // 2. Pastikan akun Super Admin selalu ada
       if(staffList.length === 0) {
-        staffList.push({ nama: 'Super Admin', email: 'admin@setyohantoro.com', pass: 'admin123', role: 'Owner' });
+        staffList.push({ nama: 'Setyo Hantoro (Owner Utama)', email: 'admin@setyohantoro.com', pass: 'admin123', role: 'Super Admin' });
         localStorage.setItem('adminStaff', JSON.stringify(staffList));
       }
-
-      // 3. Cari kecocokan email & password
       const akunDitemukan = staffList.find(s => s.email === email && s.pass === pass);
-
       if (akunDitemukan) {
         sessionStorage.setItem('authAdmin', 'true');
         sessionStorage.setItem('adminNama', akunDitemukan.nama);
         sessionStorage.setItem('adminRole', akunDitemukan.role);
-
-        // Verifikasi ganda
         const verifikasi = prompt(`🔒 Halo ${akunDitemukan.nama}.\nKetik ulang password Anda untuk melanjutkan:`);
-        
-        if (verifikasi === pass) {
-          window.location.href = 'admin.html';
-        } else {
-          sessionStorage.removeItem('authAdmin');
-          errorBox.textContent = 'Verifikasi ulang gagal.';
-          errorBox.style.display = 'block';
-        }
-      } else {
-        errorBox.textContent = 'Email atau password salah.';
-        errorBox.style.display = 'block';
-      }
+        if (verifikasi === pass) { window.location.href = 'admin.html'; } 
+        else { sessionStorage.removeItem('authAdmin'); errorBox.textContent = 'Verifikasi ulang gagal.'; errorBox.style.display = 'block'; }
+      } else { errorBox.textContent = 'Email atau password salah.'; errorBox.style.display = 'block'; }
     });
   </script>
 </body>

@@ -5,7 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Setyo Hantoro & Associates — Firma Hukum Bisnis Tangerang</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <!-- CSS LANGSUNG DI DALAM FILE AGAR TIDAK HILANG -->
+  <style>
+    :root {
+      --bg: #fbfaf7; --bg-alt: #f3efe7; --ink: #0d1b2a; --ink-soft: #4a5568;
+      --ink-mute: #6b7280; --gold: #b8860b; --line: #e8e3d9; --white: #ffffff;
+      --radius: 20px; --shadow-md: 0 12px 32px -12px rgba(13, 27, 42, 0.12);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.65; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.15; }
+    h1 span, h2 span { color: var(--gold); }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    /* Navbar */
+    .navbar { position: sticky; top: 0; z-index: 50; background: rgba(251, 250, 247, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav-inner { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 0.95rem; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 10px; background: var(--ink); color: var(--gold); font-family: 'Fraunces', serif; font-weight: 700; }
+    .brand-text em { color: var(--gold); font-style: normal; }
+    .nav-menu { display: flex; align-items: center; gap: 24px; font-size: 0.9rem; font-weight: 500; }
+    .btn-nav { padding: 10px 20px; background: var(--ink); color: var(--white) !important; border-radius: 100px; font-weight: 600; }
+
+    /* Hero */
+    .hero { padding: 80px 0; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
+    .badge { display: inline-block; padding: 8px 16px; background: var(--bg-alt); border: 1px solid var(--line); border-radius: 100px; font-size: 0.78rem; font-weight: 600; margin-bottom: 24px; }
+    .hero h1 { font-size: 3rem; margin-bottom: 16px; }
+    .hero-desc { color: var(--ink-soft); font-size: 1.05rem; margin-bottom: 32px; }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; padding: 14px 28px; background: var(--ink); color: var(--white); border-radius: 100px; font-weight: 600; transition: 0.2s; border: none; cursor: pointer; text-align: center; }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-ghost { display: inline-block; padding: 14px 28px; border: 1.5px solid var(--line); border-radius: 100px; font-weight: 600; color: var(--ink); transition: 0.2s; text-align: center; }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+    .profile-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow-md); }
+    .profile-photo { width: 80px; height: 80px; border-radius: 50%; background: var(--ink); color: var(--gold); display: grid; place-items: center; font-size: 1.8rem; font-family: 'Fraunces', serif; font-weight: bold; margin-bottom: 20px; }
+
+    /* Section & Cards */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--bg-alt); }
+    .section-head { max-width: 600px; margin-bottom: 40px; }
+    .eyebrow { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; display: block; margin-bottom: 10px; }
+    .section-head h2 { font-size: 2.2rem; margin-bottom: 12px; }
+    .section-head p { color: var(--ink-soft); }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .service-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; transition: 0.2s; }
+    .service-card:hover { box-shadow: var(--shadow-md); border-color: var(--gold); }
+    .service-card h3 { font-size: 1.15rem; margin-bottom: 12px; color: var(--ink); }
+    .service-card p { color: var(--ink-soft); font-size: 0.9rem; }
+
+    /* Responsive HP */
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+      .nav-menu { display: none; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-actions { flex-direction: column; }
+      .btn-primary, .btn-ghost { width: 100%; }
+      .section { padding: 50px 0; }
+    }
+  </style>
 </head>
 <body>
 

@@ -6,18 +6,50 @@
   <title>SAKRI & Associates — Firma Hukum Bisnis</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  
+  <!-- CSS UNTUK ANIMASI LOADING -->
+  <style>
+    #loader {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0a0a0a;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .spinner-logo {
+      width: 120px;
+      animation: pulseSpin 1.5s infinite ease-in-out;
+    }
+    @keyframes pulseSpin {
+      0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+      50% { transform: scale(1.1) rotate(180deg); opacity: 1; }
+      100% { transform: scale(1) rotate(360deg); opacity: 0.8; }
+    }
+  </style>
 </head>
 <body style="background: #0a0a0a; color: #ffffff;">
+
+  <!-- ANIMASI LOADING -->
+  <div id="loader">
+    <img src="logo.png" alt="Loading..." class="spinner-logo">
+  </div>
 
   <!-- ===== NAVBAR ===== -->
   <header class="navbar" style="background: rgba(10, 10, 10, 0.9); border-bottom: 1px solid #27272a;">
     <div class="container nav-inner">
       <a href="index.html" class="brand">
         <img src="logo.png" alt="Logo SAKRI" class="brand-logo">
-        <span class="brand-text" style="color: #ffffff; font-size: 1.1rem; font-weight: bold;">SAKRI <em style="color: #d4af37; font-style: normal;">&</em> Associates</span>
+        <span class="brand-text" style="color: #ffffff;">SAKRI <em style="color: #d4af37;">&</em> Associates</span>
       </a>
       
-      <button class="menu-toggle" style="color: #d4af37; background: none; border: none; font-size: 1.5rem;" onclick="document.querySelector('.nav-menu').classList.toggle('active')">☰</button>
+      <button class="menu-toggle" style="color: #d4af37;" onclick="document.querySelector('.nav-menu').classList.toggle('active')">☰</button>
 
       <nav class="nav-menu">
         <a href="#layanan" style="color: #a1a1aa;">Layanan</a>
@@ -30,15 +62,12 @@
   </header>
 
   <!-- ===== HERO SECTION ===== -->
-  <section class="hero" style="background: #0a0a0a; padding: 80px 0;">
+  <section class="hero" style="background: #0a0a0a;">
     <div class="container hero-grid">
       <div class="hero-content">
         <div class="badge" style="background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; color: #d4af37;">⚖️ DPC PERADI Tangerang · ⭐ 5.0 Google Rating</div>
-        
-        <!-- TEKS DIPAKSA PUTIH TERANG -->
-        <h1 style="color: #ffffff; font-size: 3rem; margin-bottom: 20px;">Kepastian Hukum untuk <span style="color: #d4af37;">Keberlanjutan</span> Bisnis Anda</h1>
-        
-        <p class="hero-desc" style="color: #a1a1aa; font-size: 1.1rem; margin-bottom: 32px;">Kami memadukan pendekatan akademis, pengalaman bisnis, dan kompetensi manajerial dalam menangani hukum korporasi, kepatuhan, HKI, dan penyelesaian sengketa bisnis.</p>
+        <h1 style="color: #ffffff;">Kepastian Hukum untuk <span style="color: #d4af37;">Keberlanjutan</span> Bisnis Anda</h1>
+        <p class="hero-desc" style="color: #a1a1aa;">Kami memadukan pendekatan akademis, pengalaman bisnis, dan kompetensi manajerial dalam menangani hukum korporasi, kepatuhan, HKI, dan penyelesaian sengketa bisnis.</p>
         
         <div class="hero-actions">
           <a href="login.html" class="btn-primary" style="background: #d4af37; color: #0a0a0a;">Masuk Portal Klien</a>
@@ -47,10 +76,9 @@
       </div>
       
       <div class="hero-image">
-        <!-- KOTAK PROFIL DIPAKSA HITAM -->
-        <div class="profile-card" style="background: #18181b; border: 1px solid #27272a; text-align: center; padding: 40px; border-radius: 24px;">
-          <img src="logo.png" alt="Logo SAKRI" style="width: 150px !important; height: auto !important; margin: 0 auto 20px; display: block; border-radius: 12px;">
-          <h3 style="color: #d4af37; margin-bottom: 8px; font-size: 1.5rem;">SAKRI & Associates</h3>
+        <div class="profile-card" style="background: #18181b; border: 1px solid #27272a; text-align: center;">
+          <img src="logo.png" alt="Logo SAKRI" style="width: 180px !important; height: auto !important; margin: 0 auto 20px; display: block;">
+          <h3 style="color: #d4af37; margin-bottom: 8px;">SAKRI & Associates</h3>
           <p style="color: #a1a1aa; margin-bottom: 16px;">Firma Hukum Bisnis Terpercaya</p>
           <span class="badge" style="margin:0; font-size:0.7rem; background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; color: #d4af37;">Praktisi & Akademisi</span>
         </div>
@@ -59,112 +87,66 @@
   </section>
 
   <!-- ===== STATISTIK ===== -->
-  <section class="stats-section" style="background: #121212; border-top: 1px solid #27272a; border-bottom: 1px solid #27272a; padding: 40px 0;">
+  <section class="stats-section" style="background: #121212; border-top: 1px solid #27272a; border-bottom: 1px solid #27272a;">
     <div class="container stats-grid">
-      <div class="stat-item"><h2 style="color: #d4af37; font-size: 2.5rem;">10+</h2><p style="color: #a1a1aa;">Tahun Pengalaman</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37; font-size: 2.5rem;">500+</h2><p style="color: #a1a1aa;">Perkara Ditangani</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37; font-size: 2.5rem;">98%</h2><p style="color: #a1a1aa;">Tingkat Keberhasilan</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37; font-size: 2.5rem;">24/7</h2><p style="color: #a1a1aa;">Dukungan Klien</p></div>
+      <div class="stat-item"><h2 style="color: #d4af37;">10+</h2><p style="color: #a1a1aa;">Tahun Pengalaman</p></div>
+      <div class="stat-item"><h2 style="color: #d4af37;">500+</h2><p style="color: #a1a1aa;">Perkara Ditangani</p></div>
+      <div class="stat-item"><h2 style="color: #d4af37;">98%</h2><p style="color: #a1a1aa;">Tingkat Keberhasilan</p></div>
+      <div class="stat-item"><h2 style="color: #d4af37;">24/7</h2><p style="color: #a1a1aa;">Dukungan Klien</p></div>
     </div>
   </section>
 
   <!-- ===== LAYANAN ===== -->
-  <section class="section" id="layanan" style="background: #0a0a0a; padding: 80px 0;">
+  <section class="section" id="layanan" style="background: #0a0a0a;">
     <div class="container">
-      <div class="section-head text-center" style="margin-bottom: 40px;">
-        <span class="eyebrow" style="color: #d4af37; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px;">BIDANG KEAHLIAN</span>
-        <h2 style="color: #ffffff; font-size: 2.5rem; margin-top: 8px;">Layanan Hukum Bisnis <span style="color: #d4af37;">Unggulan</span></h2>
-        <p style="color: #a1a1aa; margin-top: 12px;">Enam pilar layanan terstruktur untuk melindungi kepentingan komersial dan operasional perusahaan Anda.</p>
+      <div class="section-head text-center">
+        <span class="eyebrow" style="color: #d4af37;">Bidang Keahlian</span>
+        <h2 style="color: #ffffff;">Layanan Hukum Bisnis <span style="color: #d4af37;">Unggulan</span></h2>
+        <p style="color: #a1a1aa;">Enam pilar layanan terstruktur untuk melindungi kepentingan komersial dan operasional perusahaan Anda.</p>
       </div>
-      
       <div class="services-grid">
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🏢</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Hukum Bisnis & Korporasi</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Pendirian badan usaha, restrukturisasi, legal opinion, serta pendampingan transaksi.</p>
-        </div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🚢</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Hukum Pengangkutan</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Kontrak pengangkutan darat, laut, udara, mitigasi risiko klaim kerugian, demurrage.</p>
-        </div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">💡</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Hak Kekayaan Intelektual</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Pendaftaran merek, hak cipta, desain industri, paten, lisensi waralaba, serta penegakan.</p>
-        </div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🤝</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Mediasi & Sengketa (ADR)</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Mediasi sengketa dagang, arbitrase bisnis, negosiasi win-win solution.</p>
-        </div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">🛡️</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Legal Compliance & GCG</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Audit kepatuhan hukum, perizinan OSS RBA, penyusunan Good Corporate Governance.</p>
-        </div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <div class="service-icon" style="font-size: 2.5rem; margin-bottom: 16px;">📝</div>
-          <h3 style="color: #d4af37; font-size: 1.3rem; margin-bottom: 12px;">Contract Drafting & Review</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Penyusunan perjanjian bisnis, NDA, MOU, review klausul proteksi risiko.</p>
-        </div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🏢</div><h3 style="color: #d4af37;">Hukum Bisnis & Korporasi</h3><p style="color: #a1a1aa;">Pendirian badan usaha, restrukturisasi, legal opinion, serta pendampingan transaksi.</p></div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🚢</div><h3 style="color: #d4af37;">Hukum Pengangkutan</h3><p style="color: #a1a1aa;">Kontrak pengangkutan darat, laut, udara, mitigasi risiko klaim kerugian, demurrage.</p></div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">💡</div><h3 style="color: #d4af37;">Hak Kekayaan Intelektual</h3><p style="color: #a1a1aa;">Pendaftaran merek, hak cipta, desain industri, paten, lisensi waralaba, serta penegakan.</p></div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🤝</div><h3 style="color: #d4af37;">Mediasi & Sengketa (ADR)</h3><p style="color: #a1a1aa;">Mediasi sengketa dagang, arbitrase bisnis, negosiasi win-win solution.</p></div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🛡️</div><h3 style="color: #d4af37;">Legal Compliance & GCG</h3><p style="color: #a1a1aa;">Audit kepatuhan hukum, perizinan OSS RBA, penyusunan Good Corporate Governance.</p></div>
+        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">📝</div><h3 style="color: #d4af37;">Contract Drafting & Review</h3><p style="color: #a1a1aa;">Penyusunan perjanjian bisnis, NDA, MOU, review klausul proteksi risiko.</p></div>
       </div>
     </div>
   </section>
 
   <!-- ===== KEUNGGULAN ===== -->
-  <section class="section section-alt" id="keunggulan" style="background: #121212; padding: 80px 0;">
+  <section class="section section-alt" id="keunggulan" style="background: #121212;">
     <div class="container">
-      <div class="section-head text-center" style="margin-bottom: 40px;">
-        <span class="eyebrow" style="color: #d4af37; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px;">KEUNGGULAN KAMI</span>
-        <h2 style="color: #ffffff; font-size: 2.5rem; margin-top: 8px;">Mengapa Memilih <span style="color: #d4af37;">Kami?</span></h2>
+      <div class="section-head text-center">
+        <span class="eyebrow" style="color: #d4af37;">Keunggulan Kami</span>
+        <h2 style="color: #ffffff;">Mengapa Memilih <span style="color: #d4af37;">Kami?</span></h2>
       </div>
       <div class="features-grid">
-        <div class="feature-card" style="border-top: 2px solid #d4af37; padding-top: 24px;">
-          <div class="feature-icon" style="font-size: 2rem; margin-bottom: 16px;">🎓</div>
-          <h3 style="color: #ffffff; font-size: 1.2rem; margin-bottom: 8px;">Praktisi & Akademisi</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Memadukan keilmuan akademis dengan insting komersial yang tajam.</p>
-        </div>
-        <div class="feature-card" style="border-top: 2px solid #d4af37; padding-top: 24px;">
-          <div class="feature-icon" style="font-size: 2rem; margin-bottom: 16px;">🛡️</div>
-          <h3 style="color: #ffffff; font-size: 1.2rem; margin-bottom: 8px;">Anggota Resmi PERADI</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Terdaftar sah di DPC PERADI Tangerang dengan standar kode etik advokat.</p>
-        </div>
-        <div class="feature-card" style="border-top: 2px solid #d4af37; padding-top: 24px;">
-          <div class="feature-icon" style="font-size: 2rem; margin-bottom: 16px;">📊</div>
-          <h3 style="color: #ffffff; font-size: 1.2rem; margin-bottom: 8px;">Transparansi Portal Klien</h3>
-          <p style="color: #a1a1aa; font-size: 0.95rem;">Pantau tahapan sidang, agenda, dan unduh berkas secara mandiri.</p>
-        </div>
+        <div class="feature-card" style="border-top: 2px solid #d4af37;"><div class="feature-icon">🎓</div><h3 style="color: #ffffff;">Praktisi & Akademisi</h3><p style="color: #a1a1aa;">Memadukan keilmuan akademis dengan insting komersial yang tajam.</p></div>
+        <div class="feature-card" style="border-top: 2px solid #d4af37;"><div class="feature-icon">🛡️</div><h3 style="color: #ffffff;">Anggota Resmi PERADI</h3><p style="color: #a1a1aa;">Terdaftar sah di DPC PERADI Tangerang dengan standar kode etik advokat.</p></div>
+        <div class="feature-card" style="border-top: 2px solid #d4af37;"><div class="feature-icon">📊</div><h3 style="color: #ffffff;">Transparansi Portal Klien</h3><p style="color: #a1a1aa;">Pantau tahapan sidang, agenda, dan unduh berkas secara mandiri.</p></div>
       </div>
     </div>
   </section>
 
   <!-- ===== TESTIMONI ===== -->
-  <section class="section" id="testimoni" style="background: #0a0a0a; padding: 80px 0;">
+  <section class="section" id="testimoni" style="background: #0a0a0a;">
     <div class="container">
-      <div class="section-head text-center" style="margin-bottom: 40px;">
-        <span class="eyebrow" style="color: #d4af37; font-size: 0.8rem; font-weight: bold; letter-spacing: 2px;">KEPERCAYAAN KLIEN</span>
-        <h2 style="color: #ffffff; font-size: 2.5rem; margin-top: 8px;">Apa Kata <span style="color: #d4af37;">Klien Kami</span></h2>
+      <div class="section-head text-center">
+        <span class="eyebrow" style="color: #d4af37;">Kepercayaan Klien</span>
+        <h2 style="color: #ffffff;">Apa Kata <span style="color: #d4af37;">Klien Kami</span></h2>
       </div>
       <div class="services-grid">
-        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Penjelasannya sangat jelas dan saya bisa memantau progres perkara bisnis kami langsung lewat portal, sangat transparan."</p>
-          <div class="testi-author"><strong style="color:#d4af37;">Hendra Wijaya</strong><br><small style="color:#71717a;">Direktur, PT Cahaya Mitra Sejahtera</small></div>
-        </div>
-        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Review kontrak kerja sama bisnis kami sangat teliti. Klausul yang ditambahkan terbukti melindungi kami dari wanprestasi."</p>
-          <div class="testi-author"><strong style="color:#d4af37;">Melati Andini</strong><br><small style="color:#71717a;">Pemilik, CV Andini Logistik Mandiri</small></div>
-        </div>
-        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a; padding: 32px; border-radius: 16px;">
-          <p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Pendekatan yang profesional dan berbasis keilmuan kuat, sangat cocok untuk kebutuhan hukum bisnis perusahaan kami."</p>
-          <div class="testi-author"><strong style="color:#d4af37;">Rangga Prasetyo</strong><br><small style="color:#71717a;">Manajer Legal, PT Nuansa Distribusi Nusantara</small></div>
-        </div>
+        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a;"><p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Penjelasannya sangat jelas dan saya bisa memantau progres perkara bisnis kami langsung lewat portal, sangat transparan."</p><div class="testi-author"><strong style="color:#d4af37;">Hendra Wijaya</strong><br><small style="color:#71717a;">Direktur, PT Cahaya Mitra Sejahtera</small></div></div>
+        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a;"><p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Review kontrak kerja sama bisnis kami sangat teliti. Klausul yang ditambahkan terbukti melindungi kami dari wanprestasi."</p><div class="testi-author"><strong style="color:#d4af37;">Melati Andini</strong><br><small style="color:#71717a;">Pemilik, CV Andini Logistik Mandiri</small></div></div>
+        <div class="testi-card" style="background: #18181b; border: 1px solid #27272a;"><p style="font-style:italic; margin-bottom:16px; color:#a1a1aa;">"Pendekatan yang profesional dan berbasis keilmuan kuat, sangat cocok untuk kebutuhan hukum bisnis perusahaan kami."</p><div class="testi-author"><strong style="color:#d4af37;">Rangga Prasetyo</strong><br><small style="color:#71717a;">Manajer Legal, PT Nuansa Distribusi Nusantara</small></div></div>
       </div>
     </div>
   </section>
 
   <!-- ===== FOOTER ===== -->
-  <footer class="footer" style="background: #000000; border-top: 1px solid #27272a; padding: 60px 0 40px;">
+  <footer class="footer" style="background: #000000; border-top: 1px solid #27272a;">
     <div class="container footer-grid">
       <div>
         <div class="brand" style="margin-bottom:16px;">
@@ -192,6 +174,19 @@
       <a href="login-admin.html" style="color:#27272a; font-size:0.75rem; text-decoration:none;">⚙️ Internal Area</a>
     </div>
   </footer>
+
+  <!-- JAVASCRIPT UNTUK MENGHILANGKAN LOADER -->
+  <script>
+    // Ketika seluruh halaman selesai dimuat, sembunyikan loader
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        if(loader) {
+          loader.classList.add('hidden');
+        }
+      }, 1000); // Loader akan hilang setelah 1 detik (1000ms)
+    });
+  </script>
 
 </body>
 </html>

@@ -10,9 +10,14 @@
 <body>
   <div class="portal-layout">
     
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR KIRI -->
     <aside class="sidebar">
-      <div class="sidebar-brand"><span class="brand-mark">SH</span><span>Admin Area</span></div>
+      <!-- LOGO ADMIN DIPAKSA KECIL -->
+      <div class="sidebar-brand" style="display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 16px; margin-bottom: 24px;">
+        <img src="logo.png" alt="Logo SAKRI" style="height: 35px !important; width: auto !important; max-height: 35px; object-fit: contain;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: white; line-height: 1.2;">Admin Area</span>
+      </div>
+
       <ul class="sidebar-menu">
         <li><a href="javascript:void(0)" class="active" onclick="bukaMenu('monitor', this)"><span class="emoji">📊</span> Data & Dokumen</a></li>
         <li><a href="javascript:void(0)" onclick="bukaMenu('kelola', this)"><span class="emoji">👥</span> Akun Klien</a></li>
@@ -148,9 +153,7 @@
   </div>
 
   <script>
-    // ==========================================
     // 1. SATPAM: CEK LOGIN
-    // ==========================================
     if (sessionStorage.getItem('authAdmin') !== 'true') {
       alert('Akses Ditolak. Silakan login melalui halaman internal admin.');
       window.location.href = 'login-admin.html';
@@ -163,24 +166,15 @@
       window.location.href = 'login-admin.html'; 
     }
 
-    // ==========================================
-    // 2. LOGIKA NAVIGASI TAB (Fungsi Baru: bukaMenu)
-    // ==========================================
+    // 2. LOGIKA NAVIGASI TAB
     function bukaMenu(id, el) {
-      // Sembunyikan semua tab
       document.querySelectorAll('.tab-panel').forEach(p => p.hidden = true);
-      // Tampilkan tab yang dipilih
       document.getElementById('tab-' + id).hidden = false;
-      
-      // Hapus warna emas dari semua menu
       document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
-      // Beri warna emas pada menu yang diklik
       if (el) el.classList.add('active');
     }
 
-    // ==========================================
     // 3. DATA HELPERS
-    // ==========================================
     const getA = () => JSON.parse(localStorage.getItem('demoAkun') || '[]');
     const setA = (l) => localStorage.setItem('demoAkun', JSON.stringify(l));
     const getP = () => JSON.parse(localStorage.getItem('demoPending') || '[]');
@@ -198,9 +192,7 @@
     };
     const setStaff = (l) => localStorage.setItem('adminStaff', JSON.stringify(l));
 
-    // ==========================================
     // 4. RENDER SEMUA TABEL
-    // ==========================================
     function renderAll() {
       // Tabel Dokumen
       const dokumen = getD();
@@ -263,9 +255,7 @@
       `).join('') : '<tr><td colspan="4" style="text-align:center;">Belum ada staff.</td></tr>';
     }
 
-    // ==========================================
     // 5. FUNGSI AKSI
-    // ==========================================
     function delA(i) { if(confirm('Hapus klien ini?')) { const a = getA(); a.splice(i, 1); setA(a); renderAll(); } }
     function acc(i) { const p = getP(); const a = getA(); a.push(p[i]); setA(a); p.splice(i, 1); setP(p); renderAll(); alert('Disetujui!'); }
     function tolak(i) { if(confirm('Tolak pendaftaran?')) { const p = getP(); p.splice(i, 1); setP(p); renderAll(); } }
@@ -285,9 +275,7 @@
       renderAll(); alert('Perkara diperbarui!');
     }
 
-    // ==========================================
     // 6. FORM SUBMISSIONS
-    // ==========================================
     document.getElementById('formBuat').addEventListener('submit', (e) => {
       e.preventDefault();
       const a = getA();
@@ -311,7 +299,6 @@
       setStaff(s); e.target.reset(); document.getElementById('okStaff').hidden = false; renderAll();
     });
 
-    // Jalankan Render Saat Halaman Dibuka
     renderAll();
   </script>
 </body>

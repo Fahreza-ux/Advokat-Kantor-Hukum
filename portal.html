@@ -20,10 +20,7 @@
       <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
     </aside>
     <main class="portal-main">
-      <div class="portal-topbar">
-        <h1>Halo, <span id="nm">Klien</span></h1>
-        <p id="em">email@klien.com</p>
-      </div>
+      <div class="portal-topbar"><h1>Halo, <span id="nm">Klien</span></h1><p id="em">email@klien.com</p></div>
       <div class="portal-stats">
         <div class="stat-card"><div class="num" id="stDok">0</div><div class="lbl">Dokumen Saya</div></div>
         <div class="stat-card"><div class="num" id="stPrk">0</div><div class="lbl">Perkara Saya</div></div>
@@ -42,17 +39,13 @@
   <script>
     if (localStorage.getItem('demoLoggedIn') !== 'true' && sessionStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
     function logout() { localStorage.removeItem('demoLoggedIn'); sessionStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
-    
     const em = localStorage.getItem('demoEmailKlien') || 'demo';
     document.getElementById('nm').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
     document.getElementById('em').textContent = em;
-    
     const allDok = JSON.parse(localStorage.getItem('demoDokumen') || '[]').filter(d => d.owner === em);
     const allPrk = JSON.parse(localStorage.getItem('demoPerkara') || '[]').filter(p => p.owner === em);
-    
     document.getElementById('stDok').textContent = allDok.length;
     document.getElementById('stPrk').textContent = allPrk.length;
-    
     document.getElementById('tblPrk').innerHTML = allPrk.length ? allPrk.slice(0,3).map(p => `
       <tr><td><strong>${p.nomor}</strong></td><td>${p.jenis}</td><td><span class="status-pill ${p.status === 'Berjalan' ? 'aktif' : 'pending'}">${p.status}</span></td></tr>
     `).join('') : '<tr><td colspan="3" style="text-align:center;">Belum ada perkara.</td></tr>';

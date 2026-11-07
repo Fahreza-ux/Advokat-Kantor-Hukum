@@ -11,22 +11,8 @@
 <body>
 
   <div class="portal-layout">
-    <aside class="sidebar">
-      <a href="index.html" class="sidebar-brand">
-        <span class="brand-mark">SH</span>
-        <span>Setyo Hantoro</span>
-      </a>
-      <ul class="sidebar-menu">
-        <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
-        <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
-        <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
-        <li class="mobile-logout">
-          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
-        </li>
-      </ul>
-      <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
-    </aside>
-
+    
+    <!-- KONTEN UTAMA (Ditaruh paling atas agar muncul di HP) -->
     <main class="portal-main">
       <div class="portal-topbar">
         <div>
@@ -51,21 +37,35 @@
         </div>
       </div>
     </main>
+
+    <!-- SIDEBAR / MENU (Ditaruh di bawah konten) -->
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-brand">
+        <span class="brand-mark">SH</span>
+        <span>Setyo Hantoro</span>
+      </a>
+      <ul class="sidebar-menu">
+        <li><a href="portal.html" class="active"><span class="emoji">🏠</span> Dashboard</a></li>
+        <li><a href="portal-perkara.html"><span class="emoji">📋</span> Perkara</a></li>
+        <li><a href="portal-upload.html"><span class="emoji">📄</span> Upload</a></li>
+        <li class="mobile-logout">
+          <a href="login.html" onclick="logout()"><span class="emoji">🚪</span> Keluar</a>
+        </li>
+      </ul>
+      <button class="sidebar-logout" onclick="logout()">🚪 Logout</button>
+    </aside>
+
   </div>
 
   <script>
-    // Cek Login
     if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
     function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
 
-    // Tampilkan Profil
     document.getElementById('namaKlien').textContent = localStorage.getItem('demoNamaKlien') || 'Klien';
     document.getElementById('emailKlien').textContent = localStorage.getItem('demoEmailKlien') || '';
 
-    // Kunci Email untuk Filter Data
     const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
 
-    // 1. Hitung Statistik (Hanya milik sendiri)
     const allDok = JSON.parse(localStorage.getItem('demoDokumen') || '[]');
     const myDok = allDok.filter(d => d.owner === userEmail);
     document.getElementById('statDokumen').textContent = myDok.length;
@@ -74,7 +74,6 @@
     const myPrk = allPrk.filter(p => p.owner === userEmail);
     document.getElementById('statPerkara').textContent = myPrk.length;
 
-    // 2. Tampilkan Preview Perkara (Hanya milik sendiri)
     const prev = document.getElementById('perkaraPreview');
     if(myPrk.length > 0) {
       prev.innerHTML = myPrk.slice(0, 3).map(p => `

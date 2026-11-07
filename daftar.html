@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Akun Klien — Setyo Hantoro & Associates</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+<body class="login-page">
+
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">SH</span>
+        <span class="brand-text">Setyo Hantoro <em>&</em> Associates</span>
+      </a>
+      <nav class="nav-menu">
+        <a href="index.html">← Beranda</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-wrap">
+    <div class="login-card">
+      <div class="login-head">
+        <div class="login-icon">📝</div>
+        <h1>Daftar Akun Klien</h1>
+        <p>Isi form di bawah. Admin akan memverifikasi akun Anda.</p>
+      </div>
+
+      <div id="alertDaftar" class="alert-success" hidden></div>
+
+      <form id="daftarForm" class="login-form">
+        <div class="form-group">
+          <label>Nama Perusahaan / Klien</label>
+          <input type="text" id="nama" placeholder="mis. PT Maju Jaya" required>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="klien@perusahaan.com" required>
+        </div>
+        <div class="form-group">
+          <label>Kata Sandi</label>
+          <input type="password" id="password" placeholder="min. 6 karakter" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label>Konfirmasi Kata Sandi</label>
+          <input type="password" id="password2" placeholder="ulangi kata sandi" required minlength="6">
+        </div>
+
+        <div id="daftarError" class="alert-error" hidden></div>
+
+        <button type="submit" class="btn-primary btn-block">Kirim Pendaftaran</button>
+      </form>
+
+      <div class="login-foot">
+        <p>Sudah punya akun?<br>
+          <a href="login.html" class="link-gold">Masuk ke Portal →</a>
+        </p>
+      </div>
+    </div>
+
+    <aside class="login-aside">
+      <div class="aside-content">
+        <span class="eyebrow">Pendaftaran Klien</span>
+        <h2>Daftar Sekali, <span>Akses Portal Selamanya</span></h2>
+        <ul class="aside-list">
+          <li>✓ Verifikasi oleh admin</li>
+          <li>✓ Akses portal transparan</li>
+          <li>✓ Pantau perkara real-time</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const form = document.getElementById('daftarForm');
+    const alertBox = document.getElementById('alertDaftar');
+    const errorBox = document.getElementById('daftarError');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      errorBox.hidden = true;
+
+      const nama = document.getElementById('nama').value.trim();
+      const email = document.getElementById('email').value.trim().toLowerCase();
+      const password = document.getElementById('password').value;
+      const password2 = document.getElementById('password2').value;
+
+      if (password !== password2) {
+        errorBox.textContent = '⚠ Konfirmasi kata sandi tidak cocok.';
+        errorBox.hidden = false;
+        return;
+      }
+
+      const akun = JSON.parse(localStorage.getItem('demoAkun') || '[]');
+      const pending = JSON.parse(localStorage.getItem('demoPending') || '[]');
+
+      if (akun.find(a => a.email === email) || pending.find(p => p.email === email)) {
+        errorBox.textContent = '⚠ Email sudah terdaftar atau sedang menunggu verifikasi.';
+        errorBox.hidden = false;
+        return;
+      }
+
+      pending.push({
+        nama,
+        email,
+        password,
+        tanggal: new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' })
+      });
+      localStorage.setItem('demoPending', JSON.stringify(pending));
+
+      form.hidden = true;
+      alertBox.innerHTML = `
+        ✓ Pendaftaran berhasil!<br>
+        <small style="font-weight:400;">Admin akan memverifikasi akun <strong>${email}</strong>.</small>
+      `;
+      alertBox.hidden = false;
+    });
+  </script>
+</body>
+</html>

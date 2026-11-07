@@ -67,44 +67,60 @@
   </div>
 
   <script>
+    // Cek Login
     if (localStorage.getItem('demoLoggedIn') !== 'true') window.location.href = 'login.html';
     function logout() { localStorage.removeItem('demoLoggedIn'); window.location.href = 'login.html'; }
 
+    // Ambil Email Klien yang sedang login sebagai Kunci Data
+    const userEmail = localStorage.getItem('demoEmailKlien') || 'demo';
     const table = document.getElementById('perkaraTable');
 
+    // Fungsi Render (Hanya ambil data milik userEmail ini)
     function renderPerkara() {
-      const list = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      if (list.length === 0) {
+      const allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+      // Filter: Hanya tampilkan perkara milik email ini
+      const myPerkara = allData.filter(p => p.owner === userEmail);
+
+      if (myPerkara.length === 0) {
         table.innerHTML = '<tr><td colspan="4" style="text-align:center;">Belum ada perkara.</td></tr>';
         return;
       }
-      table.innerHTML = list.map((p, i) => `
+      table.innerHTML = myPerkara.map((p, i) => `
         <tr>
           <td><strong>${p.nomor}</strong></td>
           <td>${p.jenis}</td>
           <td><span class="status-pill ${p.status}">${p.status}</span></td>
-          <td><button onclick="hapusPerkara(${i})" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
+          <td><button onclick="hapusPerkara('${p.id}')" style="background:none;border:none;color:#dc2626;font-weight:bold;cursor:pointer;">Hapus</button></td>
         </tr>
       `).join('');
     }
 
+    // Tambah Perkara
     document.getElementById('perkaraForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      const list = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      list.unshift({ 
+      const allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+      
+      // Simpan dengan owner: userEmail
+      allData.unshift({ 
+        id: Date.now().toString(), // ID unik untuk hapus
+        owner: userEmail,
         nomor: document.getElementById('nomor').value, 
         jenis: document.getElementById('jenis').value, 
         status: 'pending' 
       });
-      localStorage.setItem('demoPerkara', JSON.stringify(list));
+      
+      localStorage.setItem('demoPerkara', JSON.stringify(allData));
       e.target.reset();
       renderPerkara();
     });
 
-    function hapusPerkara(i) {
-      const list = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
-      list.splice(i, 1);
-      localStorage.setItem('demoPerkara', JSON.stringify(list));
+    // Hapus Perkara (Berdasarkan ID, dan pastikan hanya miliknya)
+    function hapusPerkara(id) {
+      if(!confirm('Hapus perkara ini?')) return;
+      let allData = JSON.parse(localStorage.getItem('demoPerkara') || '[]');
+      // Buang data dengan ID tersebut
+      allData = allData.filter(p => p.id !== id);
+      localStorage.setItem('demoPerkara', JSON.stringify(allData));
       renderPerkara();
     }
 

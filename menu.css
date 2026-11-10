@@ -166,3 +166,26 @@
   .khb-main h2{font-size:1.7rem}
   .khb-main{padding:40px 20px}
 }
+/* =========================================
+   PAKSA FULL SCREEN (MENGATASI PUTIH DI PINGGIR)
+   ========================================= */
+body {
+  background-color: #0a0a0a !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+.khb-main {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 60px 20px !important;
+  background-color: #0a0a0a !important;
+}
+.khb-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.khb-header, .khb-nav, .khb-topbar {
+  width: 100% !important;
+  max-width: 100% !important;
+}

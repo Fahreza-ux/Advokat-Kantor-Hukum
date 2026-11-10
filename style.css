@@ -15,7 +15,7 @@ body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); colo
 a { text-decoration: none; color: inherit; }
 h1, h2, h3, h4 { font-family: 'Fraunces', serif; font-weight: 600; line-height: 1.15; color: var(--white); }
 h1 span, h2 span { color: var(--gold); }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; width: 100%; }
 .text-center { text-align: center; margin-left: auto; margin-right: auto; }
 
 /* NAVBAR */
@@ -98,7 +98,6 @@ h1 span, h2 span { color: var(--gold); }
 
 /* =========================================================
    BAGIAN 2 — MENU & HALAMAN BARU (.khb-*)
-   Ditambahkan di paling bawah agar tidak menimpa style lama.
    ========================================================= */
 
 /* ---------- TOPBAR ---------- */
@@ -115,10 +114,12 @@ h1 span, h2 span { color: var(--gold); }
 .khb-header{
   background:rgba(10,10,10,.92);backdrop-filter:blur(15px);
   border-bottom:1px solid #27272a;position:sticky;top:0;z-index:1000;
+  width: 100%;
 }
 .khb-header-inner{
   max-width:1280px;margin:0 auto;padding:14px 24px;
   display:flex;align-items:center;justify-content:space-between;gap:16px;
+  width: 100%;
 }
 .khb-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .khb-logo{
@@ -144,8 +145,8 @@ h1 span, h2 span { color: var(--gold); }
 .khb-hamburger span{width:26px;height:3px;background:#d4af37;border-radius:2px}
 
 /* ---------- NAV ---------- */
-.khb-nav{background:#0a0a0a;border-bottom:1px solid #27272a;color:#e8f0f9}
-.khb-nav-inner{max-width:1280px;margin:0 auto;padding:0 12px;display:flex;flex-wrap:wrap}
+.khb-nav{background:#0a0a0a;border-bottom:1px solid #27272a;color:#e8f0f9;width: 100%;}
+.khb-nav-inner{max-width:1280px;margin:0 auto;padding:0 12px;display:flex;flex-wrap:wrap;width: 100%;}
 .khb-nav-item{position:relative}
 .khb-nav-link{
   display:flex;align-items:center;gap:6px;padding:13px 14px;
@@ -193,11 +194,16 @@ h1 span, h2 span { color: var(--gold); }
 }
 .khb-mega a:hover{background:#121212;color:#fff}
 
-/* ---------- KONTEN HALAMAN BARU ---------- */
+/* ---------- KONTEN HALAMAN BARU (FULL SCREEN) ---------- */
 .khb-main{
-  max-width:1100px;margin:0 auto;padding:60px 24px;
-  color:#ffffff;background:#0a0a0a;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 auto;
+  padding: 60px 5% !important; /* Padding responsif kiri kanan */
+  color:#ffffff;
+  background-color:#0a0a0a !important;
   font-family:'Plus Jakarta Sans',sans-serif;
+  box-sizing: border-box;
 }
 .khb-main h2{
   font-family:'Fraunces',serif;font-size:2.2rem;color:#fff;
@@ -205,7 +211,13 @@ h1 span, h2 span { color: var(--gold); }
 }
 .khb-main .khb-lead{color:#a1a1aa;margin-bottom:34px;font-size:1.02rem}
 
-.khb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.khb-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:24px;
+  max-width: 1200px; /* Kotak-kotak tetap rapi di tengah */
+  margin: 0 auto;
+}
 .khb-card{
   background:#18181b;border:1px solid #27272a;border-radius:24px;
   padding:30px;box-shadow:0 20px 40px -20px rgba(0,0,0,.8);
@@ -231,6 +243,7 @@ h1 span, h2 span { color: var(--gold); }
   background:#000;color:#a1a1aa;padding:60px 24px 24px;margin-top:60px;
   border-top:1px solid #27272a;
   font-family:'Plus Jakarta Sans',sans-serif;
+  width: 100%;
 }
 .khb-footer-inner{
   max-width:1280px;margin:0 auto;
@@ -253,8 +266,9 @@ h1 span, h2 span { color: var(--gold); }
   border-top:1px solid #27272a;text-align:center;font-size:12.5px;color:#71717a;
 }
 
-/* ---------- RESPONSIVE HALAMAN BARU ---------- */
+/* ---------- RESPONSIVE HALAMAN BARU (MOBILE) ---------- */
 @media (max-width:980px){
+  /* Perbaikan Navigasi Mobile */
   .khb-nav-inner{display:none;flex-direction:column;padding:8px}
   .khb-nav-inner.khb-show{display:flex}
   .khb-nav-item{width:100%}
@@ -267,7 +281,12 @@ h1 span, h2 span { color: var(--gold); }
   .khb-nav-item.khb-open .khb-mega{display:block}
   .khb-mega{grid-template-columns:1fr}
   .khb-hamburger{display:flex}
+  
+  /* Perbaikan Teks & Spasi Mobile */
   .khb-brand h1{font-size:15px}
   .khb-main h2{font-size:1.7rem}
-  .khb-main{padding:40px 20px}
+  .khb-main{padding:40px 20px !important}
+  
+  /* Memastikan tidak ada yang kepotong */
+  body { overflow-x: hidden; width: 100%; }
 }

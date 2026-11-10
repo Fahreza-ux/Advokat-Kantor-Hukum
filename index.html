@@ -3,92 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kantor Hukum Bersama — Advocates, Legal Consultants & Education</title>
+<title>Advokat Kantor Hukum — Advocates, Legal Consultants & Education</title>
 <style>
+/* ===== WARNA BARU: HITAM & EMAS ===== */
+:root {
+  --hitam-pekat: #0a0a0a;
+  --hitam-latar: #111111;
+  --emas: #D4AF37;
+  --emas-terang: #FFD700;
+  --emas-gelap: #B8860B;
+  --putih: #ffffff;
+  --abu: #9ca3af;
+}
+
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1f2937;background:#f9fafb}
-a{color:#1e40af;text-decoration:none;cursor:pointer}
+a{color:var(--emas-gelap);text-decoration:none;cursor:pointer}
 a:hover{text-decoration:none}
 .container{max-width:1150px;margin:0 auto;padding:0 1rem}
-.navbar{background:#0f172a;color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+
+/* NAVBAR HITAM */
+.navbar{background:var(--hitam-pekat);color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.5);border-bottom: 1px solid #222;}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;gap:1rem}
 .brand{color:#fff;display:flex;align-items:center;gap:.6rem;cursor:pointer}
+.brand img{height: 42px; width: auto; max-width: 120px; object-fit: contain; border-radius: 4px;}
 .brand-text{font-size:.78rem;line-height:1.1}
-.brand-text strong{font-size:.9rem;color:#fbbf24;display:block}
-.brand-text small{font-size:.58rem;color:#94a3b8;letter-spacing:.5px}
+.brand-text strong{font-size:.9rem;color:var(--emas);display:block;letter-spacing: 0.5px;}
+.brand-text small{font-size:.55rem;color:var(--abu);letter-spacing:.5px}
 .nav-toggle{display:none;font-size:1.5rem;cursor:pointer;color:#fff;background:none;border:none}
 #nav-toggle{display:none}
 .nav-links{list-style:none;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
-.nav-links a{color:#e2e8f0;font-size:.82rem;padding:.35rem .5rem;cursor:pointer;display:inline-block}
-.nav-links a:hover{color:#fbbf24}
-.btn-nav{background:#fbbf24;color:#0f172a!important;padding:.45rem .9rem!important;border-radius:6px;font-weight:700}
+.nav-links a{color:#e5e7eb;font-size:.82rem;padding:.35rem .5rem;cursor:pointer;display:inline-block}
+.nav-links a:hover{color:var(--emas)}
+.btn-nav{background:var(--emas);color:var(--hitam-pekat)!important;padding:.45rem .9rem!important;border-radius:6px;font-weight:700}
 .dropdown{position:relative}
-.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:#0f172a;min-width:220px;padding:.5rem 0;border-radius:8px;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:200}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--hitam-latar);min-width:220px;padding:.5rem 0;border-radius:8px;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,.5);z-index:200;border: 1px solid #333;}
 .dropdown:hover .dropdown-menu{display:block}
 .dropdown-menu li a{display:block;padding:.4rem 1rem;color:#cbd5e1;font-size:.78rem}
-.dropdown-menu li a:hover{background:#1e293b;color:#fbbf24}
+.dropdown-menu li a:hover{background:#222;color:var(--emas)}
 @media(max-width:900px){
 .nav-toggle{display:block}
-.nav-links{display:none;flex-direction:column;align-items:stretch;position:absolute;top:100%;left:0;right:0;background:#0f172a;padding:1rem;gap:.2rem;max-height:80vh;overflow-y:auto}
+.nav-links{display:none;flex-direction:column;align-items:stretch;position:absolute;top:100%;left:0;right:0;background:var(--hitam-pekat);padding:1rem;gap:.2rem;max-height:80vh;overflow-y:auto;border-bottom: 2px solid var(--emas);}
 #nav-toggle:checked ~ .nav-links{display:flex}
-.dropdown-menu{position:static;display:block;background:#1e293b;box-shadow:none;padding-left:.8rem}
+.dropdown-menu{position:static;display:block;background:#1a1a1a;box-shadow:none;padding-left:.8rem;border:none;}
 }
-.hero{background:linear-gradient(135deg,#1e3a8a,#1e40af);color:#fff;padding:3rem 1rem;text-align:center}
-.hero-img{max-width:320px;margin:0 auto 1rem;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.3))}
-.hero h1{font-size:2rem;margin-bottom:.8rem;line-height:1.2}
-.hero p{font-size:1rem;max-width:700px;margin:0 auto 1.5rem;opacity:.92}
+
+/* HERO HITAM EMAS */
+.hero{background:linear-gradient(135deg,var(--hitam-pekat),#1a1a1a);color:#fff;padding:3rem 1rem;text-align:center;border-bottom: 2px solid var(--emas);}
+.hero-img{max-width:320px;margin:0 auto 1rem;display:block;filter:drop-shadow(0 10px 20px rgba(212,175,55,.2))}
+.hero h1{font-size:2rem;margin-bottom:.8rem;line-height:1.2;color:var(--emas);}
+.hero p{font-size:1rem;max-width:700px;margin:0 auto 1.5rem;opacity:.9}
 .hero-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
 .btn{display:inline-block;padding:.65rem 1.4rem;border-radius:6px;font-weight:700;border:none;cursor:pointer;font-size:.9rem;transition:transform .15s}
 .btn:hover{transform:translateY(-2px)}
-.btn-primary{background:#fbbf24;color:#0f172a}
-.btn-outline{background:transparent;color:#fff;border:2px solid #fff}
+.btn-primary{background:var(--emas);color:var(--hitam-pekat)}
+.btn-primary:hover{background:var(--emas-terang)}
+.btn-outline{background:transparent;color:var(--emas);border:2px solid var(--emas)}
+.btn-outline:hover{background:var(--emas);color:var(--hitam-pekat);}
 .btn-sm{padding:.4rem 1rem;font-size:.8rem}
 .btn-danger{background:#ef4444;color:#fff}
+
+/* SECTION LAINNYA */
 .section{padding:3rem 1rem}
 .section:nth-child(even){background:#fff}
-.section-title{font-size:1.6rem;color:#0f172a;margin-bottom:.4rem;border-left:5px solid #fbbf24;padding-left:1rem}
+.section-title{font-size:1.6rem;color:var(--hitam-pekat);margin-bottom:.4rem;border-left:5px solid var(--emas);padding-left:1rem}
 .section-sub{color:#6b7280;margin-bottom:1.5rem;padding-left:1.4rem;font-size:.9rem}
-.page-header{background:linear-gradient(135deg,#1e3a8a,#1e40af);color:#fff;padding:2.5rem 1rem;text-align:center}
-.page-header h1{font-size:1.8rem;margin-bottom:.3rem}
+.page-header{background:var(--hitam-latar);color:#fff;padding:2.5rem 1rem;text-align:center;border-bottom: 2px solid var(--emas);}
+.page-header h1{font-size:1.8rem;margin-bottom:.3rem;color:var(--emas);}
 .page-header p{opacity:.9;font-size:.9rem}
 .back-bar{max-width:1150px;margin:0 auto;padding:1rem}
 .back-btn{display:inline-flex;align-items:center;gap:.4rem;background:#f3f4f6;color:#374151;padding:.5rem 1rem;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;border:none}
 .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
-.card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;transition:transform .15s;cursor:pointer}
-.card:hover{transform:translateY(-3px)}
+.card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;transition:transform .15s;cursor:pointer;border-top: 3px solid transparent;}
+.card:hover{transform:translateY(-3px);border-top-color:var(--emas);box-shadow:0 6px 20px rgba(0,0,0,.1);}
 .card .icon{font-size:2.4rem;margin-bottom:.5rem}
-.card h3{color:#1e40af;margin-bottom:.4rem;font-size:1rem}
+.card h3{color:var(--emas-gelap);margin-bottom:.4rem;font-size:1rem}
 .card p{font-size:.85rem;color:#4b5563}
 .layanan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
-.layanan-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
-.layanan-card:hover{transform:translateY(-3px)}
+.layanan-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s;border:1px solid #eee;}
+.layanan-card:hover{transform:translateY(-3px);border-color:var(--emas);}
 .layanan-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff}
 .layanan-body{padding:1.2rem}
-.layanan-body h3{color:#1e40af;margin-bottom:.3rem;font-size:1rem}
+.layanan-body h3{color:var(--emas-gelap);margin-bottom:.3rem;font-size:1rem}
 .layanan-body p{font-size:.82rem;color:#6b7280}
 .tim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
 .tim-card{background:#fff;padding:1.4rem 1rem;border-radius:12px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
-.tim-card:hover{transform:translateY(-3px)}
-.tim-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.tim-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,.1);}
+.tim-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;color:var(--hitam-pekat);box-shadow:0 4px 12px rgba(0,0,0,.15);background: var(--emas);}
 .tim-card h3{font-size:.9rem;color:#0f172a;margin-bottom:.2rem}
-.tim-jabatan{font-size:.75rem;color:#1e40af;font-weight:600}
+.tim-jabatan{font-size:.75rem;color:var(--emas-gelap);font-weight:600}
 .tim-bidang{font-size:.72rem;color:#6b7280}
 .book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
 .book-card{background:#fff;padding:1rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;cursor:pointer;transition:transform .15s}
 .book-card:hover{transform:translateY(-3px)}
 .book-cover{height:150px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;color:#fff;margin-bottom:.7rem;position:relative;overflow:hidden}
-.book-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:rgba(0,0,0,.2)}
+.book-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:rgba(0,0,0,.3)}
 .book-cover-title{font-size:.72rem;font-weight:700;text-align:center;line-height:1.2;position:relative;z-index:1}
 .book-cover-author{font-size:.6rem;opacity:.9;margin-top:.3rem;position:relative;z-index:1}
 .book-card h3{font-size:.85rem;color:#0f172a;margin-bottom:.2rem}
 .book-kategori{font-size:.72rem;color:#6b7280}
-.book-harga{font-weight:700;color:#1e40af;font-size:.9rem}
+.book-harga{font-weight:700;color:var(--emas-gelap);font-size:.9rem}
 .news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
 .news-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
 .news-card:hover{transform:translateY(-3px)}
 .news-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff}
 .news-body{padding:1rem}
-.news-tag{display:inline-block;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;margin-bottom:.4rem}
+.news-tag{display:inline-block;background:var(--emas);color:var(--hitam-pekat);font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;margin-bottom:.4rem}
 .news-body h3{font-size:.92rem;margin-bottom:.3rem;color:#0f172a}
 .news-body small{color:#6b7280;font-size:11px}
 .detail-img{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:#fff;border-radius:12px;margin-bottom:1.5rem}
@@ -96,23 +116,23 @@ a:hover{text-decoration:none}
 .detail-content h1{color:#0f172a;font-size:1.6rem;margin-bottom:.5rem}
 .detail-content .meta{color:#6b7280;font-size:.85rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e5e7eb}
 .detail-content p{margin-bottom:1rem;line-height:1.8}
-.detail-content h2{color:#1e40af;font-size:1.2rem;margin:1.5rem 0 .7rem}
+.detail-content h2{color:var(--emas-gelap);font-size:1.2rem;margin:1.5rem 0 .7rem}
 .detail-content ul{margin-left:1.5rem;margin-bottom:1rem}
 .detail-content li{margin-bottom:.4rem}
 .partner-card{display:flex;gap:1.2rem;align-items:center;background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.06)}
-.partner-avatar{width:90px;height:90px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;font-weight:700}
+.partner-avatar{width:90px;height:90px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:var(--emas);color:var(--hitam-pekat);font-weight:700}
 @media(max-width:600px){.partner-card{flex-direction:column;text-align:center}}
-.timeline{border-left:3px solid #1e40af;padding-left:1.5rem;margin-top:1rem}
+.timeline{border-left:3px solid var(--emas);padding-left:1.5rem;margin-top:1rem}
 .timeline-item{margin-bottom:1.3rem;position:relative}
-.timeline-item::before{content:'';position:absolute;left:-1.9rem;top:6px;width:12px;height:12px;background:#fbbf24;border-radius:50%;border:3px solid #1e40af}
-.timeline-item strong{color:#1e40af;display:block;margin-bottom:.2rem}
+.timeline-item::before{content:'';position:absolute;left:-1.9rem;top:6px;width:12px;height:12px;background:var(--hitam-pekat);border-radius:50%;border:3px solid var(--emas)}
+.timeline-item strong{color:var(--emas-gelap);display:block;margin-bottom:.2rem}
 .org-chart{text-align:center;margin-top:1rem}
-.org-node{display:inline-block;background:#fff;border:2px solid #1e40af;color:#1e40af;padding:.6rem 1.2rem;border-radius:8px;margin:.35rem;font-weight:600;font-size:.85rem}
-.org-node.primary{background:#1e40af;color:#fff}
+.org-node{display:inline-block;background:#fff;border:2px solid var(--hitam-pekat);color:var(--hitam-pekat);padding:.6rem 1.2rem;border-radius:8px;margin:.35rem;font-weight:600;font-size:.85rem}
+.org-node.primary{background:var(--hitam-pekat);color:var(--emas);border-color:var(--emas);}
 .org-row{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem}
 .table{width:100%;background:#fff;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-top:1rem;font-size:.85rem}
 .table th,.table td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid #e5e7eb}
-.table th{background:#f3f4f6;font-weight:700;color:#374151}
+.table th{background:var(--hitam-latar);font-weight:700;color:var(--emas)}
 .table tr:last-child td{border-bottom:none}
 code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 .badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase}
@@ -121,10 +141,10 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 .badge-proses{background:#e0e7ff;color:#4338ca}
 .badge-selesai{background:#dcfce7;color:#166534}
 .badge-ditutup{background:#e5e7eb;color:#374151}
-.form{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:.9rem;max-width:480px;margin:1rem auto}
+.form{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:.9rem;max-width:480px;margin:1rem auto;border-top: 3px solid var(--emas);}
 .form label{display:flex;flex-direction:column;gap:.3rem;font-weight:500;font-size:.85rem}
 .form input,.form select,.form textarea{padding:.6rem .8rem;border:1px solid #d1d5db;border-radius:6px;font:inherit;font-size:.88rem;width:100%}
-.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 3px rgba(30,64,175,.15)}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:var(--emas-gelap);box-shadow:0 0 0 3px rgba(184,134,11,.2)}
 .alert{padding:.75rem 1rem;border-radius:8px;margin:1rem 0;font-size:.85rem}
 .alert-error{background:#fee2e2;color:#991b1b}
 .alert-success{background:#dcfce7;color:#166534}
@@ -132,34 +152,34 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1rem}
 @media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
 .contact-list p{margin-bottom:.9rem;line-height:1.7;font-size:.9rem}
-.footer{background:#0f172a;color:#cbd5e1;padding:2.5rem 1rem 1.5rem;margin-top:2rem}
+.footer{background:var(--hitam-pekat);color:#cbd5e1;padding:2.5rem 1rem 1.5rem;margin-top:2rem;border-top: 3px solid var(--emas);}
 .footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:2rem}
-.footer h4{color:#fbbf24;margin-bottom:.6rem;font-size:.95rem}
+.footer h4{color:var(--emas);margin-bottom:.6rem;font-size:.95rem}
 .footer ul{list-style:none}
 .footer li{margin-bottom:.3rem;font-size:.82rem}
 .footer a{color:#cbd5e1}
-.footer a:hover{color:#fbbf24}
-.copyright{text-align:center;font-size:.78rem;color:#64748b;border-top:1px solid #1e293b;padding-top:1.2rem}
+.footer a:hover{color:var(--emas)}
+.copyright{text-align:center;font-size:.78rem;color:#64748b;border-top:1px solid #333;padding-top:1.2rem}
 .wa-float{position:fixed;bottom:1.2rem;right:1.2rem;background:#25d366;color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 16px rgba(37,211,102,.5);z-index:99}
 @media(max-width:600px){.hero h1{font-size:1.5rem}.hero p{font-size:.9rem}.section-title{font-size:1.3rem}}
 
 /* DASHBOARD */
-.dash-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:1.5rem 1rem}
+.dash-header{background:linear-gradient(135deg,var(--hitam-pekat),#1a1a1a);color:#fff;padding:1.5rem 1rem;border-bottom: 3px solid var(--emas);}
 .dash-header .inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;max-width:1100px;margin:0 auto}
-.dash-header h1{font-size:1.2rem}
+.dash-header h1{font-size:1.2rem;color:var(--emas)}
 .dash-header .user{font-size:.85rem;opacity:.9}
-.dash-header .user strong{color:#fbbf24}
+.dash-header .user strong{color:var(--emas)}
 .dash-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:.5rem 0;position:sticky;top:0;z-index:50}
 .dash-nav .inner{display:flex;gap:.3rem;overflow-x:auto;padding:.3rem 1rem;max-width:1100px;margin:0 auto}
 .dash-nav a{padding:.5rem 1rem;border-radius:6px;font-size:.85rem;color:#374151;white-space:nowrap;font-weight:500;cursor:pointer}
 .dash-nav a:hover{background:#f3f4f6}
-.dash-nav a.active{background:#1e40af;color:#fff}
+.dash-nav a.active{background:var(--emas);color:var(--hitam-pekat)}
 .dash-main{padding:2rem 1rem;max-width:1100px;margin:0 auto}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1rem 0 1.5rem}
-.stat-card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.stat-card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.06);border-left: 4px solid var(--emas);}
 .stat-card span{font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase}
-.stat-card strong{display:block;font-size:1.8rem;color:#1e40af;margin-top:.3rem}
-.demo-badge{background:#fef3c7;color:#92400e;padding:.3rem .8rem;border-radius:20px;font-size:.72rem;font-weight:700;display:inline-block;margin-bottom:1rem}
+.stat-card strong{display:block;font-size:1.8rem;color:var(--hitam-pekat);margin-top:.3rem}
+.demo-badge{background:var(--emas);color:var(--hitam-pekat);padding:.3rem .8rem;border-radius:20px;font-size:.72rem;font-weight:700;display:inline-block;margin-bottom:1rem}
 </style>
 </head>
 <body>
@@ -167,8 +187,12 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 <nav class="navbar">
   <div class="nav-inner container">
     <div class="brand" onclick="go('/')">
-      <svg width="42" height="42" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#fbbf24"/><circle cx="30" cy="30" r="24" fill="#0f172a"/><path d="M30 14v32M20 22h20M14 38h32" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="14" r="3" fill="#fbbf24"/><path d="M20 22l-6 16h12zM40 22l-6 16h12z" fill="#fbbf24" opacity=".9"/><path d="M14 38l-4 8h8zM46 38l-4 8h8z" fill="#fbbf24" opacity=".7"/></svg>
-      <div class="brand-text"><strong>KANTOR HUKUM BERSAMA</strong><small>ADVOCATES · LEGAL CONSULTANTS · EDUCATION</small></div>
+      <!-- LOGO DARI FILE GITHUB ANDA -->
+      <img src="logo.png" alt="Logo Advokat Kantor Hukum" onerror="this.src='https://via.placeholder.com/120x42/111111/D4AF37?text=LOGO'">
+      <div class="brand-text">
+        <strong>ADVOKAT KANTOR HUKUM</strong>
+        <small>ADVOCATES · LEGAL CONSULTANTS · EDUCATION</small>
+      </div>
     </div>
     <input type="checkbox" id="nav-toggle">
     <label for="nav-toggle" class="nav-toggle">☰</label>
@@ -213,7 +237,7 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
-      <div><h4>⚖️ Kantor Hukum Bersama</h4><p style="font-size:.82rem">Advocates, Legal Consultants & Education.</p></div>
+      <div><h4>⚖️ Advokat Kantor Hukum</h4><p style="font-size:.82rem">Advocates, Legal Consultants & Education.</p></div>
       <div><h4>Navigasi</h4><ul>
         <li><a onclick="go('/profil')">Profil</a></li>
         <li><a onclick="go('/layanan')">Layanan</a></li>
@@ -227,9 +251,9 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
         <li><a onclick="go('/klien')">Klien</a></li>
         <li><a onclick="go('/kontak')">Kontak</a></li>
       </ul></div>
-      <div><h4>Kontak</h4><p style="font-size:.82rem">📧 info@khb.co.id<br>📞 +62 812-3456-7890<br>📍 Jakarta</p></div>
+      <div><h4>Kontak</h4><p style="font-size:.82rem">📧 info@advokatkantorhukum.co.id<br>📞 +62 812-3456-7890<br>📍 Jakarta</p></div>
     </div>
-    <p class="copyright">© 2025 Kantor Hukum Bersama</p>
+    <p class="copyright">© 2025 Advokat Kantor Hukum</p>
   </div>
 </footer>
 
@@ -238,55 +262,55 @@ code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
 <script>
 // ============ DATA ============
 const LAYANAN = [
-  {id:'pidana',nama:'Hukum Pidana',icon:'⚖️',color:'linear-gradient(135deg,#dc2626,#b91c1c)',desc:'Pendampingan perkara pidana.',isi:'<p>Tim advokat pidana kami menangani perkara dari penyidikan kepolisian hingga kasasi di Mahkamah Agung.</p><h2>Ruang Lingkup</h2><ul><li>Pendampingan di kepolisian</li><li>Praperadilan</li><li>Pembelaan di persidangan</li><li>Banding, kasasi, PK</li><li>Grasi dan rehabilitasi</li></ul>'},
-  {id:'perdata',nama:'Hukum Perdata',icon:'📜',color:'linear-gradient(135deg,#7c3aed,#6d28d9)',desc:'Sengketa perjanjian, wanprestasi.',isi:'<p>Kami menangani sengketa perdata antara individu maupun badan hukum.</p><h2>Ruang Lingkup</h2><ul><li>Wanprestasi</li><li>Perbuatan melawan hukum</li><li>Sengketa jual beli</li><li>Ganti rugi</li></ul>'},
-  {id:'bisnis',nama:'Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#0891b2,#0e7490)',desc:'Pendirian PT, merger akuisisi.',isi:'<p>Layanan hukum komprehensif untuk pelaku usaha.</p><h2>Ruang Lingkup</h2><ul><li>Pendirian PT/CV</li><li>Review kontrak</li><li>Merger & akuisisi</li><li>Legal due diligence</li></ul>'},
-  {id:'ketenagakerjaan',nama:'Ketenagakerjaan',icon:'👷',color:'linear-gradient(135deg,#ea580c,#c2410c)',desc:'Sengketa PHI, PHK.',isi:'<p>Pendampingan di bidang hubungan industrial.</p><h2>Ruang Lingkup</h2><ul><li>Perjanjian kerja</li><li>PHK & pesangon</li><li>Sengketa PHI</li></ul>'},
-  {id:'pertanahan',nama:'Pertanahan',icon:'🌾',color:'linear-gradient(135deg,#16a34a,#15803d)',desc:'Sertifikasi, sengketa tanah.',isi:'<p>Penanganan sengketa dan transaksi pertanahan.</p><h2>Ruang Lingkup</h2><ul><li>Sertifikasi tanah</li><li>Sengketa batas</li><li>Jual beli tanah</li></ul>'},
-  {id:'perpajakan',nama:'Perpajakan',icon:'🧾',color:'linear-gradient(135deg,#ca8a04,#a16207)',desc:'Sengketa pajak.',isi:'<p>Pendampingan sengketa perpajakan.</p><h2>Ruang Lingkup</h2><ul><li>Keberatan pajak</li><li>Banding</li><li>Gugatan pengadilan pajak</li></ul>'},
-  {id:'keluarga',nama:'Keluarga & Waris',icon:'👨‍👩‍👧',color:'linear-gradient(135deg,#db2777,#be185d)',desc:'Perceraian, hak asuh, waris.',isi:'<p>Pendampingan hukum keluarga.</p><h2>Ruang Lingkup</h2><ul><li>Perceraian</li><li>Hak asuh anak</li><li>Pembagian waris</li></ul>'},
-  {id:'tun',nama:'Tata Usaha Negara',icon:'🏛️',color:'linear-gradient(135deg,#475569,#334155)',desc:'Gugatan TUN.',isi:'<p>Sengketa administrasi pemerintahan.</p><h2>Ruang Lingkup</h2><ul><li>Gugatan KTUN</li><li>Sengketa kepegawaian</li></ul>'},
-  {id:'pailit',nama:'Kepailitan & PKPU',icon:'💸',color:'linear-gradient(135deg,#9333ea,#7e22ce)',desc:'Permohonan pailit.',isi:'<p>Penanganan utang-piutang.</p><h2>Ruang Lingkup</h2><ul><li>Permohonan pailit</li><li>PKPU</li><li>Restrukturisasi</li></ul>'},
-  {id:'arbitrase',nama:'Arbitrase & Mediasi',icon:'🤝',color:'linear-gradient(135deg,#0d9488,#0f766e)',desc:'Sengketa di luar pengadilan.',isi:'<p>Alternatif penyelesaian sengketa.</p><h2>Ruang Lingkup</h2><ul><li>Arbitrase BANI</li><li>Mediasi</li><li>Konsiliasi</li></ul>'},
-  {id:'legal',nama:'Legal Opinion',icon:'📋',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',desc:'Pendapat hukum tertulis.',isi:'<p>Pendapat hukum dan audit.</p><h2>Ruang Lingkup</h2><ul><li>Legal opinion</li><li>Legal audit</li><li>Review kontrak</li></ul>'},
-  {id:'retainer',nama:'Retainer',icon:'🔁',color:'linear-gradient(135deg,#b45309,#92400e)',desc:'Jasa hukum berlangganan.',isi:'<p>Paket jasa hukum bulanan.</p><h2>Manfaat</h2><ul><li>Konsultasi tak terbatas</li><li>Review kontrak</li><li>Prioritas penanganan</li></ul>'}
+  {id:'pidana',nama:'Hukum Pidana',icon:'⚖️',color:'linear-gradient(135deg,#333,#111)',desc:'Pendampingan perkara pidana.',isi:'<p>Tim advokat pidana kami menangani perkara dari penyidikan kepolisian hingga kasasi di Mahkamah Agung.</p><h2>Ruang Lingkup</h2><ul><li>Pendampingan di kepolisian</li><li>Praperadilan</li><li>Pembelaan di persidangan</li><li>Banding, kasasi, PK</li><li>Grasi dan rehabilitasi</li></ul>'},
+  {id:'perdata',nama:'Hukum Perdata',icon:'📜',color:'linear-gradient(135deg,#444,#222)',desc:'Sengketa perjanjian, wanprestasi.',isi:'<p>Kami menangani sengketa perdata antara individu maupun badan hukum.</p><h2>Ruang Lingkup</h2><ul><li>Wanprestasi</li><li>Perbuatan melawan hukum</li><li>Sengketa jual beli</li><li>Ganti rugi</li></ul>'},
+  {id:'bisnis',nama:'Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#B8860B,#8B6508)',desc:'Pendirian PT, merger akuisisi.',isi:'<p>Layanan hukum komprehensif untuk pelaku usaha.</p><h2>Ruang Lingkup</h2><ul><li>Pendirian PT/CV</li><li>Review kontrak</li><li>Merger & akuisisi</li><li>Legal due diligence</li></ul>'},
+  {id:'ketenagakerjaan',nama:'Ketenagakerjaan',icon:'👷',color:'linear-gradient(135deg,#D4AF37,#B8860B)',desc:'Sengketa PHI, PHK.',isi:'<p>Pendampingan di bidang hubungan industrial.</p><h2>Ruang Lingkup</h2><ul><li>Perjanjian kerja</li><li>PHK & pesangon</li><li>Sengketa PHI</li></ul>'},
+  {id:'pertanahan',nama:'Pertanahan',icon:'🌾',color:'linear-gradient(135deg,#333,#111)',desc:'Sertifikasi, sengketa tanah.',isi:'<p>Penanganan sengketa dan transaksi pertanahan.</p><h2>Ruang Lingkup</h2><ul><li>Sertifikasi tanah</li><li>Sengketa batas</li><li>Jual beli tanah</li></ul>'},
+  {id:'perpajakan',nama:'Perpajakan',icon:'🧾',color:'linear-gradient(135deg,#444,#222)',desc:'Sengketa pajak.',isi:'<p>Pendampingan sengketa perpajakan.</p><h2>Ruang Lingkup</h2><ul><li>Keberatan pajak</li><li>Banding</li><li>Gugatan pengadilan pajak</li></ul>'},
+  {id:'keluarga',nama:'Keluarga & Waris',icon:'👨‍👩‍👧',color:'linear-gradient(135deg,#B8860B,#8B6508)',desc:'Perceraian, hak asuh, waris.',isi:'<p>Pendampingan hukum keluarga.</p><h2>Ruang Lingkup</h2><ul><li>Perceraian</li><li>Hak asuh anak</li><li>Pembagian waris</li></ul>'},
+  {id:'tun',nama:'Tata Usaha Negara',icon:'🏛️',color:'linear-gradient(135deg,#D4AF37,#B8860B)',desc:'Gugatan TUN.',isi:'<p>Sengketa administrasi pemerintahan.</p><h2>Ruang Lingkup</h2><ul><li>Gugatan KTUN</li><li>Sengketa kepegawaian</li></ul>'},
+  {id:'pailit',nama:'Kepailitan & PKPU',icon:'💸',color:'linear-gradient(135deg,#333,#111)',desc:'Permohonan pailit.',isi:'<p>Penanganan utang-piutang.</p><h2>Ruang Lingkup</h2><ul><li>Permohonan pailit</li><li>PKPU</li><li>Restrukturisasi</li></ul>'},
+  {id:'arbitrase',nama:'Arbitrase & Mediasi',icon:'🤝',color:'linear-gradient(135deg,#444,#222)',desc:'Sengketa di luar pengadilan.',isi:'<p>Alternatif penyelesaian sengketa.</p><h2>Ruang Lingkup</h2><ul><li>Arbitrase BANI</li><li>Mediasi</li><li>Konsiliasi</li></ul>'},
+  {id:'legal',nama:'Legal Opinion',icon:'📋',color:'linear-gradient(135deg,#B8860B,#8B6508)',desc:'Pendapat hukum tertulis.',isi:'<p>Pendapat hukum dan audit.</p><h2>Ruang Lingkup</h2><ul><li>Legal opinion</li><li>Legal audit</li><li>Review kontrak</li></ul>'},
+  {id:'retainer',nama:'Retainer',icon:'🔁',color:'linear-gradient(135deg,#D4AF37,#B8860B)',desc:'Jasa hukum berlangganan.',isi:'<p>Paket jasa hukum bulanan.</p><h2>Manfaat</h2><ul><li>Konsultasi tak terbatas</li><li>Review kontrak</li><li>Prioritas penanganan</li></ul>'}
 ];
 const TIM = [
-  {nama:'Adv. Setyo Hantoro, S.H., M.H.',jabatan:'Managing Partner',bidang:'Litigasi & Corporate',init:'SH',color:'#1e40af'},
-  {nama:'Adv. Rina Wijaya, S.H.',jabatan:'Senior Advocate',bidang:'Pidana & Ketenagakerjaan',init:'RW',color:'#db2777'},
-  {nama:'Adv. Budi Prasetyo, S.H.',jabatan:'Senior Advocate',bidang:'Bisnis & Kepailitan',init:'BP',color:'#0891b2'},
-  {nama:'Adv. Dewi Lestari, S.H.',jabatan:'Associate',bidang:'Keluarga & Waris',init:'DL',color:'#ea580c'},
-  {nama:'Adv. Andi Saputra, S.H.',jabatan:'Associate',bidang:'Perdata & Pertanahan',init:'AS',color:'#16a34a'},
-  {nama:'Dra. Maya Kurnia, S.H.',jabatan:'Konsultan Hukum',bidang:'Perpajakan',init:'MK',color:'#9333ea'},
-  {nama:'Rudi Hartono, S.H.',jabatan:'Paralegal',bidang:'Dokumentasi',init:'RH',color:'#475569'},
-  {nama:'Sari Indah, S.H.',jabatan:'Paralegal',bidang:'Administrasi',init:'SI',color:'#ca8a04'}
+  {nama:'Adv. Setyo Hantoro, S.H., M.H.',jabatan:'Managing Partner',bidang:'Litigasi & Corporate',init:'SH',color:'#D4AF37'},
+  {nama:'Adv. Rina Wijaya, S.H.',jabatan:'Senior Advocate',bidang:'Pidana & Ketenagakerjaan',init:'RW',color:'#B8860B'},
+  {nama:'Adv. Budi Prasetyo, S.H.',jabatan:'Senior Advocate',bidang:'Bisnis & Kepailitan',init:'BP',color:'#D4AF37'},
+  {nama:'Adv. Dewi Lestari, S.H.',jabatan:'Associate',bidang:'Keluarga & Waris',init:'DL',color:'#B8860B'},
+  {nama:'Adv. Andi Saputra, S.H.',jabatan:'Associate',bidang:'Perdata & Pertanahan',init:'AS',color:'#D4AF37'},
+  {nama:'Dra. Maya Kurnia, S.H.',jabatan:'Konsultan Hukum',bidang:'Perpajakan',init:'MK',color:'#B8860B'},
+  {nama:'Rudi Hartono, S.H.',jabatan:'Paralegal',bidang:'Dokumentasi',init:'RH',color:'#D4AF37'},
+  {nama:'Sari Indah, S.H.',jabatan:'Paralegal',bidang:'Administrasi',init:'SI',color:'#B8860B'}
 ];
 const BUKU = [
-  {id:'b1',judul:'Hukum Perdata Indonesia',kategori:'Buku Hukum',harga:150000,color:'linear-gradient(135deg,#dc2626,#991b1b)',penulis:'Tim KHB'},
-  {id:'b2',judul:'Panduan Legal Drafting',kategori:'Hukum Bisnis',harga:175000,color:'linear-gradient(135deg,#1e40af,#1e3a8a)',penulis:'Adv. Budi'},
-  {id:'b3',judul:'Hukum Pidana Praktis',kategori:'Pidana',harga:160000,color:'linear-gradient(135deg,#0f172a,#334155)',penulis:'Adv. Rina'},
-  {id:'b4',judul:'Hukum Perdata Praktik',kategori:'Perdata',harga:145000,color:'linear-gradient(135deg,#7c3aed,#6d28d9)',penulis:'Adv. Andi'},
-  {id:'b5',judul:'Advokasi & Paralegal',kategori:'Advokasi',harga:130000,color:'linear-gradient(135deg,#ea580c,#c2410c)',penulis:'Tim KHB'},
-  {id:'b6',judul:'Hukum untuk Masyarakat',kategori:'Praktis',harga:95000,color:'linear-gradient(135deg,#16a34a,#15803d)',penulis:'Tim KHB'},
-  {id:'b7',judul:'Kumpulan Putusan',kategori:'Internal',harga:200000,color:'linear-gradient(135deg,#0891b2,#0e7490)',penulis:'Editorial'},
-  {id:'b8',judul:'Hukum Bisnis 2025',kategori:'Terbaru',harga:185000,color:'linear-gradient(135deg,#b45309,#92400e)',penulis:'Adv. Setyo'}
+  {id:'b1',judul:'Hukum Perdata Indonesia',kategori:'Buku Hukum',harga:150000,color:'linear-gradient(135deg,#333,#111)',penulis:'Tim Advokat'},
+  {id:'b2',judul:'Panduan Legal Drafting',kategori:'Hukum Bisnis',harga:175000,color:'linear-gradient(135deg,#B8860B,#8B6508)',penulis:'Adv. Budi'},
+  {id:'b3',judul:'Hukum Pidana Praktis',kategori:'Pidana',harga:160000,color:'linear-gradient(135deg,#444,#222)',penulis:'Adv. Rina'},
+  {id:'b4',judul:'Hukum Perdata Praktik',kategori:'Perdata',harga:145000,color:'linear-gradient(135deg,#D4AF37,#B8860B)',penulis:'Adv. Andi'},
+  {id:'b5',judul:'Advokasi & Paralegal',kategori:'Advokasi',harga:130000,color:'linear-gradient(135deg,#333,#111)',penulis:'Tim Advokat'},
+  {id:'b6',judul:'Hukum untuk Masyarakat',kategori:'Praktis',harga:95000,color:'linear-gradient(135deg,#444,#222)',penulis:'Tim Advokat'},
+  {id:'b7',judul:'Kumpulan Putusan',kategori:'Internal',harga:200000,color:'linear-gradient(135deg,#B8860B,#8B6508)',penulis:'Editorial'},
+  {id:'b8',judul:'Hukum Bisnis 2025',kategori:'Terbaru',harga:185000,color:'linear-gradient(135deg,#D4AF37,#B8860B)',penulis:'Adv. Setyo'}
 ];
 const DIKLAT = [
-  {id:'d1',nama:'Pendidikan Advokat',icon:'🎓',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',desc:'Program PKPA',isi:'Program PKPA 200+ jam untuk calon advokat.'},
-  {id:'d2',nama:'Pendidikan Paralegal',icon:'👨‍💼',color:'linear-gradient(135deg,#0891b2,#0e7490)',desc:'Sertifikasi paralegal',isi:'Pelatihan paralegal dengan sertifikasi.'},
-  {id:'d3',nama:'Diklat Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#16a34a,#15803d)',desc:'Kontrak & merger',isi:'Pelatihan hukum bisnis untuk praktisi.'},
-  {id:'d4',nama:'Diklat Legal Drafting',icon:'✍️',color:'linear-gradient(135deg,#7c3aed,#6d28d9)',desc:'Teknik drafting',isi:'Penyusunan kontrak profesional.'},
-  {id:'d5',nama:'Diklat Mediator',icon:'🤝',color:'linear-gradient(135deg,#ea580c,#c2410c)',desc:'Sertifikasi mediator',isi:'Pelatihan mediator bersertifikat MA.'},
-  {id:'d6',nama:'Diklat Arbitrase',icon:'⚖️',color:'linear-gradient(135deg,#db2777,#be185d)',desc:'Arbitrase BANI',isi:'Pelatihan arbitrase domestik & internasional.'},
-  {id:'d7',nama:'Seminar & Webinar',icon:'📡',color:'linear-gradient(135deg,#ca8a04,#a16207)',desc:'Seminar hukum',isi:'Seminar topik terkini.'},
-  {id:'d8',nama:'Workshop Hukum',icon:'🛠️',color:'linear-gradient(135deg,#475569,#334155)',desc:'Workshop intensif',isi:'Workshop praktik hukum.'}
+  {id:'d1',nama:'Pendidikan Advokat',icon:'🎓',color:'linear-gradient(135deg,#333,#111)',desc:'Program PKPA',isi:'Program PKPA 200+ jam untuk calon advokat.'},
+  {id:'d2',nama:'Pendidikan Paralegal',icon:'👨‍💼',color:'linear-gradient(135deg,#B8860B,#8B6508)',desc:'Sertifikasi paralegal',isi:'Pelatihan paralegal dengan sertifikasi.'},
+  {id:'d3',nama:'Diklat Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#444,#222)',desc:'Kontrak & merger',isi:'Pelatihan hukum bisnis untuk praktisi.'},
+  {id:'d4',nama:'Diklat Legal Drafting',icon:'✍️',color:'linear-gradient(135deg,#D4AF37,#B8860B)',desc:'Teknik drafting',isi:'Penyusunan kontrak profesional.'},
+  {id:'d5',nama:'Diklat Mediator',icon:'🤝',color:'linear-gradient(135deg,#333,#111)',desc:'Sertifikasi mediator',isi:'Pelatihan mediator bersertifikat MA.'},
+  {id:'d6',nama:'Diklat Arbitrase',icon:'⚖️',color:'linear-gradient(135deg,#B8860B,#8B6508)',desc:'Arbitrase BANI',isi:'Pelatihan arbitrase domestik & internasional.'},
+  {id:'d7',nama:'Seminar & Webinar',icon:'📡',color:'linear-gradient(135deg,#444,#222)',desc:'Seminar hukum',isi:'Seminar topik terkini.'},
+  {id:'d8',nama:'Workshop Hukum',icon:'🛠️',color:'linear-gradient(135deg,#D4AF37,#B8860B)',desc:'Workshop intensif',isi:'Workshop praktik hukum.'}
 ];
 const ARTIKEL = [
-  {id:'a1',judul:'Analisis UU PDP dan Implikasinya',kategori:'Artikel Hukum',tanggal:'5 Jan 2025',icon:'📰',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',isi:'<p>UU PDP membawa perubahan signifikan bagi dunia usaha.</p><h2>Poin Penting</h2><ul><li>Persetujuan eksplisit</li><li>Hak subjek data</li><li>Notifikasi kebocoran 3x24 jam</li><li>Sanksi hingga 2% pendapatan</li></ul>'},
-  {id:'a2',judul:'Reformasi Hukum Pidana Indonesia',kategori:'Opini Hukum',tanggal:'28 Des 2024',icon:'✍️',color:'linear-gradient(135deg,#db2777,#be185d)',isi:'<p>KUHP baru membawa paradigma restoratif.</p><h2>Perubahan Kunci</h2><ul><li>Rekodifikasi</li><li>Hukum pidana adat</li><li>Pidana kerja sosial</li></ul>'},
-  {id:'a3',judul:'Arbitrase dalam Sengketa Konstruksi',kategori:'Jurnal',tanggal:'15 Des 2024',icon:'📖',color:'linear-gradient(135deg,#0d9488,#0f766e)',isi:'<p>Arbitrase jadi pilihan utama sengketa konstruksi.</p><h2>Keunggulan</h2><ul><li>Arbiter ahli</li><li>Cepat</li><li>Final</li></ul>'},
-  {id:'a4',judul:'Diklat Paralegal Batch 4 Sukses',kategori:'Berita',tanggal:'10 Des 2024',icon:'🎉',color:'linear-gradient(135deg,#ea580c,#c2410c)',isi:'<p>25 peserta mengikuti Diklat Paralegal Batch 4.</p><h2>Materi</h2><ul><li>Riset hukum</li><li>Drafting</li><li>Etika</li></ul>'},
-  {id:'a5',judul:'Perlindungan Konsumen Digital',kategori:'Kajian',tanggal:'2 Des 2024',icon:'🔍',color:'linear-gradient(135deg,#9333ea,#7e22ce)',isi:'<p>Tantangan baru perlindungan konsumen digital.</p><h2>Isu</h2><ul><li>Transaksi elektronik</li><li>Penipuan online</li><li>Tanggung jawab platform</li></ul>'}
+  {id:'a1',judul:'Analisis UU PDP dan Implikasinya',kategori:'Artikel Hukum',tanggal:'5 Jan 2025',icon:'📰',color:'linear-gradient(135deg,#333,#111)',isi:'<p>UU PDP membawa perubahan signifikan bagi dunia usaha.</p><h2>Poin Penting</h2><ul><li>Persetujuan eksplisit</li><li>Hak subjek data</li><li>Notifikasi kebocoran 3x24 jam</li><li>Sanksi hingga 2% pendapatan</li></ul>'},
+  {id:'a2',judul:'Reformasi Hukum Pidana Indonesia',kategori:'Opini Hukum',tanggal:'28 Des 2024',icon:'✍️',color:'linear-gradient(135deg,#B8860B,#8B6508)',isi:'<p>KUHP baru membawa paradigma restoratif.</p><h2>Perubahan Kunci</h2><ul><li>Rekodifikasi</li><li>Hukum pidana adat</li><li>Pidana kerja sosial</li></ul>'},
+  {id:'a3',judul:'Arbitrase dalam Sengketa Konstruksi',kategori:'Jurnal',tanggal:'15 Des 2024',icon:'📖',color:'linear-gradient(135deg,#444,#222)',isi:'<p>Arbitrase jadi pilihan utama sengketa konstruksi.</p><h2>Keunggulan</h2><ul><li>Arbiter ahli</li><li>Cepat</li><li>Final</li></ul>'},
+  {id:'a4',judul:'Diklat Paralegal Batch 4 Sukses',kategori:'Berita',tanggal:'10 Des 2024',icon:'🎉',color:'linear-gradient(135deg,#D4AF37,#B8860B)',isi:'<p>25 peserta mengikuti Diklat Paralegal Batch 4.</p><h2>Materi</h2><ul><li>Riset hukum</li><li>Drafting</li><li>Etika</li></ul>'},
+  {id:'a5',judul:'Perlindungan Konsumen Digital',kategori:'Kajian',tanggal:'2 Des 2024',icon:'🔍',color:'linear-gradient(135deg,#333,#111)',isi:'<p>Tantangan baru perlindungan konsumen digital.</p><h2>Isu</h2><ul><li>Transaksi elektronik</li><li>Penipuan online</li><li>Tanggung jawab platform</li></ul>'}
 ];
 const KARIER = [
   {id:'k1',nama:'Advokat',icon:'👨‍⚖️',kualifikasi:'S.H., izin advokat aktif, min. 3 tahun pengalaman.'},
@@ -309,8 +333,8 @@ function saveKonsultasi(d){ localStorage.setItem('khb_konsultasi', JSON.stringif
 
 if(!localStorage.getItem('khb_perkara')){
   savePerkara([
-    {id:1,nomor:'KHB/PERDATA/2025/0001',konsumen:'Budi Santoso',jenis:'PERDATA',status:'aktif',deskripsi:'Sengketa perjanjian',created:'2025-01-05'},
-    {id:2,nomor:'KHB/PIDANA/2025/0002',konsumen:'Siti Rahayu',jenis:'PIDANA',status:'proses',deskripsi:'Pendampingan kepolisian',created:'2025-01-08'}
+    {id:1,nomor:'AKH/PERDATA/2025/0001',konsumen:'Budi Santoso',jenis:'PERDATA',status:'aktif',deskripsi:'Sengketa perjanjian',created:'2025-01-05'},
+    {id:2,nomor:'AKH/PIDANA/2025/0002',konsumen:'Siti Rahayu',jenis:'PIDANA',status:'proses',deskripsi:'Pendampingan kepolisian',created:'2025-01-08'}
   ]);
 }
 if(!localStorage.getItem('khb_konsultasi')){
@@ -319,19 +343,17 @@ if(!localStorage.getItem('khb_konsultasi')){
     {id:2,konsumen:'Siti Rahayu',topik:'Perceraian',deskripsi:'Hak asuh anak',status:'dijadwalkan',created:'2025-01-09'}
   ]);
 }
-
-function updateAuthNav(){
+  function updateAuthNav(){
   const u = getUser();
   const el = document.getElementById('authNav');
   if(u){
     el.innerHTML = `<a onclick="go('/${u.role==='admin'?'admin':'konsumen'}')" class="btn-nav">Dashboard</a>`;
-    // tambah logout di nav
     const nav = document.getElementById('navLinks');
     let logoutLi = document.getElementById('logoutLi');
     if(!logoutLi){
       logoutLi = document.createElement('li');
       logoutLi.id = 'logoutLi';
-      logoutLi.innerHTML = '<a onclick="doLogout()" style="color:#fca5a5">Logout</a>';
+      logoutLi.innerHTML = '<a onclick="doLogout()" style="color:#ef4444">Logout</a>';
       nav.appendChild(logoutLi);
     }
   } else {
@@ -349,8 +371,9 @@ function doLogout(){
 // ============ RENDER HELPERS ============
 const app = document.getElementById('app');
 
+// Gambar gedung diganti hitam emas
 function heroSVG(){
-  return `<svg class="hero-img" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24" stop-opacity=".9"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".7"/></linearGradient></defs><rect x="80" y="150" width="240" height="60" fill="#1e3a8a" stroke="#fbbf24" stroke-width="2" rx="4"/><rect x="90" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="130" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="170" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="210" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="250" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="290" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><path d="M70 80 L200 30 L330 80 Z" fill="url(#g1)" stroke="#fbbf24" stroke-width="2"/></svg>`;
+  return `<svg class="hero-img" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D4AF37" stop-opacity=".9"/><stop offset="1" stop-color="#B8860B" stop-opacity=".7"/></linearGradient></defs><rect x="80" y="150" width="240" height="60" fill="#111" stroke="#D4AF37" stroke-width="2" rx="4"/><rect x="90" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><rect x="130" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><rect x="170" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><rect x="210" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><rect x="250" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><rect x="290" y="80" width="30" height="70" fill="#D4AF37" opacity=".85"/><path d="M70 80 L200 30 L330 80 Z" fill="url(#g1)" stroke="#D4AF37" stroke-width="2"/></svg>`;
 }
 
 // ============ PAGES ============
@@ -358,7 +381,7 @@ function renderHome(){
   return `
     <section class="hero">${heroSVG()}<h1>Advocates, Legal Consultants & Education</h1><p>Kantor hukum terpadu: layanan hukum profesional, pendidikan advokat, penerbitan buku hukum, dan konsultasi terpercaya.</p><div class="hero-btns"><a onclick="go('/konsultasi')" class="btn btn-primary">Konsultasi Sekarang</a><a onclick="go('/layanan')" class="btn btn-outline">Lihat Layanan</a></div></section>
     <section class="section"><div class="container"><h2 class="section-title">Sambutan Managing Partner</h2><p class="section-sub">Pesan dari pimpinan kantor</p>
-      <div class="partner-card"><div class="partner-avatar">SH</div><div><p><em>"Selamat datang di Kantor Hukum Bersama. Kami berkomitmen memberikan pelayanan hukum profesional dan berintegritas."</em></p><p style="margin-top:.7rem"><strong>— Adv. Setyo Hantoro, S.H., M.H.</strong><br><small style="color:#6b7280">Managing Partner</small></p></div></div>
+      <div class="partner-card"><div class="partner-avatar">SH</div><div><p><em>"Selamat datang di Advokat Kantor Hukum. Kami berkomitmen memberikan pelayanan hukum profesional dan berintegritas."</em></p><p style="margin-top:.7rem"><strong>— Adv. Setyo Hantoro, S.H., M.H.</strong><br><small style="color:#6b7280">Managing Partner</small></p></div></div>
     </div></section>
     <section class="section"><div class="container"><h2 class="section-title">Layanan Unggulan</h2><p class="section-sub">Klik untuk detail</p>
       <div class="features">${LAYANAN.slice(0,4).map(l=>`<div class="card" onclick="go('/layanan/${l.id}')"><div class="icon">${l.icon}</div><h3>${l.nama}</h3><p>${l.desc}</p></div>`).join('')}</div>
@@ -383,11 +406,11 @@ function renderProfil(){
 
 function renderProfilSub(sub){
   const d = {
-    tentang:{h:'Tentang Kami',c:'<p>Kantor Hukum Bersama adalah firma hukum terpadu di bidang jasa hukum, pendidikan, dan penerbitan.</p><h2>Nilai</h2><ul><li><strong>Integritas</strong></li><li><strong>Profesionalisme</strong></li><li><strong>Keadilan</strong></li></ul>'},
+    tentang:{h:'Tentang Kami',c:'<p>Advokat Kantor Hukum adalah firma hukum terpadu di bidang jasa hukum, pendidikan, dan penerbitan.</p><h2>Nilai</h2><ul><li><strong>Integritas</strong></li><li><strong>Profesionalisme</strong></li><li><strong>Keadilan</strong></li></ul>'},
     sejarah:{h:'Sejarah Kantor',c:'<div class="timeline"><div class="timeline-item"><strong>2010</strong><p>Pendirian kantor.</p></div><div class="timeline-item"><strong>2015</strong><p>Ekspansi ke hukum bisnis.</p></div><div class="timeline-item"><strong>2018</strong><p>Peluncuran diklat.</p></div><div class="timeline-item"><strong>2020</strong><p>Terbit buku pertama.</p></div><div class="timeline-item"><strong>2025</strong><p>Transformasi digital.</p></div></div>'},
     visi:{h:'Visi & Misi',c:'<h2>Visi</h2><p>Menjadi kantor hukum terdepan dengan integritas dan profesionalisme.</p><h2>Misi</h2><ul><li>Layanan hukum berkualitas</li><li>Pendidikan hukum aplikatif</li><li>Penerbitan buku</li><li>Etika profesi</li></ul>'},
     struktur:{h:'Struktur Organisasi',c:'<div class="org-chart"><div class="org-node primary">Managing Partner</div><div class="org-row"><div class="org-node">Senior Advocate</div><div class="org-node">Konsultan</div></div><div class="org-row"><div class="org-node">Associate</div><div class="org-node">Paralegal</div></div></div>'},
-    partner:{h:'Managing Partner',c:'<div class="partner-card" style="margin-top:0"><div class="partner-avatar">SH</div><div><h3 style="color:#0f172a">Adv. Setyo Hantoro, S.H., M.H.</h3><p style="color:#1e40af;font-weight:600">Managing Partner</p><p style="margin-top:.5rem">Berpengalaman 15+ tahun di litigasi dan hukum bisnis.</p></div></div>'},
+    partner:{h:'Managing Partner',c:'<div class="partner-card" style="margin-top:0"><div class="partner-avatar">SH</div><div><h3 style="color:#0f172a">Adv. Setyo Hantoro, S.H., M.H.</h3><p style="color:#B8860B;font-weight:600">Managing Partner</p><p style="margin-top:.5rem">Berpengalaman 15+ tahun di litigasi dan hukum bisnis.</p></div></div>'},
     etika:{h:'Prinsip & Etika',c:'<ul><li><strong>Integritas</strong> — jujur dalam setiap tindakan</li><li><strong>Kerahasiaan</strong> — menjaga rahasia klien</li><li><strong>Keadilan</strong> — tanpa pandang bulu</li><li><strong>Independensi</strong> — bebas dari pengaruh</li></ul>'}
   }[sub];
   if(!d) return renderProfil();
@@ -395,7 +418,7 @@ function renderProfilSub(sub){
 }
 
 function renderLayanan(){
-  return `<section class="page-header"><h1>Layanan Hukum</h1><p>12 bidang layanan profesional</p></section><section class="section"><div class="container"><div class="layanan-grid">${LAYANAN.map(l=>`<div class="layanan-card" onclick="go('/layanan/${l.id}')"><div class="layanan-img" style="background:${l.color}">${l.icon}</div><div class="layanan-body"><h3>${l.nama}</h3><p>${l.desc}</p><small style="color:#1e40af;font-weight:600">Detail →</small></div></div>`).join('')}</div></div></section>`;
+  return `<section class="page-header"><h1>Layanan Hukum</h1><p>12 bidang layanan profesional</p></section><section class="section"><div class="container"><div class="layanan-grid">${LAYANAN.map(l=>`<div class="layanan-card" onclick="go('/layanan/${l.id}')"><div class="layanan-img" style="background:${l.color}">${l.icon}</div><div class="layanan-body"><h3>${l.nama}</h3><p>${l.desc}</p><small style="color:#B8860B;font-weight:600">Detail →</small></div></div>`).join('')}</div></div></section>`;
 }
 
 function renderLayananDetail(id){
@@ -407,6 +430,7 @@ function renderLayananDetail(id){
 function renderTim(){
   return `<section class="page-header"><h1>Tim Advokat</h1><p>Profesional berpengalaman</p></section><section class="section"><div class="container"><div class="tim-grid">${TIM.map((t,i)=>`<div class="tim-card" onclick="go('/tim/${i}')"><div class="tim-avatar" style="background:${t.color}">${t.init}</div><h3>${t.nama}</h3><p class="tim-jabatan">${t.jabatan}</p><p class="tim-bidang">${t.bidang}</p></div>`).join('')}</div></div></section>`;
 }
+
 function renderTimDetail(idx){
   const t = TIM[idx];
   if(!t) return renderTim();
@@ -425,7 +449,7 @@ function renderBuku(){
 function renderBukuDetail(id){
   const b = BUKU.find(x=>x.id===id);
   if(!b) return renderBuku();
-  return `<section class="page-header"><h1>${b.judul}</h1><p>${b.kategori}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/buku')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;margin-bottom:1.5rem"><div class="book-cover" style="background:${b.color};max-width:200px;height:260px;margin:0 auto"><div class="book-cover-title" style="font-size:1rem">${b.judul}</div><div class="book-cover-author" style="font-size:.75rem">${b.penulis}</div></div></div><h1>${b.judul}</h1><p class="meta">${b.kategori} · ${b.penulis}</p><p style="font-size:1.5rem;font-weight:700;color:#1e40af">Rp ${b.harga.toLocaleString('id-ID')}</p><h2>Deskripsi</h2><p>Buku komprehensif tentang ${b.kategori.toLowerCase()} dengan pendekatan praktis.</p><p style="margin-top:1.5rem"><a onclick="go('/kontak')" class="btn btn-primary">Pesan Buku</a></p></div></div></section>`;
+  return `<section class="page-header"><h1>${b.judul}</h1><p>${b.kategori}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/buku')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;margin-bottom:1.5rem"><div class="book-cover" style="background:${b.color};max-width:200px;height:260px;margin:0 auto"><div class="book-cover-title" style="font-size:1rem">${b.judul}</div><div class="book-cover-author" style="font-size:.75rem">${b.penulis}</div></div></div><h1>${b.judul}</h1><p class="meta">${b.kategori} · ${b.penulis}</p><p style="font-size:1.5rem;font-weight:700;color:#B8860B">Rp ${b.harga.toLocaleString('id-ID')}</p><h2>Deskripsi</h2><p>Buku komprehensif tentang ${b.kategori.toLowerCase()} dengan pendekatan praktis.</p><p style="margin-top:1.5rem"><a onclick="go('/kontak')" class="btn btn-primary">Pesan Buku</a></p></div></div></section>`;
 }
 
 function renderDiklat(){
@@ -440,12 +464,11 @@ function renderDiklatDetail(id){
 
 function renderKarier(){
   return `<section class="page-header"><h1>Karier</h1><p>Bergabung bersama kami</p></section><section class="section"><div class="container"><div class="features">${KARIER.map(k=>`<div class="card" onclick="go('/karier/${k.id}')"><div class="icon">${k.icon}</div><h3>${k.nama}</h3><p style="font-size:.78rem">${k.kualifikasi.substring(0,60)}...</p></div>`).join('')}</div></div></section>`;
-}
-
-function renderKarierDetail(id){
+      }
+  function renderKarierDetail(id){
   const k = KARIER.find(x=>x.id===id);
   if(!k) return renderKarier();
-  return `<section class="page-header"><h1>${k.nama}</h1><p>Lowongan</p></section><div class="back-bar"><button class="back-btn" onclick="go('/karier')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;font-size:4rem;margin-bottom:1rem">${k.icon}</div><h1>${k.nama}</h1><h2>Kualifikasi</h2><p>${k.kualifikasi}</p><h2>Cara Melamar</h2><p>Kirim CV ke <strong>hrd@khb.co.id</strong>.</p></div></div></section>`;
+  return `<section class="page-header"><h1>${k.nama}</h1><p>Lowongan</p></section><div class="back-bar"><button class="back-btn" onclick="go('/karier')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;font-size:4rem;margin-bottom:1rem">${k.icon}</div><h1>${k.nama}</h1><h2>Kualifikasi</h2><p>${k.kualifikasi}</p><h2>Cara Melamar</h2><p>Kirim CV ke <strong>hrd@advokatkantorhukum.co.id</strong>.</p></div></div></section>`;
 }
 
 function renderPublikasi(){
@@ -467,18 +490,19 @@ function renderKonsultasi(){
 }
 
 function renderKontak(){
-  return `<section class="page-header"><h1>Kontak</h1><p>Hubungi kami</p></section><section class="section"><div class="container"><div class="contact-grid"><div><h2 class="section-title">Kontak</h2><div class="contact-list"><p>📍 Jl. Jenderal Sudirman Kav. 52-53, Jakarta</p><p>💬 <a href="https://wa.me/6281234567890">+62 812-3456-7890</a></p><p>📧 info@khb.co.id</p><p>🕐 Senin-Jumat 08.00-17.00</p></div></div><div><h2 class="section-title">Peta</h2><iframe src="https://www.google.com/maps?q=jakarta&output=embed" width="100%" height="280" style="border:0;border-radius:10px;margin-top:1rem" loading="lazy"></iframe></div></div></div></section>`;
+  return `<section class="page-header"><h1>Kontak</h1><p>Hubungi kami</p></section><section class="section"><div class="container"><div class="contact-grid"><div><h2 class="section-title">Kontak</h2><div class="contact-list"><p>📍 Jl. Jenderal Sudirman Kav. 52-53, Jakarta</p><p>💬 <a href="https://wa.me/6281234567890">+62 812-3456-7890</a></p><p>📧 info@advokatkantorhukum.co.id</p><p>🕐 Senin-Jumat 08.00-17.00</p></div></div><div><h2 class="section-title">Peta</h2><iframe src="https://www.google.com/maps?q=jakarta&output=embed" width="100%" height="280" style="border:0;border-radius:10px;margin-top:1rem" loading="lazy"></iframe></div></div></div></section>`;
 }
 
 // ============ LOGIN / REGISTER ============
 function renderLogin(){
-  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#0f172a;margin-bottom:.3rem">Login</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Masuk ke akun Anda</p><div id="loginAlert"></div><form onsubmit="doLogin(event)" class="form"><label>Email<input type="email" id="loginEmail" required placeholder="nama@email.com"></label><label>Password<input type="password" id="loginPass" required placeholder="••••••••"></label><button class="btn btn-primary" type="submit">Masuk</button><p style="text-align:center;font-size:.85rem">Belum punya akun? <a onclick="go('/register')">Daftar</a></p></form><div style="max-width:480px;margin:1rem auto;padding:1rem;background:#fef3c7;border-radius:8px;font-size:.8rem;color:#92400e"><strong>🔐 Demo Login:</strong><br>Admin: <code>admin@khb.local</code> / <code>admin123</code><br>Konsumen: daftar dulu lewat halaman Register</div></div></section>`;
+  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#111;margin-bottom:.3rem">Login</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Masuk ke akun Anda</p><div id="loginAlert"></div><form onsubmit="doLogin(event)" class="form"><label>Email<input type="email" id="loginEmail" required placeholder="nama@email.com"></label><label>Password<input type="password" id="loginPass" required placeholder="••••••••"></label><button class="btn btn-primary" type="submit">Masuk</button><p style="text-align:center;font-size:.85rem">Belum punya akun? <a onclick="go('/register')">Daftar</a></p></form><div style="max-width:480px;margin:1rem auto;padding:1rem;background:#FEF3C7;border-radius:8px;font-size:.8rem;color:#92400E"><strong>🔐 Demo Login:</strong><br>Admin: <code>admin@khb.local</code> / <code>admin123</code><br>Konsumen: daftar dulu lewat halaman Register</div></div></section>`;
 }
 
 function renderRegister(){
-  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#0f172a;margin-bottom:.3rem">Daftar Akun</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Registrasi konsumen baru</p><div id="regAlert"></div><form onsubmit="doRegister(event)" class="form"><label>Nama Lengkap<input id="regNama" required minlength="3"></label><label>Email<input type="email" id="regEmail" required></label><label>Telepon<input type="tel" id="regTelp"></label><label>Password (min 6)<input type="password" id="regPass" required minlength="6"></label><label>Konfirmasi<input type="password" id="regPass2" required minlength="6"></label><button class="btn btn-primary" type="submit">Daftar</button><p style="text-align:center;font-size:.85rem">Sudah punya akun? <a onclick="go('/login')">Login</a></p></form></div></section>`;
+  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#111;margin-bottom:.3rem">Daftar Akun</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Registrasi konsumen baru</p><div id="regAlert"></div><form onsubmit="doRegister(event)" class="form"><label>Nama Lengkap<input id="regNama" required minlength="3"></label><label>Email<input type="email" id="regEmail" required></label><label>Telepon<input type="tel" id="regTelp"></label><label>Password (min 6)<input type="password" id="regPass" required minlength="6"></label><label>Konfirmasi<input type="password" id="regPass2" required minlength="6"></label><button class="btn btn-primary" type="submit">Daftar</button><p style="text-align:center;font-size:.85rem">Sudah punya akun? <a onclick="go('/login')">Login</a></p></form></div></section>`;
 }
-  function doLogin(e){
+
+function doLogin(e){
   e.preventDefault();
   const email = document.getElementById('loginEmail').value.trim().toLowerCase();
   const pass = document.getElementById('loginPass').value;
@@ -498,8 +522,7 @@ function renderRegister(){
   box.innerHTML = '<div class="alert alert-error">Email atau password salah.</div>';
   return false;
 }
-
-function doRegister(e){
+  function doRegister(e){
   e.preventDefault();
   const nama = document.getElementById('regNama').value.trim();
   const email = document.getElementById('regEmail').value.trim().toLowerCase();
@@ -553,7 +576,8 @@ function renderAdmin(){
       ${users.length===0 ? '<div class="alert alert-info">Belum ada konsumen. Minta klien daftar di halaman Register.</div>' : `<table class="table"><thead><tr><th>#</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Terdaftar</th></tr></thead><tbody>${users.map((x,i)=>`<tr><td>${i+1}</td><td>${x.nama}</td><td>${x.email}</td><td>${x.telepon||'-'}</td><td>${x.created||'-'}</td></tr>`).join('')}</tbody></table>`}
     </div>`;
 }
-  function renderKonsumen(){
+
+function renderKonsumen(){
   const u = getUser();
   if(!u || u.role !== 'konsumen') return renderForbidden();
   const myKonsul = getKonsultasi().filter(k => k.konsumen === u.nama);
@@ -582,13 +606,12 @@ function renderAdmin(){
 function renderForbidden(){
   return `<section class="section"><div class="container" style="text-align:center;padding:3rem 1rem"><h1 style="color:#dc2626">403 Forbidden</h1><p style="margin:1rem 0">Anda belum login atau tidak memiliki akses.</p><a onclick="go('/login')" class="btn btn-primary">Login</a></div></section>`;
 }
-
-function tambahPerkara(e){
+  function tambahPerkara(e){
   e.preventDefault();
   const list = getPerkara();
   const id = (list[list.length-1]?.id||0)+1;
   const jenis = document.getElementById('pJenis').value;
-  const nomor = `KHB/${jenis}/2025/${String(id).padStart(4,'0')}`;
+  const nomor = `AKH/${jenis}/2025/${String(id).padStart(4,'0')}`;
   list.push({id, nomor, konsumen:document.getElementById('pKonsumen').value, jenis, deskripsi:document.getElementById('pDesk').value, status:'diajukan', created:new Date().toISOString().slice(0,10)});
   savePerkara(list);
   alert('✅ Perkara ditambahkan: ' + nomor);

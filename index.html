@@ -6,18 +6,13 @@
   <title>SAKRI & Associates — Firma Hukum Bisnis</title>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
-  <!-- CSS LOADER -->
+  <link rel="stylesheet" href="menu.css">
+  
   <style>
     #loader {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background-color: #0a0a0a;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.8s ease, visibility 0.8s ease;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-color: #0a0a0a; display: flex; justify-content: center; align-items: center;
+      z-index: 9999; transition: opacity 0.8s ease, visibility 0.8s ease;
     }
     #loader.hidden { opacity: 0; visibility: hidden; }
     .spinner-logo { width: 120px; animation: pulseSpin 1.5s infinite ease-in-out; }
@@ -30,12 +25,11 @@
 </head>
 <body style="background: #0a0a0a; color: #ffffff;">
 
-  <!-- LOADER -->
   <div id="loader">
     <img src="logo.png" alt="Loading..." class="spinner-logo">
   </div>
 
-  <!-- ===== TOPBAR ===== -->
+  <!-- TOPBAR -->
   <div class="khb-topbar">
     <span>⚖️ SAKRI &amp; Associates — Advocates, Legal Consultants &amp; Education</span>
     <span>
@@ -45,7 +39,7 @@
     </span>
   </div>
 
-  <!-- ===== HEADER BARU (KHB) ===== -->
+  <!-- HEADER -->
   <header class="khb-header">
     <div class="khb-header-inner">
       <a class="khb-brand" href="index.html">
@@ -63,12 +57,11 @@
     </div>
   </header>
 
-  <!-- ===== NAV MENU 1–12 ===== -->
+  <!-- NAV (ANGKA SUDAH DIHILANGKAN) -->
   <nav class="khb-nav">
     <div class="khb-nav-inner" id="khbNavInner">
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="index.html">1. BERANDA <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="index.html">BERANDA <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="index.html#hero">Halaman Utama</a>
           <a href="index.html#sambutan">Sambutan Managing Partner</a>
@@ -76,9 +69,8 @@
           <a href="index.html#keunggulan">Informasi Terbaru</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="profil.html">2. PROFIL KANTOR <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="profil.html">PROFIL KANTOR <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="profil.html#tentang">Tentang Kami</a>
           <a href="profil.html#sejarah">Sejarah Kantor</a>
@@ -88,9 +80,8 @@
           <a href="profil.html#etika">Prinsip dan Etika Profesi</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="layanan.html">3. LAYANAN HUKUM <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="layanan.html">LAYANAN HUKUM <span class="khb-caret">▼</span></a>
         <div class="khb-mega">
           <h4>Bidang Layanan</h4>
           <a href="layanan.html#pidana">Hukum Pidana</a>
@@ -107,9 +98,8 @@
           <a href="layanan.html#retainer">Retainer</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="tim.html">4. TIM ADVOKAT <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="tim.html">TIM ADVOKAT <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="tim.html#managing-partner">Managing Partner</a>
           <a href="tim.html#senior">Senior Advocate</a>
@@ -119,9 +109,8 @@
           <a href="tim.html#mitra">Mitra Advokat</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="keahlian.html">5. BIDANG KEAHLIAN <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="keahlian.html">BIDANG KEAHLIAN <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="keahlian.html#litigasi">Litigasi</a>
           <a href="keahlian.html#non-litigasi">Non-Litigasi</a>
@@ -130,9 +119,8 @@
           <a href="keahlian.html#negosiasi">Negosiasi dan Mediasi</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="katalog.html">6. KATALOG BUKU <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="katalog.html">KATALOG BUKU <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="katalog.html#buku-hukum">Buku Hukum</a>
           <a href="katalog.html#buku-bisnis">Buku Hukum Bisnis</a>
@@ -145,9 +133,8 @@
           <a href="katalog.html#pemesanan">Pemesanan Buku</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="diklat.html">7. DIKLAT &amp; PENDIDIKAN <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="diklat.html">DIKLAT &amp; PENDIDIKAN <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="diklat.html#advokat">Pendidikan dan Pelatihan Advokat</a>
           <a href="diklat.html#paralegal">Pendidikan Paralegal</a>
@@ -162,9 +149,8 @@
           <a href="diklat.html#sertifikat">Sertifikat dan Alumni</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="karier.html">8. KARIER <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="karier.html">KARIER <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="karier.html#bergabung">Bergabung Bersama Kami</a>
           <a href="karier.html#rekrutmen-advokat">Rekrutmen Advokat</a>
@@ -176,9 +162,8 @@
           <a href="karier.html#formulir">Formulir Lamaran</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="publikasi.html">9. PUBLIKASI &amp; BERITA <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="publikasi.html">PUBLIKASI &amp; BERITA <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="publikasi.html#artikel">Artikel Hukum</a>
           <a href="publikasi.html#opini">Opini Hukum</a>
@@ -187,18 +172,16 @@
           <a href="publikasi.html#kajian">Kajian dan Analisis Hukum</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="klien.html">10. KLIEN &amp; MITRA <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="klien.html">KLIEN &amp; MITRA <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="klien.html#korporasi">Klien Korporasi</a>
           <a href="klien.html#mitra">Mitra Strategis</a>
           <a href="klien.html#kerja-sama">Kerja Sama Kelembagaan</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="konsultasi.html">11. KONSULTASI HUKUM <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="konsultasi.html">KONSULTASI HUKUM <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="konsultasi.html#online">Konsultasi Online</a>
           <a href="konsultasi.html#pendampingan">Permohonan Pendampingan</a>
@@ -206,9 +189,8 @@
           <a href="konsultasi.html#pengaduan">Pengaduan dan Informasi</a>
         </div>
       </div>
-
       <div class="khb-nav-item">
-        <a class="khb-nav-link" href="kontak.html">12. KONTAK KAMI <span class="khb-caret">▼</span></a>
+        <a class="khb-nav-link" href="kontak.html">KONTAK KAMI <span class="khb-caret">▼</span></a>
         <div class="khb-dropdown">
           <a href="kontak.html#alamat">Alamat Kantor</a>
           <a href="kontak.html#wa">WhatsApp</a>
@@ -216,11 +198,10 @@
           <a href="kontak.html#peta">Peta Lokasi</a>
         </div>
       </div>
-
     </div>
   </nav>
 
-  <!-- ===== HERO SECTION (SAKRI LAMA) ===== -->
+  <!-- KONTEN UTAMA (SAKRI) -->
   <section class="hero" id="hero" style="background: #0a0a0a;">
     <div class="container hero-grid">
       <div class="hero-content">
@@ -243,27 +224,16 @@
     </div>
   </section>
 
-  <!-- ===== SAMBUTAN MANAGING PARTNER (BARU) ===== -->
   <section class="khb-main" id="sambutan">
     <h2>Sambutan Managing Partner</h2>
     <p class="khb-lead">Assalamu'alaikum warahmatullahi wabarakatuh. Terima kasih atas kunjungan Anda ke SAKRI &amp; Associates.</p>
     <div class="khb-grid">
-      <div class="khb-card">
-        <h3>Komitmen Kami</h3>
-        <p>Kami hadir untuk memberikan layanan hukum yang profesional, berintegritas, dan berorientasi pada kepastian hukum bagi seluruh klien.</p>
-      </div>
-      <div class="khb-card">
-        <h3>Pendekatan Kami</h3>
-        <p>Memadukan keilmuan akademis, pengalaman bisnis, dan kompetensi manajerial dalam setiap penanganan perkara.</p>
-      </div>
-      <div class="khb-card">
-        <h3>Visi Kami</h3>
-        <p>Menjadi firma hukum bisnis terpercaya yang memberikan kepastian hukum untuk keberlanjutan bisnis klien.</p>
-      </div>
+      <div class="khb-card"><h3>Komitmen Kami</h3><p>Kami hadir untuk memberikan layanan hukum yang profesional, berintegritas, dan berorientasi pada kepastian hukum bagi seluruh klien.</p></div>
+      <div class="khb-card"><h3>Pendekatan Kami</h3><p>Memadukan keilmuan akademis, pengalaman bisnis, dan kompetensi manajerial dalam setiap penanganan perkara.</p></div>
+      <div class="khb-card"><h3>Visi Kami</h3><p>Menjadi firma hukum bisnis terpercaya yang memberikan kepastian hukum untuk keberlanjutan bisnis klien.</p></div>
     </div>
   </section>
 
-  <!-- ===== STATISTIK ===== -->
   <section class="stats-section" style="background: #121212; border-top: 1px solid #27272a; border-bottom: 1px solid #27272a;">
     <div class="container stats-grid">
       <div class="stat-item"><h2 style="color: #d4af37;">10+</h2><p style="color: #a1a1aa;">Tahun Pengalaman</p></div>
@@ -273,7 +243,6 @@
     </div>
   </section>
 
-  <!-- ===== LAYANAN ===== -->
   <section class="section" id="layanan" style="background: #0a0a0a;">
     <div class="container">
       <div class="section-head text-center">
@@ -292,7 +261,6 @@
     </div>
   </section>
 
-  <!-- ===== KEUNGGULAN ===== -->
   <section class="section section-alt" id="keunggulan" style="background: #121212;">
     <div class="container">
       <div class="section-head text-center">
@@ -307,7 +275,6 @@
     </div>
   </section>
 
-  <!-- ===== TESTIMONI ===== -->
   <section class="section" id="testimoni" style="background: #0a0a0a;">
     <div class="container">
       <div class="section-head text-center">
@@ -322,7 +289,7 @@
     </div>
   </section>
 
-  <!-- ===== FOOTER (GABUNGAN) ===== -->
+  <!-- FOOTER -->
   <footer class="khb-footer">
     <div class="khb-footer-inner">
       <div>
@@ -330,28 +297,9 @@
         <p style="font-size:13.5px;margin:0">Advocates, Legal Consultants &amp; Education</p>
         <p style="font-size:13.5px;margin-top:8px">Tangerang, Banten<br>+62 21 1234 5678<br>info@sakri-law.com</p>
       </div>
-      <div>
-        <h5>Navigasi</h5>
-        <a href="index.html#hero">Beranda</a>
-        <a href="profil.html">Profil Kantor</a>
-        <a href="layanan.html">Layanan Hukum</a>
-        <a href="tim.html">Tim Advokat</a>
-        <a href="katalog.html">Katalog Buku</a>
-      </div>
-      <div>
-        <h5>Informasi</h5>
-        <a href="publikasi.html">Publikasi &amp; Berita</a>
-        <a href="karier.html">Karier</a>
-        <a href="diklat.html">Diklat &amp; Pendidikan</a>
-        <a href="klien.html">Klien &amp; Mitra</a>
-      </div>
-      <div>
-        <h5>Kontak</h5>
-        <a href="konsultasi.html">Konsultasi Online</a>
-        <a href="kontak.html">Kontak Kami</a>
-        <a href="login.html">Login Klien</a>
-        <a href="daftar.html">Daftar Akun</a>
-      </div>
+      <div><h5>Navigasi</h5><a href="index.html">Beranda</a><a href="profil.html">Profil Kantor</a><a href="layanan.html">Layanan Hukum</a><a href="tim.html">Tim Advokat</a><a href="katalog.html">Katalog Buku</a></div>
+      <div><h5>Informasi</h5><a href="publikasi.html">Publikasi &amp; Berita</a><a href="karier.html">Karier</a><a href="diklat.html">Diklat &amp; Pendidikan</a><a href="klien.html">Klien &amp; Mitra</a></div>
+      <div><h5>Kontak</h5><a href="konsultasi.html">Konsultasi Online</a><a href="kontak.html">Kontak Kami</a><a href="login.html">Login Klien</a><a href="daftar.html">Daftar Akun</a></div>
     </div>
     <div class="khb-copyright">
       © 2026 SAKRI &amp; Associates. All rights reserved.
@@ -360,9 +308,7 @@
     </div>
   </footer>
 
-  <!-- ===== SCRIPT ===== -->
   <script>
-    // Loader
     window.addEventListener('load', () => {
       setTimeout(() => {
         const loader = document.getElementById('loader');
@@ -370,7 +316,6 @@
       }, 1000);
     });
 
-    // Hamburger + dropdown nav KHB
     (function(){
       var hb=document.getElementById('khbHamburger');
       var nav=document.getElementById('khbNavInner');
@@ -395,6 +340,5 @@
       document.addEventListener('click',function(){items.forEach(function(i){i.classList.remove('khb-open');});});
     })();
   </script>
-
 </body>
 </html>

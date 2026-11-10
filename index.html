@@ -1,120 +1,664 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SAKRI & Associates — Firma Hukum Bisnis</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="menu.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kantor Hukum Bersama — Advocates, Legal Consultants & Education</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#1f2937;background:#f9fafb}
+a{color:#1e40af;text-decoration:none;cursor:pointer}
+a:hover{text-decoration:none}
+.container{max-width:1150px;margin:0 auto;padding:0 1rem}
+.navbar{background:#0f172a;color:#fff;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1rem;gap:1rem}
+.brand{color:#fff;display:flex;align-items:center;gap:.6rem;cursor:pointer}
+.brand-text{font-size:.78rem;line-height:1.1}
+.brand-text strong{font-size:.9rem;color:#fbbf24;display:block}
+.brand-text small{font-size:.58rem;color:#94a3b8;letter-spacing:.5px}
+.nav-toggle{display:none;font-size:1.5rem;cursor:pointer;color:#fff;background:none;border:none}
+#nav-toggle{display:none}
+.nav-links{list-style:none;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.nav-links a{color:#e2e8f0;font-size:.82rem;padding:.35rem .5rem;cursor:pointer;display:inline-block}
+.nav-links a:hover{color:#fbbf24}
+.btn-nav{background:#fbbf24;color:#0f172a!important;padding:.45rem .9rem!important;border-radius:6px;font-weight:700}
+.dropdown{position:relative}
+.dropdown-menu{display:none;position:absolute;top:100%;left:0;background:#0f172a;min-width:220px;padding:.5rem 0;border-radius:8px;list-style:none;box-shadow:0 8px 24px rgba(0,0,0,.3);z-index:200}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu li a{display:block;padding:.4rem 1rem;color:#cbd5e1;font-size:.78rem}
+.dropdown-menu li a:hover{background:#1e293b;color:#fbbf24}
+@media(max-width:900px){
+.nav-toggle{display:block}
+.nav-links{display:none;flex-direction:column;align-items:stretch;position:absolute;top:100%;left:0;right:0;background:#0f172a;padding:1rem;gap:.2rem;max-height:80vh;overflow-y:auto}
+#nav-toggle:checked ~ .nav-links{display:flex}
+.dropdown-menu{position:static;display:block;background:#1e293b;box-shadow:none;padding-left:.8rem}
+}
+.hero{background:linear-gradient(135deg,#1e3a8a,#1e40af);color:#fff;padding:3rem 1rem;text-align:center}
+.hero-img{max-width:320px;margin:0 auto 1rem;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.3))}
+.hero h1{font-size:2rem;margin-bottom:.8rem;line-height:1.2}
+.hero p{font-size:1rem;max-width:700px;margin:0 auto 1.5rem;opacity:.92}
+.hero-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:.65rem 1.4rem;border-radius:6px;font-weight:700;border:none;cursor:pointer;font-size:.9rem;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:#fbbf24;color:#0f172a}
+.btn-outline{background:transparent;color:#fff;border:2px solid #fff}
+.btn-sm{padding:.4rem 1rem;font-size:.8rem}
+.btn-danger{background:#ef4444;color:#fff}
+.section{padding:3rem 1rem}
+.section:nth-child(even){background:#fff}
+.section-title{font-size:1.6rem;color:#0f172a;margin-bottom:.4rem;border-left:5px solid #fbbf24;padding-left:1rem}
+.section-sub{color:#6b7280;margin-bottom:1.5rem;padding-left:1.4rem;font-size:.9rem}
+.page-header{background:linear-gradient(135deg,#1e3a8a,#1e40af);color:#fff;padding:2.5rem 1rem;text-align:center}
+.page-header h1{font-size:1.8rem;margin-bottom:.3rem}
+.page-header p{opacity:.9;font-size:.9rem}
+.back-bar{max-width:1150px;margin:0 auto;padding:1rem}
+.back-btn{display:inline-flex;align-items:center;gap:.4rem;background:#f3f4f6;color:#374151;padding:.5rem 1rem;border-radius:6px;font-size:.85rem;font-weight:600;cursor:pointer;border:none}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem}
+.card{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;transition:transform .15s;cursor:pointer}
+.card:hover{transform:translateY(-3px)}
+.card .icon{font-size:2.4rem;margin-bottom:.5rem}
+.card h3{color:#1e40af;margin-bottom:.4rem;font-size:1rem}
+.card p{font-size:.85rem;color:#4b5563}
+.layanan-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.2rem}
+.layanan-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
+.layanan-card:hover{transform:translateY(-3px)}
+.layanan-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff}
+.layanan-body{padding:1.2rem}
+.layanan-body h3{color:#1e40af;margin-bottom:.3rem;font-size:1rem}
+.layanan-body p{font-size:.82rem;color:#6b7280}
+.tim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
+.tim-card{background:#fff;padding:1.4rem 1rem;border-radius:12px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
+.tim-card:hover{transform:translateY(-3px)}
+.tim-avatar{width:80px;height:80px;border-radius:50%;margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:700;color:#fff;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.tim-card h3{font-size:.9rem;color:#0f172a;margin-bottom:.2rem}
+.tim-jabatan{font-size:.75rem;color:#1e40af;font-weight:600}
+.tim-bidang{font-size:.72rem;color:#6b7280}
+.book-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem}
+.book-card{background:#fff;padding:1rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);text-align:center;cursor:pointer;transition:transform .15s}
+.book-card:hover{transform:translateY(-3px)}
+.book-cover{height:150px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.5rem;color:#fff;margin-bottom:.7rem;position:relative;overflow:hidden}
+.book-cover::before{content:'';position:absolute;left:0;top:0;bottom:0;width:8px;background:rgba(0,0,0,.2)}
+.book-cover-title{font-size:.72rem;font-weight:700;text-align:center;line-height:1.2;position:relative;z-index:1}
+.book-cover-author{font-size:.6rem;opacity:.9;margin-top:.3rem;position:relative;z-index:1}
+.book-card h3{font-size:.85rem;color:#0f172a;margin-bottom:.2rem}
+.book-kategori{font-size:.72rem;color:#6b7280}
+.book-harga{font-weight:700;color:#1e40af;font-size:.9rem}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+.news-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);cursor:pointer;transition:transform .15s}
+.news-card:hover{transform:translateY(-3px)}
+.news-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#fff}
+.news-body{padding:1rem}
+.news-tag{display:inline-block;background:#fef3c7;color:#92400e;font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;text-transform:uppercase;margin-bottom:.4rem}
+.news-body h3{font-size:.92rem;margin-bottom:.3rem;color:#0f172a}
+.news-body small{color:#6b7280;font-size:11px}
+.detail-img{width:100%;height:220px;display:flex;align-items:center;justify-content:center;font-size:5rem;color:#fff;border-radius:12px;margin-bottom:1.5rem}
+.detail-content{background:#fff;padding:2rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.detail-content h1{color:#0f172a;font-size:1.6rem;margin-bottom:.5rem}
+.detail-content .meta{color:#6b7280;font-size:.85rem;margin-bottom:1.5rem;padding-bottom:1rem;border-bottom:1px solid #e5e7eb}
+.detail-content p{margin-bottom:1rem;line-height:1.8}
+.detail-content h2{color:#1e40af;font-size:1.2rem;margin:1.5rem 0 .7rem}
+.detail-content ul{margin-left:1.5rem;margin-bottom:1rem}
+.detail-content li{margin-bottom:.4rem}
+.partner-card{display:flex;gap:1.2rem;align-items:center;background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.06)}
+.partner-avatar{width:90px;height:90px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;font-weight:700}
+@media(max-width:600px){.partner-card{flex-direction:column;text-align:center}}
+.timeline{border-left:3px solid #1e40af;padding-left:1.5rem;margin-top:1rem}
+.timeline-item{margin-bottom:1.3rem;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-1.9rem;top:6px;width:12px;height:12px;background:#fbbf24;border-radius:50%;border:3px solid #1e40af}
+.timeline-item strong{color:#1e40af;display:block;margin-bottom:.2rem}
+.org-chart{text-align:center;margin-top:1rem}
+.org-node{display:inline-block;background:#fff;border:2px solid #1e40af;color:#1e40af;padding:.6rem 1.2rem;border-radius:8px;margin:.35rem;font-weight:600;font-size:.85rem}
+.org-node.primary{background:#1e40af;color:#fff}
+.org-row{display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem}
+.table{width:100%;background:#fff;border-collapse:collapse;border-radius:10px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.06);margin-top:1rem;font-size:.85rem}
+.table th,.table td{padding:.7rem .9rem;text-align:left;border-bottom:1px solid #e5e7eb}
+.table th{background:#f3f4f6;font-weight:700;color:#374151}
+.table tr:last-child td{border-bottom:none}
+code{background:#f3f4f6;padding:.15rem .4rem;border-radius:4px;font-size:.82rem}
+.badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase}
+.badge-pending,.badge-diajukan{background:#fef3c7;color:#92400e}
+.badge-aktif,.badge-dijadwalkan{background:#dbeafe;color:#1e40af}
+.badge-proses{background:#e0e7ff;color:#4338ca}
+.badge-selesai{background:#dcfce7;color:#166534}
+.badge-ditutup{background:#e5e7eb;color:#374151}
+.form{background:#fff;padding:1.5rem;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:.9rem;max-width:480px;margin:1rem auto}
+.form label{display:flex;flex-direction:column;gap:.3rem;font-weight:500;font-size:.85rem}
+.form input,.form select,.form textarea{padding:.6rem .8rem;border:1px solid #d1d5db;border-radius:6px;font:inherit;font-size:.88rem;width:100%}
+.form input:focus,.form select:focus,.form textarea:focus{outline:none;border-color:#1e40af;box-shadow:0 0 0 3px rgba(30,64,175,.15)}
+.alert{padding:.75rem 1rem;border-radius:8px;margin:1rem 0;font-size:.85rem}
+.alert-error{background:#fee2e2;color:#991b1b}
+.alert-success{background:#dcfce7;color:#166534}
+.alert-info{background:#dbeafe;color:#1e40af}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1rem}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+.contact-list p{margin-bottom:.9rem;line-height:1.7;font-size:.9rem}
+.footer{background:#0f172a;color:#cbd5e1;padding:2.5rem 1rem 1.5rem;margin-top:2rem}
+.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;margin-bottom:2rem}
+.footer h4{color:#fbbf24;margin-bottom:.6rem;font-size:.95rem}
+.footer ul{list-style:none}
+.footer li{margin-bottom:.3rem;font-size:.82rem}
+.footer a{color:#cbd5e1}
+.footer a:hover{color:#fbbf24}
+.copyright{text-align:center;font-size:.78rem;color:#64748b;border-top:1px solid #1e293b;padding-top:1.2rem}
+.wa-float{position:fixed;bottom:1.2rem;right:1.2rem;background:#25d366;color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 16px rgba(37,211,102,.5);z-index:99}
+@media(max-width:600px){.hero h1{font-size:1.5rem}.hero p{font-size:.9rem}.section-title{font-size:1.3rem}}
+
+/* DASHBOARD */
+.dash-header{background:linear-gradient(135deg,#0f172a,#1e3a8a);color:#fff;padding:1.5rem 1rem}
+.dash-header .inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;max-width:1100px;margin:0 auto}
+.dash-header h1{font-size:1.2rem}
+.dash-header .user{font-size:.85rem;opacity:.9}
+.dash-header .user strong{color:#fbbf24}
+.dash-nav{background:#fff;border-bottom:1px solid #e5e7eb;padding:.5rem 0;position:sticky;top:0;z-index:50}
+.dash-nav .inner{display:flex;gap:.3rem;overflow-x:auto;padding:.3rem 1rem;max-width:1100px;margin:0 auto}
+.dash-nav a{padding:.5rem 1rem;border-radius:6px;font-size:.85rem;color:#374151;white-space:nowrap;font-weight:500;cursor:pointer}
+.dash-nav a:hover{background:#f3f4f6}
+.dash-nav a.active{background:#1e40af;color:#fff}
+.dash-main{padding:2rem 1rem;max-width:1100px;margin:0 auto}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1rem 0 1.5rem}
+.stat-card{background:#fff;padding:1.3rem;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.stat-card span{font-size:.75rem;color:#6b7280;font-weight:600;text-transform:uppercase}
+.stat-card strong{display:block;font-size:1.8rem;color:#1e40af;margin-top:.3rem}
+.demo-badge{background:#fef3c7;color:#92400e;padding:.3rem .8rem;border-radius:20px;font-size:.72rem;font-weight:700;display:inline-block;margin-bottom:1rem}
+</style>
 </head>
-<body style="background: #0a0a0a; color: #ffffff; margin: 0;">
+<body>
 
-  <div class="khb-topbar">
-    <span>⚖️ SAKRI &amp; Associates — Advocates, Legal Consultants &amp; Education</span>
-    <span><a href="kontak.html">📞 WhatsApp</a> &nbsp;|&nbsp; <a href="kontak.html">✉️ Email</a> &nbsp;|&nbsp; <a href="konsultasi.html">Konsultasi Online</a></span>
+<nav class="navbar">
+  <div class="nav-inner container">
+    <div class="brand" onclick="go('/')">
+      <svg width="42" height="42" viewBox="0 0 60 60"><circle cx="30" cy="30" r="28" fill="#fbbf24"/><circle cx="30" cy="30" r="24" fill="#0f172a"/><path d="M30 14v32M20 22h20M14 38h32" stroke="#fbbf24" stroke-width="2.5" stroke-linecap="round"/><circle cx="30" cy="14" r="3" fill="#fbbf24"/><path d="M20 22l-6 16h12zM40 22l-6 16h12z" fill="#fbbf24" opacity=".9"/><path d="M14 38l-4 8h8zM46 38l-4 8h8z" fill="#fbbf24" opacity=".7"/></svg>
+      <div class="brand-text"><strong>KANTOR HUKUM BERSAMA</strong><small>ADVOCATES · LEGAL CONSULTANTS · EDUCATION</small></div>
+    </div>
+    <input type="checkbox" id="nav-toggle">
+    <label for="nav-toggle" class="nav-toggle">☰</label>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="go('/')">Beranda</a></li>
+      <li class="dropdown"><a onclick="go('/profil')">Profil ▾</a>
+        <ul class="dropdown-menu">
+          <li><a onclick="go('/profil/tentang')">Tentang Kami</a></li>
+          <li><a onclick="go('/profil/sejarah')">Sejarah</a></li>
+          <li><a onclick="go('/profil/visi')">Visi & Misi</a></li>
+          <li><a onclick="go('/profil/struktur')">Struktur</a></li>
+          <li><a onclick="go('/profil/partner')">Managing Partner</a></li>
+          <li><a onclick="go('/profil/etika')">Etika</a></li>
+        </ul>
+      </li>
+      <li class="dropdown"><a onclick="go('/layanan')">Layanan ▾</a>
+        <ul class="dropdown-menu" id="layananMenu"></ul>
+      </li>
+      <li><a onclick="go('/tim')">Tim</a></li>
+      <li><a onclick="go('/keahlian')">Keahlian</a></li>
+      <li class="dropdown"><a onclick="go('/buku')">Edukasi ▾</a>
+        <ul class="dropdown-menu">
+          <li><a onclick="go('/buku')">📚 Katalog Buku</a></li>
+          <li><a onclick="go('/diklat')">🎓 Diklat</a></li>
+        </ul>
+      </li>
+      <li class="dropdown"><a onclick="go('/publikasi')">Info ▾</a>
+        <ul class="dropdown-menu">
+          <li><a onclick="go('/karier')">💼 Karier</a></li>
+          <li><a onclick="go('/publikasi')">📰 Publikasi</a></li>
+          <li><a onclick="go('/klien')">🤝 Klien</a></li>
+        </ul>
+      </li>
+      <li><a onclick="go('/konsultasi')" class="btn-nav">Konsultasi</a></li>
+      <li id="authNav"><a onclick="go('/login')">Login</a></li>
+    </ul>
   </div>
+</nav>
 
-  <header class="khb-header">
-    <div class="khb-header-inner">
-      <a class="khb-brand" href="index.html">
-        <img src="logo.png" alt="Logo SAKRI" style="height:50px; width:auto; object-fit:contain;">
-        <div><h1>SAKRI &amp; ASSOCIATES</h1><small>Advocates, Legal Consultants &amp; Education</small></div>
-      </a>
-      <div class="khb-header-actions">
-        <a href="konsultasi.html" class="khb-btn khb-btn-outline">Konsultasi</a>
-        <a href="login.html" class="khb-btn khb-btn-gold">Login Klien</a>
-        <button class="khb-hamburger" id="khbHamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+<main id="app"></main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div><h4>⚖️ Kantor Hukum Bersama</h4><p style="font-size:.82rem">Advocates, Legal Consultants & Education.</p></div>
+      <div><h4>Navigasi</h4><ul>
+        <li><a onclick="go('/profil')">Profil</a></li>
+        <li><a onclick="go('/layanan')">Layanan</a></li>
+        <li><a onclick="go('/tim')">Tim</a></li>
+        <li><a onclick="go('/buku')">Buku</a></li>
+        <li><a onclick="go('/diklat')">Diklat</a></li>
+      </ul></div>
+      <div><h4>Informasi</h4><ul>
+        <li><a onclick="go('/publikasi')">Publikasi</a></li>
+        <li><a onclick="go('/karier')">Karier</a></li>
+        <li><a onclick="go('/klien')">Klien</a></li>
+        <li><a onclick="go('/kontak')">Kontak</a></li>
+      </ul></div>
+      <div><h4>Kontak</h4><p style="font-size:.82rem">📧 info@khb.co.id<br>📞 +62 812-3456-7890<br>📍 Jakarta</p></div>
+    </div>
+    <p class="copyright">© 2025 Kantor Hukum Bersama</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/6281234567890" class="wa-float" target="_blank">💬</a>
+
+<script>
+// ============ DATA ============
+const LAYANAN = [
+  {id:'pidana',nama:'Hukum Pidana',icon:'⚖️',color:'linear-gradient(135deg,#dc2626,#b91c1c)',desc:'Pendampingan perkara pidana.',isi:'<p>Tim advokat pidana kami menangani perkara dari penyidikan kepolisian hingga kasasi di Mahkamah Agung.</p><h2>Ruang Lingkup</h2><ul><li>Pendampingan di kepolisian</li><li>Praperadilan</li><li>Pembelaan di persidangan</li><li>Banding, kasasi, PK</li><li>Grasi dan rehabilitasi</li></ul>'},
+  {id:'perdata',nama:'Hukum Perdata',icon:'📜',color:'linear-gradient(135deg,#7c3aed,#6d28d9)',desc:'Sengketa perjanjian, wanprestasi.',isi:'<p>Kami menangani sengketa perdata antara individu maupun badan hukum.</p><h2>Ruang Lingkup</h2><ul><li>Wanprestasi</li><li>Perbuatan melawan hukum</li><li>Sengketa jual beli</li><li>Ganti rugi</li></ul>'},
+  {id:'bisnis',nama:'Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#0891b2,#0e7490)',desc:'Pendirian PT, merger akuisisi.',isi:'<p>Layanan hukum komprehensif untuk pelaku usaha.</p><h2>Ruang Lingkup</h2><ul><li>Pendirian PT/CV</li><li>Review kontrak</li><li>Merger & akuisisi</li><li>Legal due diligence</li></ul>'},
+  {id:'ketenagakerjaan',nama:'Ketenagakerjaan',icon:'👷',color:'linear-gradient(135deg,#ea580c,#c2410c)',desc:'Sengketa PHI, PHK.',isi:'<p>Pendampingan di bidang hubungan industrial.</p><h2>Ruang Lingkup</h2><ul><li>Perjanjian kerja</li><li>PHK & pesangon</li><li>Sengketa PHI</li></ul>'},
+  {id:'pertanahan',nama:'Pertanahan',icon:'🌾',color:'linear-gradient(135deg,#16a34a,#15803d)',desc:'Sertifikasi, sengketa tanah.',isi:'<p>Penanganan sengketa dan transaksi pertanahan.</p><h2>Ruang Lingkup</h2><ul><li>Sertifikasi tanah</li><li>Sengketa batas</li><li>Jual beli tanah</li></ul>'},
+  {id:'perpajakan',nama:'Perpajakan',icon:'🧾',color:'linear-gradient(135deg,#ca8a04,#a16207)',desc:'Sengketa pajak.',isi:'<p>Pendampingan sengketa perpajakan.</p><h2>Ruang Lingkup</h2><ul><li>Keberatan pajak</li><li>Banding</li><li>Gugatan pengadilan pajak</li></ul>'},
+  {id:'keluarga',nama:'Keluarga & Waris',icon:'👨‍👩‍👧',color:'linear-gradient(135deg,#db2777,#be185d)',desc:'Perceraian, hak asuh, waris.',isi:'<p>Pendampingan hukum keluarga.</p><h2>Ruang Lingkup</h2><ul><li>Perceraian</li><li>Hak asuh anak</li><li>Pembagian waris</li></ul>'},
+  {id:'tun',nama:'Tata Usaha Negara',icon:'🏛️',color:'linear-gradient(135deg,#475569,#334155)',desc:'Gugatan TUN.',isi:'<p>Sengketa administrasi pemerintahan.</p><h2>Ruang Lingkup</h2><ul><li>Gugatan KTUN</li><li>Sengketa kepegawaian</li></ul>'},
+  {id:'pailit',nama:'Kepailitan & PKPU',icon:'💸',color:'linear-gradient(135deg,#9333ea,#7e22ce)',desc:'Permohonan pailit.',isi:'<p>Penanganan utang-piutang.</p><h2>Ruang Lingkup</h2><ul><li>Permohonan pailit</li><li>PKPU</li><li>Restrukturisasi</li></ul>'},
+  {id:'arbitrase',nama:'Arbitrase & Mediasi',icon:'🤝',color:'linear-gradient(135deg,#0d9488,#0f766e)',desc:'Sengketa di luar pengadilan.',isi:'<p>Alternatif penyelesaian sengketa.</p><h2>Ruang Lingkup</h2><ul><li>Arbitrase BANI</li><li>Mediasi</li><li>Konsiliasi</li></ul>'},
+  {id:'legal',nama:'Legal Opinion',icon:'📋',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',desc:'Pendapat hukum tertulis.',isi:'<p>Pendapat hukum dan audit.</p><h2>Ruang Lingkup</h2><ul><li>Legal opinion</li><li>Legal audit</li><li>Review kontrak</li></ul>'},
+  {id:'retainer',nama:'Retainer',icon:'🔁',color:'linear-gradient(135deg,#b45309,#92400e)',desc:'Jasa hukum berlangganan.',isi:'<p>Paket jasa hukum bulanan.</p><h2>Manfaat</h2><ul><li>Konsultasi tak terbatas</li><li>Review kontrak</li><li>Prioritas penanganan</li></ul>'}
+];
+const TIM = [
+  {nama:'Adv. Setyo Hantoro, S.H., M.H.',jabatan:'Managing Partner',bidang:'Litigasi & Corporate',init:'SH',color:'#1e40af'},
+  {nama:'Adv. Rina Wijaya, S.H.',jabatan:'Senior Advocate',bidang:'Pidana & Ketenagakerjaan',init:'RW',color:'#db2777'},
+  {nama:'Adv. Budi Prasetyo, S.H.',jabatan:'Senior Advocate',bidang:'Bisnis & Kepailitan',init:'BP',color:'#0891b2'},
+  {nama:'Adv. Dewi Lestari, S.H.',jabatan:'Associate',bidang:'Keluarga & Waris',init:'DL',color:'#ea580c'},
+  {nama:'Adv. Andi Saputra, S.H.',jabatan:'Associate',bidang:'Perdata & Pertanahan',init:'AS',color:'#16a34a'},
+  {nama:'Dra. Maya Kurnia, S.H.',jabatan:'Konsultan Hukum',bidang:'Perpajakan',init:'MK',color:'#9333ea'},
+  {nama:'Rudi Hartono, S.H.',jabatan:'Paralegal',bidang:'Dokumentasi',init:'RH',color:'#475569'},
+  {nama:'Sari Indah, S.H.',jabatan:'Paralegal',bidang:'Administrasi',init:'SI',color:'#ca8a04'}
+];
+const BUKU = [
+  {id:'b1',judul:'Hukum Perdata Indonesia',kategori:'Buku Hukum',harga:150000,color:'linear-gradient(135deg,#dc2626,#991b1b)',penulis:'Tim KHB'},
+  {id:'b2',judul:'Panduan Legal Drafting',kategori:'Hukum Bisnis',harga:175000,color:'linear-gradient(135deg,#1e40af,#1e3a8a)',penulis:'Adv. Budi'},
+  {id:'b3',judul:'Hukum Pidana Praktis',kategori:'Pidana',harga:160000,color:'linear-gradient(135deg,#0f172a,#334155)',penulis:'Adv. Rina'},
+  {id:'b4',judul:'Hukum Perdata Praktik',kategori:'Perdata',harga:145000,color:'linear-gradient(135deg,#7c3aed,#6d28d9)',penulis:'Adv. Andi'},
+  {id:'b5',judul:'Advokasi & Paralegal',kategori:'Advokasi',harga:130000,color:'linear-gradient(135deg,#ea580c,#c2410c)',penulis:'Tim KHB'},
+  {id:'b6',judul:'Hukum untuk Masyarakat',kategori:'Praktis',harga:95000,color:'linear-gradient(135deg,#16a34a,#15803d)',penulis:'Tim KHB'},
+  {id:'b7',judul:'Kumpulan Putusan',kategori:'Internal',harga:200000,color:'linear-gradient(135deg,#0891b2,#0e7490)',penulis:'Editorial'},
+  {id:'b8',judul:'Hukum Bisnis 2025',kategori:'Terbaru',harga:185000,color:'linear-gradient(135deg,#b45309,#92400e)',penulis:'Adv. Setyo'}
+];
+const DIKLAT = [
+  {id:'d1',nama:'Pendidikan Advokat',icon:'🎓',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',desc:'Program PKPA',isi:'Program PKPA 200+ jam untuk calon advokat.'},
+  {id:'d2',nama:'Pendidikan Paralegal',icon:'👨‍💼',color:'linear-gradient(135deg,#0891b2,#0e7490)',desc:'Sertifikasi paralegal',isi:'Pelatihan paralegal dengan sertifikasi.'},
+  {id:'d3',nama:'Diklat Hukum Bisnis',icon:'🏢',color:'linear-gradient(135deg,#16a34a,#15803d)',desc:'Kontrak & merger',isi:'Pelatihan hukum bisnis untuk praktisi.'},
+  {id:'d4',nama:'Diklat Legal Drafting',icon:'✍️',color:'linear-gradient(135deg,#7c3aed,#6d28d9)',desc:'Teknik drafting',isi:'Penyusunan kontrak profesional.'},
+  {id:'d5',nama:'Diklat Mediator',icon:'🤝',color:'linear-gradient(135deg,#ea580c,#c2410c)',desc:'Sertifikasi mediator',isi:'Pelatihan mediator bersertifikat MA.'},
+  {id:'d6',nama:'Diklat Arbitrase',icon:'⚖️',color:'linear-gradient(135deg,#db2777,#be185d)',desc:'Arbitrase BANI',isi:'Pelatihan arbitrase domestik & internasional.'},
+  {id:'d7',nama:'Seminar & Webinar',icon:'📡',color:'linear-gradient(135deg,#ca8a04,#a16207)',desc:'Seminar hukum',isi:'Seminar topik terkini.'},
+  {id:'d8',nama:'Workshop Hukum',icon:'🛠️',color:'linear-gradient(135deg,#475569,#334155)',desc:'Workshop intensif',isi:'Workshop praktik hukum.'}
+];
+const ARTIKEL = [
+  {id:'a1',judul:'Analisis UU PDP dan Implikasinya',kategori:'Artikel Hukum',tanggal:'5 Jan 2025',icon:'📰',color:'linear-gradient(135deg,#1e40af,#1e3a8a)',isi:'<p>UU PDP membawa perubahan signifikan bagi dunia usaha.</p><h2>Poin Penting</h2><ul><li>Persetujuan eksplisit</li><li>Hak subjek data</li><li>Notifikasi kebocoran 3x24 jam</li><li>Sanksi hingga 2% pendapatan</li></ul>'},
+  {id:'a2',judul:'Reformasi Hukum Pidana Indonesia',kategori:'Opini Hukum',tanggal:'28 Des 2024',icon:'✍️',color:'linear-gradient(135deg,#db2777,#be185d)',isi:'<p>KUHP baru membawa paradigma restoratif.</p><h2>Perubahan Kunci</h2><ul><li>Rekodifikasi</li><li>Hukum pidana adat</li><li>Pidana kerja sosial</li></ul>'},
+  {id:'a3',judul:'Arbitrase dalam Sengketa Konstruksi',kategori:'Jurnal',tanggal:'15 Des 2024',icon:'📖',color:'linear-gradient(135deg,#0d9488,#0f766e)',isi:'<p>Arbitrase jadi pilihan utama sengketa konstruksi.</p><h2>Keunggulan</h2><ul><li>Arbiter ahli</li><li>Cepat</li><li>Final</li></ul>'},
+  {id:'a4',judul:'Diklat Paralegal Batch 4 Sukses',kategori:'Berita',tanggal:'10 Des 2024',icon:'🎉',color:'linear-gradient(135deg,#ea580c,#c2410c)',isi:'<p>25 peserta mengikuti Diklat Paralegal Batch 4.</p><h2>Materi</h2><ul><li>Riset hukum</li><li>Drafting</li><li>Etika</li></ul>'},
+  {id:'a5',judul:'Perlindungan Konsumen Digital',kategori:'Kajian',tanggal:'2 Des 2024',icon:'🔍',color:'linear-gradient(135deg,#9333ea,#7e22ce)',isi:'<p>Tantangan baru perlindungan konsumen digital.</p><h2>Isu</h2><ul><li>Transaksi elektronik</li><li>Penipuan online</li><li>Tanggung jawab platform</li></ul>'}
+];
+const KARIER = [
+  {id:'k1',nama:'Advokat',icon:'👨‍⚖️',kualifikasi:'S.H., izin advokat aktif, min. 3 tahun pengalaman.'},
+  {id:'k2',nama:'Associate Lawyer',icon:'👩‍⚖️',kualifikasi:'Fresh graduate S.H., IPK min. 3.0.'},
+  {id:'k3',nama:'Paralegal',icon:'👨‍💼',kualifikasi:'D3/S1 Hukum, teliti, komunikatif.'},
+  {id:'k4',nama:'Magang Mahasiswa',icon:'🎓',kualifikasi:'Semester 5+, aktif, min. 3 bulan.'},
+  {id:'k5',nama:'Administrasi Hukum',icon:'📋',kualifikasi:'D3 Admin, menguasai MS Office.'}
+];
+
+// ============ AUTH ============
+function getUser(){ try{ return JSON.parse(sessionStorage.getItem('khb_user')||'null'); }catch(e){ return null; } }
+function setUser(u){ sessionStorage.setItem('khb_user', JSON.stringify(u)); updateAuthNav(); }
+function clearUser(){ sessionStorage.removeItem('khb_user'); updateAuthNav(); }
+function getUsers(){ try{ return JSON.parse(localStorage.getItem('khb_users')||'[]'); }catch(e){ return []; } }
+function saveUsers(d){ localStorage.setItem('khb_users', JSON.stringify(d)); }
+function getPerkara(){ try{ return JSON.parse(localStorage.getItem('khb_perkara')||'[]'); }catch(e){ return []; } }
+function savePerkara(d){ localStorage.setItem('khb_perkara', JSON.stringify(d)); }
+function getKonsultasi(){ try{ return JSON.parse(localStorage.getItem('khb_konsultasi')||'[]'); }catch(e){ return []; } }
+function saveKonsultasi(d){ localStorage.setItem('khb_konsultasi', JSON.stringify(d)); }
+
+if(!localStorage.getItem('khb_perkara')){
+  savePerkara([
+    {id:1,nomor:'KHB/PERDATA/2025/0001',konsumen:'Budi Santoso',jenis:'PERDATA',status:'aktif',deskripsi:'Sengketa perjanjian',created:'2025-01-05'},
+    {id:2,nomor:'KHB/PIDANA/2025/0002',konsumen:'Siti Rahayu',jenis:'PIDANA',status:'proses',deskripsi:'Pendampingan kepolisian',created:'2025-01-08'}
+  ]);
+}
+if(!localStorage.getItem('khb_konsultasi')){
+  saveKonsultasi([
+    {id:1,konsumen:'Budi Santoso',topik:'Sengketa Tanah',deskripsi:'Batas tanah dengan tetangga',status:'pending',created:'2025-01-10'},
+    {id:2,konsumen:'Siti Rahayu',topik:'Perceraian',deskripsi:'Hak asuh anak',status:'dijadwalkan',created:'2025-01-09'}
+  ]);
+}
+
+function updateAuthNav(){
+  const u = getUser();
+  const el = document.getElementById('authNav');
+  if(u){
+    el.innerHTML = `<a onclick="go('/${u.role==='admin'?'admin':'konsumen'}')" class="btn-nav">Dashboard</a>`;
+    // tambah logout di nav
+    const nav = document.getElementById('navLinks');
+    let logoutLi = document.getElementById('logoutLi');
+    if(!logoutLi){
+      logoutLi = document.createElement('li');
+      logoutLi.id = 'logoutLi';
+      logoutLi.innerHTML = '<a onclick="doLogout()" style="color:#fca5a5">Logout</a>';
+      nav.appendChild(logoutLi);
+    }
+  } else {
+    el.innerHTML = '<a onclick="go(\'/login\')">Login</a>';
+    const logoutLi = document.getElementById('logoutLi');
+    if(logoutLi) logoutLi.remove();
+  }
+}
+function doLogout(){
+  clearUser();
+  go('/');
+  alert('Anda telah logout.');
+}
+
+// ============ RENDER HELPERS ============
+const app = document.getElementById('app');
+
+function heroSVG(){
+  return `<svg class="hero-img" viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbbf24" stop-opacity=".9"/><stop offset="1" stop-color="#f59e0b" stop-opacity=".7"/></linearGradient></defs><rect x="80" y="150" width="240" height="60" fill="#1e3a8a" stroke="#fbbf24" stroke-width="2" rx="4"/><rect x="90" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="130" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="170" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="210" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="250" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><rect x="290" y="80" width="30" height="70" fill="#fbbf24" opacity=".85"/><path d="M70 80 L200 30 L330 80 Z" fill="url(#g1)" stroke="#fbbf24" stroke-width="2"/></svg>`;
+}
+
+// ============ PAGES ============
+function renderHome(){
+  return `
+    <section class="hero">${heroSVG()}<h1>Advocates, Legal Consultants & Education</h1><p>Kantor hukum terpadu: layanan hukum profesional, pendidikan advokat, penerbitan buku hukum, dan konsultasi terpercaya.</p><div class="hero-btns"><a onclick="go('/konsultasi')" class="btn btn-primary">Konsultasi Sekarang</a><a onclick="go('/layanan')" class="btn btn-outline">Lihat Layanan</a></div></section>
+    <section class="section"><div class="container"><h2 class="section-title">Sambutan Managing Partner</h2><p class="section-sub">Pesan dari pimpinan kantor</p>
+      <div class="partner-card"><div class="partner-avatar">SH</div><div><p><em>"Selamat datang di Kantor Hukum Bersama. Kami berkomitmen memberikan pelayanan hukum profesional dan berintegritas."</em></p><p style="margin-top:.7rem"><strong>— Adv. Setyo Hantoro, S.H., M.H.</strong><br><small style="color:#6b7280">Managing Partner</small></p></div></div>
+    </div></section>
+    <section class="section"><div class="container"><h2 class="section-title">Layanan Unggulan</h2><p class="section-sub">Klik untuk detail</p>
+      <div class="features">${LAYANAN.slice(0,4).map(l=>`<div class="card" onclick="go('/layanan/${l.id}')"><div class="icon">${l.icon}</div><h3>${l.nama}</h3><p>${l.desc}</p></div>`).join('')}</div>
+      <p style="text-align:center;margin-top:1.5rem"><a onclick="go('/layanan')" class="btn btn-primary">Lihat Semua 12 Layanan →</a></p>
+    </div></section>
+    <section class="section"><div class="container"><h2 class="section-title">Informasi Terbaru</h2><p class="section-sub">Kegiatan & artikel terbaru</p>
+      <div class="news-grid">${ARTIKEL.slice(0,3).map(a=>`<article class="news-card" onclick="go('/publikasi/${a.id}')"><div class="news-thumb" style="background:${a.color}">${a.icon}</div><div class="news-body"><span class="news-tag">${a.kategori}</span><h3>${a.judul}</h3><small>${a.tanggal}</small></div></article>`).join('')}</div>
+    </div></section>`;
+}
+
+function renderProfil(){
+  return `<section class="page-header"><h1>Profil Kantor</h1><p>Tentang kami dan struktur</p></section>
+    <section class="section"><div class="container"><div class="features">
+      <div class="card" onclick="go('/profil/tentang')"><div class="icon">🏛️</div><h3>Tentang Kami</h3></div>
+      <div class="card" onclick="go('/profil/sejarah')"><div class="icon">📜</div><h3>Sejarah</h3></div>
+      <div class="card" onclick="go('/profil/visi')"><div class="icon">🎯</div><h3>Visi & Misi</h3></div>
+      <div class="card" onclick="go('/profil/struktur')"><div class="icon">📊</div><h3>Struktur</h3></div>
+      <div class="card" onclick="go('/profil/partner')"><div class="icon">👨‍⚖️</div><h3>Managing Partner</h3></div>
+      <div class="card" onclick="go('/profil/etika')"><div class="icon">⚖️</div><h3>Etika</h3></div>
+    </div></div></section>`;
+}
+
+function renderProfilSub(sub){
+  const d = {
+    tentang:{h:'Tentang Kami',c:'<p>Kantor Hukum Bersama adalah firma hukum terpadu di bidang jasa hukum, pendidikan, dan penerbitan.</p><h2>Nilai</h2><ul><li><strong>Integritas</strong></li><li><strong>Profesionalisme</strong></li><li><strong>Keadilan</strong></li></ul>'},
+    sejarah:{h:'Sejarah Kantor',c:'<div class="timeline"><div class="timeline-item"><strong>2010</strong><p>Pendirian kantor.</p></div><div class="timeline-item"><strong>2015</strong><p>Ekspansi ke hukum bisnis.</p></div><div class="timeline-item"><strong>2018</strong><p>Peluncuran diklat.</p></div><div class="timeline-item"><strong>2020</strong><p>Terbit buku pertama.</p></div><div class="timeline-item"><strong>2025</strong><p>Transformasi digital.</p></div></div>'},
+    visi:{h:'Visi & Misi',c:'<h2>Visi</h2><p>Menjadi kantor hukum terdepan dengan integritas dan profesionalisme.</p><h2>Misi</h2><ul><li>Layanan hukum berkualitas</li><li>Pendidikan hukum aplikatif</li><li>Penerbitan buku</li><li>Etika profesi</li></ul>'},
+    struktur:{h:'Struktur Organisasi',c:'<div class="org-chart"><div class="org-node primary">Managing Partner</div><div class="org-row"><div class="org-node">Senior Advocate</div><div class="org-node">Konsultan</div></div><div class="org-row"><div class="org-node">Associate</div><div class="org-node">Paralegal</div></div></div>'},
+    partner:{h:'Managing Partner',c:'<div class="partner-card" style="margin-top:0"><div class="partner-avatar">SH</div><div><h3 style="color:#0f172a">Adv. Setyo Hantoro, S.H., M.H.</h3><p style="color:#1e40af;font-weight:600">Managing Partner</p><p style="margin-top:.5rem">Berpengalaman 15+ tahun di litigasi dan hukum bisnis.</p></div></div>'},
+    etika:{h:'Prinsip & Etika',c:'<ul><li><strong>Integritas</strong> — jujur dalam setiap tindakan</li><li><strong>Kerahasiaan</strong> — menjaga rahasia klien</li><li><strong>Keadilan</strong> — tanpa pandang bulu</li><li><strong>Independensi</strong> — bebas dari pengaruh</li></ul>'}
+  }[sub];
+  if(!d) return renderProfil();
+  return `<section class="page-header"><h1>${d.h}</h1><p>Profil Kantor</p></section><div class="back-bar"><button class="back-btn" onclick="go('/profil')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content">${d.c}</div></div></section>`;
+}
+
+function renderLayanan(){
+  return `<section class="page-header"><h1>Layanan Hukum</h1><p>12 bidang layanan profesional</p></section><section class="section"><div class="container"><div class="layanan-grid">${LAYANAN.map(l=>`<div class="layanan-card" onclick="go('/layanan/${l.id}')"><div class="layanan-img" style="background:${l.color}">${l.icon}</div><div class="layanan-body"><h3>${l.nama}</h3><p>${l.desc}</p><small style="color:#1e40af;font-weight:600">Detail →</small></div></div>`).join('')}</div></div></section>`;
+}
+
+function renderLayananDetail(id){
+  const l = LAYANAN.find(x=>x.id===id);
+  if(!l) return renderLayanan();
+  return `<section class="page-header"><h1>${l.nama}</h1><p>Layanan</p></section><div class="back-bar"><button class="back-btn" onclick="go('/layanan')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-img" style="background:${l.color}">${l.icon}</div><div class="detail-content">${l.isi}<p style="margin-top:1.5rem"><a onclick="go('/konsultasi')" class="btn btn-primary">Konsultasi</a></p></div></div></section>`;
+}
+
+function renderTim(){
+  return `<section class="page-header"><h1>Tim Advokat</h1><p>Profesional berpengalaman</p></section><section class="section"><div class="container"><div class="tim-grid">${TIM.map((t,i)=>`<div class="tim-card" onclick="go('/tim/${i}')"><div class="tim-avatar" style="background:${t.color}">${t.init}</div><h3>${t.nama}</h3><p class="tim-jabatan">${t.jabatan}</p><p class="tim-bidang">${t.bidang}</p></div>`).join('')}</div></div></section>`;
+}
+function renderTimDetail(idx){
+  const t = TIM[idx];
+  if(!t) return renderTim();
+  return `<section class="page-header"><h1>${t.nama}</h1><p>${t.jabatan}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/tim')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content" style="text-align:center"><div class="tim-avatar" style="background:${t.color};width:120px;height:120px;font-size:2.5rem;margin:0 auto 1.5rem">${t.init}</div><h1>${t.nama}</h1><p class="meta">${t.jabatan}</p><p><strong>Bidang:</strong> ${t.bidang}</p><p style="margin-top:1.5rem"><a onclick="go('/konsultasi')" class="btn btn-primary">Konsultasi</a></p></div></div></section>`;
+}
+
+function renderKeahlian(){
+  const k = [{h:'Litigasi',i:'⚖️',d:'Perkara di pengadilan.'},{h:'Non-Litigasi',i:'🤝',d:'Mediasi, arbitrase.'},{h:'Corporate Legal',i:'🏢',d:'Hukum perusahaan.'},{h:'Pendampingan',i:'📋',d:'Bantuan hukum rutin.'},{h:'Negosiasi',i:'💬',d:'Negosiasi kontrak.'}];
+  return `<section class="page-header"><h1>Bidang Keahlian</h1><p>Kompetensi inti</p></section><section class="section"><div class="container"><div class="features">${k.map(x=>`<div class="card"><div class="icon">${x.i}</div><h3>${x.h}</h3><p>${x.d}</p></div>`).join('')}</div></div></section>`;
+}
+
+function renderBuku(){
+  return `<section class="page-header"><h1>Katalog Buku</h1><p>Literatur hukum</p></section><section class="section"><div class="container"><div class="book-grid">${BUKU.map(b=>`<div class="book-card" onclick="go('/buku/${b.id}')"><div class="book-cover" style="background:${b.color}"><div class="book-cover-title">${b.judul}</div><div class="book-cover-author">${b.penulis}</div></div><h3>${b.judul}</h3><p class="book-kategori">${b.kategori}</p><p class="book-harga">Rp ${b.harga.toLocaleString('id-ID')}</p></div>`).join('')}</div></div></section>`;
+}
+
+function renderBukuDetail(id){
+  const b = BUKU.find(x=>x.id===id);
+  if(!b) return renderBuku();
+  return `<section class="page-header"><h1>${b.judul}</h1><p>${b.kategori}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/buku')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;margin-bottom:1.5rem"><div class="book-cover" style="background:${b.color};max-width:200px;height:260px;margin:0 auto"><div class="book-cover-title" style="font-size:1rem">${b.judul}</div><div class="book-cover-author" style="font-size:.75rem">${b.penulis}</div></div></div><h1>${b.judul}</h1><p class="meta">${b.kategori} · ${b.penulis}</p><p style="font-size:1.5rem;font-weight:700;color:#1e40af">Rp ${b.harga.toLocaleString('id-ID')}</p><h2>Deskripsi</h2><p>Buku komprehensif tentang ${b.kategori.toLowerCase()} dengan pendekatan praktis.</p><p style="margin-top:1.5rem"><a onclick="go('/kontak')" class="btn btn-primary">Pesan Buku</a></p></div></div></section>`;
+}
+
+function renderDiklat(){
+  return `<section class="page-header"><h1>Diklat & Pendidikan</h1><p>Program pendidikan hukum</p></section><section class="section"><div class="container"><div class="features">${DIKLAT.map(d=>`<div class="card" onclick="go('/diklat/${d.id}')"><div class="icon">${d.icon}</div><h3>${d.nama}</h3><p>${d.desc}</p></div>`).join('')}</div></div></section>`;
+}
+
+function renderDiklatDetail(id){
+  const d = DIKLAT.find(x=>x.id===id);
+  if(!d) return renderDiklat();
+  return `<section class="page-header"><h1>${d.nama}</h1><p>${d.desc}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/diklat')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-img" style="background:${d.color}">${d.icon}</div><div class="detail-content"><h1>${d.nama}</h1><p class="meta">${d.desc}</p><p>${d.isi}</p><p style="margin-top:1.5rem"><a onclick="go('/kontak')" class="btn btn-primary">Daftar</a></p></div></div></section>`;
+}
+
+function renderKarier(){
+  return `<section class="page-header"><h1>Karier</h1><p>Bergabung bersama kami</p></section><section class="section"><div class="container"><div class="features">${KARIER.map(k=>`<div class="card" onclick="go('/karier/${k.id}')"><div class="icon">${k.icon}</div><h3>${k.nama}</h3><p style="font-size:.78rem">${k.kualifikasi.substring(0,60)}...</p></div>`).join('')}</div></div></section>`;
+}
+
+function renderKarierDetail(id){
+  const k = KARIER.find(x=>x.id===id);
+  if(!k) return renderKarier();
+  return `<section class="page-header"><h1>${k.nama}</h1><p>Lowongan</p></section><div class="back-bar"><button class="back-btn" onclick="go('/karier')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-content"><div style="text-align:center;font-size:4rem;margin-bottom:1rem">${k.icon}</div><h1>${k.nama}</h1><h2>Kualifikasi</h2><p>${k.kualifikasi}</p><h2>Cara Melamar</h2><p>Kirim CV ke <strong>hrd@khb.co.id</strong>.</p></div></div></section>`;
+}
+
+function renderPublikasi(){
+  return `<section class="page-header"><h1>Publikasi & Berita</h1><p>Artikel & kegiatan</p></section><section class="section"><div class="container"><div class="news-grid">${ARTIKEL.map(a=>`<article class="news-card" onclick="go('/publikasi/${a.id}')"><div class="news-thumb" style="background:${a.color}">${a.icon}</div><div class="news-body"><span class="news-tag">${a.kategori}</span><h3>${a.judul}</h3><small>${a.tanggal}</small></div></article>`).join('')}</div></div></section>`;
+}
+
+function renderPublikasiDetail(id){
+  const a = ARTIKEL.find(x=>x.id===id);
+  if(!a) return renderPublikasi();
+  return `<section class="page-header"><h1>${a.judul}</h1><p>${a.kategori}</p></section><div class="back-bar"><button class="back-btn" onclick="go('/publikasi')">← Kembali</button></div><section class="section"><div class="container"><div class="detail-img" style="background:${a.color}">${a.icon}</div><div class="detail-content"><h1>${a.judul}</h1><p class="meta">${a.kategori} · ${a.tanggal}</p>${a.isi}</div></div></section>`;
+}
+
+function renderKlien(){
+  return `<section class="page-header"><h1>Klien & Mitra</h1><p>Kepercayaan yang dibangun</p></section><section class="section"><div class="container"><h2 class="section-title">Klien Korporasi</h2><div class="features"><div class="card"><div class="icon">🏢</div><h3>PT Maju Jaya</h3><p>Retainer korporasi</p></div><div class="card"><div class="icon">🏭</div><h3>PT Sentosa</h3><p>Sengketa tanah</p></div><div class="card"><div class="icon">💼</div><h3>CV Karya</h3><p>Kontrak bisnis</p></div></div><h2 class="section-title" style="margin-top:2rem">Mitra Strategis</h2><div class="features"><div class="card"><div class="icon">🎓</div><h3>Fakultas Hukum</h3><p>Kerja sama pendidikan</p></div><div class="card"><div class="icon">⚖️</div><h3>Asosiasi Advokat</h3><p>Kolaborasi diklat</p></div><div class="card"><div class="icon">🌐</div><h3>LBH Masyarakat</h3><p>Bantuan pro bono</p></div></div></div></section>`;
+}
+
+function renderKonsultasi(){
+  return `<section class="page-header"><h1>Konsultasi Hukum</h1><p>Kami siap membantu</p></section><section class="section"><div class="container"><div class="features"><div class="card"><div class="icon">💬</div><h3>Chat Online</h3><p>Via WhatsApp.</p><a href="https://wa.me/6281234567890" class="btn btn-primary btn-sm" style="margin-top:.6rem;display:inline-block">Mulai Chat</a></div><div class="card" onclick="go('/kontak')"><div class="icon">📝</div><h3>Pendampingan</h3><p>Ajukan pendampingan.</p></div><div class="card" onclick="go(getUser()?'/konsumen':'/login')"><div class="icon">📅</div><h3>Jadwalkan</h3><p>Buat janji temu.</p></div><div class="card" onclick="go('/kontak')"><div class="icon">📣</div><h3>Pengaduan</h3><p>Sampaikan pengaduan.</p></div></div></div></section>`;
+}
+
+function renderKontak(){
+  return `<section class="page-header"><h1>Kontak</h1><p>Hubungi kami</p></section><section class="section"><div class="container"><div class="contact-grid"><div><h2 class="section-title">Kontak</h2><div class="contact-list"><p>📍 Jl. Jenderal Sudirman Kav. 52-53, Jakarta</p><p>💬 <a href="https://wa.me/6281234567890">+62 812-3456-7890</a></p><p>📧 info@khb.co.id</p><p>🕐 Senin-Jumat 08.00-17.00</p></div></div><div><h2 class="section-title">Peta</h2><iframe src="https://www.google.com/maps?q=jakarta&output=embed" width="100%" height="280" style="border:0;border-radius:10px;margin-top:1rem" loading="lazy"></iframe></div></div></div></section>`;
+}
+
+// ============ LOGIN / REGISTER ============
+function renderLogin(){
+  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#0f172a;margin-bottom:.3rem">Login</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Masuk ke akun Anda</p><div id="loginAlert"></div><form onsubmit="doLogin(event)" class="form"><label>Email<input type="email" id="loginEmail" required placeholder="nama@email.com"></label><label>Password<input type="password" id="loginPass" required placeholder="••••••••"></label><button class="btn btn-primary" type="submit">Masuk</button><p style="text-align:center;font-size:.85rem">Belum punya akun? <a onclick="go('/register')">Daftar</a></p></form><div style="max-width:480px;margin:1rem auto;padding:1rem;background:#fef3c7;border-radius:8px;font-size:.8rem;color:#92400e"><strong>🔐 Demo Login:</strong><br>Admin: <code>admin@khb.local</code> / <code>admin123</code><br>Konsumen: daftar dulu lewat halaman Register</div></div></section>`;
+}
+
+function renderRegister(){
+  return `<section class="section"><div class="container"><h1 style="text-align:center;color:#0f172a;margin-bottom:.3rem">Daftar Akun</h1><p style="text-align:center;color:#6b7280;margin-bottom:1rem">Registrasi konsumen baru</p><div id="regAlert"></div><form onsubmit="doRegister(event)" class="form"><label>Nama Lengkap<input id="regNama" required minlength="3"></label><label>Email<input type="email" id="regEmail" required></label><label>Telepon<input type="tel" id="regTelp"></label><label>Password (min 6)<input type="password" id="regPass" required minlength="6"></label><label>Konfirmasi<input type="password" id="regPass2" required minlength="6"></label><button class="btn btn-primary" type="submit">Daftar</button><p style="text-align:center;font-size:.85rem">Sudah punya akun? <a onclick="go('/login')">Login</a></p></form></div></section>`;
+}
+  function doLogin(e){
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+  const pass = document.getElementById('loginPass').value;
+  const box = document.getElementById('loginAlert');
+  if(email === 'admin@khb.local' && pass === 'admin123'){
+    setUser({nama:'Administrator', email, role:'admin'});
+    go('/admin');
+    return false;
+  }
+  const users = getUsers();
+  const u = users.find(x => x.email === email && x.password === pass);
+  if(u){
+    setUser({nama:u.nama, email, role:'konsumen'});
+    go('/konsumen');
+    return false;
+  }
+  box.innerHTML = '<div class="alert alert-error">Email atau password salah.</div>';
+  return false;
+}
+
+function doRegister(e){
+  e.preventDefault();
+  const nama = document.getElementById('regNama').value.trim();
+  const email = document.getElementById('regEmail').value.trim().toLowerCase();
+  const telp = document.getElementById('regTelp').value.trim();
+  const pass = document.getElementById('regPass').value;
+  const pass2 = document.getElementById('regPass2').value;
+  const box = document.getElementById('regAlert');
+  if(pass !== pass2){ box.innerHTML = '<div class="alert alert-error">Password tidak cocok.</div>'; return false; }
+  if(email === 'admin@khb.local'){ box.innerHTML = '<div class="alert alert-error">Email sudah terdaftar.</div>'; return false; }
+  const users = getUsers();
+  if(users.find(u => u.email === email)){ box.innerHTML = '<div class="alert alert-error">Email sudah terdaftar.</div>'; return false; }
+  users.push({nama, email, telepon:telp, password:pass, created:new Date().toISOString().slice(0,10)});
+  saveUsers(users);
+  box.innerHTML = '<div class="alert alert-success">✅ Registrasi berhasil! Mengalihkan ke login...</div>';
+  setTimeout(() => { go('/login'); }, 1200);
+  return false;
+}
+
+// ============ ADMIN DASHBOARD ============
+function renderAdmin(){
+  const u = getUser();
+  if(!u || u.role !== 'admin') return renderForbidden();
+  const users = getUsers();
+  const perkara = getPerkara();
+  const konsul = getKonsultasi().filter(k => k.status === 'pending');
+  return `
+    <div class="dash-header"><div class="inner"><div><h1>👑 Dashboard Administrator</h1><div class="user">Login sebagai <strong>${u.nama}</strong></div></div><button class="btn btn-danger" onclick="doLogout()">Logout</button></div></div>
+    <div class="dash-main">
+      <div class="demo-badge">🔐 Mode Demo — Data di localStorage</div>
+      <h2 style="color:#0f172a;margin-bottom:1rem">Statistik</h2>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Total Konsumen</span><strong>${users.length}</strong></div>
+        <div class="stat-card"><span>Total Perkara</span><strong>${perkara.length}</strong></div>
+        <div class="stat-card"><span>Konsultasi Pending</span><strong>${konsul.length}</strong></div>
       </div>
-    </div>
-  </header>
-
-  <nav class="khb-nav">
-    <div class="khb-nav-inner" id="khbNavInner">
-      <div class="khb-nav-item"><a class="khb-nav-link" href="index.html">BERANDA <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="index.html#hero">Halaman Utama</a><a href="index.html#sambutan">Sambutan</a><a href="index.html#layanan">Layanan</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="profil.html">PROFIL KANTOR <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="profil.html#tentang">Tentang Kami</a><a href="profil.html#visi-misi">Visi Misi</a><a href="profil.html#struktur">Struktur</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="layanan.html">LAYANAN HUKUM <span class="khb-caret">▼</span></a><div class="khb-mega"><h4>Bidang Layanan</h4><a href="layanan.html#pidana">Hukum Pidana</a><a href="layanan.html#perdata">Hukum Perdata</a><a href="layanan.html#bisnis">Hukum Bisnis</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="tim.html">TIM ADVOKAT <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="tim.html#managing-partner">Managing Partner</a><a href="tim.html#senior">Senior Advocate</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="keahlian.html">BIDANG KEAHLIAN <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="keahlian.html#litigasi">Litigasi</a><a href="keahlian.html#non-litigasi">Non-Litigasi</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="katalog.html">KATALOG BUKU <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="katalog.html#buku-hukum">Buku Hukum</a><a href="katalog.html#buku-bisnis">Buku Bisnis</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="diklat.html">DIKLAT &amp; PENDIDIKAN <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="diklat.html#advokat">Pelatihan Advokat</a><a href="diklat.html#paralegal">Paralegal</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="karier.html">KARIER <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="karier.html#bergabung">Bergabung</a><a href="karier.html#magang">Magang</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="publikasi.html">PUBLIKASI &amp; BERITA <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="publikasi.html#artikel">Artikel</a><a href="publikasi.html#berita">Berita</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="klien.html">KLIEN &amp; MITRA <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="klien.html#korporasi">Korporasi</a><a href="klien.html#mitra">Mitra</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="konsultasi.html">KONSULTASI <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="konsultasi.html#online">Online</a><a href="konsultasi.html#jadwal">Jadwal</a></div></div>
-      <div class="khb-nav-item"><a class="khb-nav-link" href="kontak.html">KONTAK KAMI <span class="khb-caret">▼</span></a><div class="khb-dropdown"><a href="kontak.html#alamat">Alamat</a><a href="kontak.html#wa">WhatsApp</a></div></div>
-    </div>
-  </nav>
-
-  <section class="hero" id="hero" style="background: #0a0a0a;">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="badge" style="background: rgba(212, 175, 55, 0.1); border: 1px solid #d4af37; color: #d4af37;">⚖️ DPC PERADI Tangerang · ⭐ 5.0 Google Rating</div>
-        <h1 style="color: #ffffff;">Kepastian Hukum untuk <span style="color: #d4af37;">Keberlanjutan</span> Bisnis Anda</h1>
-        <p class="hero-desc" style="color: #a1a1aa;">Kami memadukan pendekatan akademis, pengalaman bisnis, dan kompetensi manajerial dalam menangani hukum korporasi, kepatuhan, HKI, dan penyelesaian sengketa bisnis.</p>
-        <div class="hero-actions">
-          <a href="login.html" class="btn-primary" style="background: #d4af37; color: #0a0a0a;">Masuk Portal Klien</a>
-          <a href="daftar.html" class="btn-ghost" style="border: 1.5px solid #d4af37; color: #d4af37;">Daftar Akun Baru</a>
-        </div>
+      <h2 style="color:#0f172a;margin:1.5rem 0 1rem">Manajemen Perkara</h2>
+      <form onsubmit="return tambahPerkara(event)" class="form" style="max-width:100%;margin:0 0 1rem">
+        <label>Konsumen<select id="pKonsumen">${users.length?users.map(x=>`<option>${x.nama}</option>`).join(''):'<option>Budi Santoso</option><option>Siti Rahayu</option>'}</select></label>
+        <label>Jenis<select id="pJenis"><option>PERDATA</option><option>PIDANA</option><option>BISNIS</option><option>KELUARGA</option></select></label>
+        <label>Deskripsi<textarea id="pDesk" rows="2" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Tambah Perkara</button>
+      </form>
+      <table class="table"><thead><tr><th>No. Perkara</th><th>Konsumen</th><th>Jenis</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
+        ${perkara.map(p=>`<tr><td><code>${p.nomor}</code></td><td>${p.konsumen}</td><td>${p.jenis}</td><td><span class="badge badge-${p.status}">${p.status}</span></td><td><select onchange="ubahStatusPerkara(${p.id}, this.value)" style="font-size:.78rem;padding:.25rem">${['diajukan','aktif','proses','selesai','ditutup'].map(s=>`<option ${s===p.status?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')}
+      </tbody></table>
+      <h2 style="color:#0f172a;margin:1.5rem 0 1rem">Manajemen Konsultasi</h2>
+      <table class="table"><thead><tr><th>Konsumen</th><th>Topik</th><th>Status</th><th>Aksi</th></tr></thead><tbody>
+        ${getKonsultasi().map(k=>`<tr><td>${k.konsumen}</td><td><strong>${k.topik}</strong><br><small style="color:#6b7280">${k.deskripsi}</small></td><td><span class="badge badge-${k.status}">${k.status}</span></td><td><select onchange="ubahStatusKonsul(${k.id}, this.value)" style="font-size:.78rem;padding:.25rem">${['pending','dijadwalkan','selesai'].map(s=>`<option ${s===k.status?'selected':''}>${s}</option>`).join('')}</select></td></tr>`).join('')}
+      </tbody></table>
+      <h2 style="color:#0f172a;margin:1.5rem 0 1rem">Data Konsumen</h2>
+      ${users.length===0 ? '<div class="alert alert-info">Belum ada konsumen. Minta klien daftar di halaman Register.</div>' : `<table class="table"><thead><tr><th>#</th><th>Nama</th><th>Email</th><th>Telepon</th><th>Terdaftar</th></tr></thead><tbody>${users.map((x,i)=>`<tr><td>${i+1}</td><td>${x.nama}</td><td>${x.email}</td><td>${x.telepon||'-'}</td><td>${x.created||'-'}</td></tr>`).join('')}</tbody></table>`}
+    </div>`;
+}
+  function renderKonsumen(){
+  const u = getUser();
+  if(!u || u.role !== 'konsumen') return renderForbidden();
+  const myKonsul = getKonsultasi().filter(k => k.konsumen === u.nama);
+  const myPerkara = getPerkara().filter(p => p.konsumen === u.nama);
+  return `
+    <div class="dash-header"><div class="inner"><div><h1>👤 Dashboard Konsumen</h1><div class="user">Halo, <strong>${u.nama}</strong></div></div><button class="btn btn-danger" onclick="doLogout()">Logout</button></div></div>
+    <div class="dash-main">
+      <div class="demo-badge">🔐 Mode Demo — Data di localStorage</div>
+      <div class="stats-grid">
+        <div class="stat-card"><span>Perkara Saya</span><strong>${myPerkara.length}</strong></div>
+        <div class="stat-card"><span>Konsultasi</span><strong>${myKonsul.length}</strong></div>
       </div>
-      <div class="hero-image">
-        <div class="profile-card" style="background: #18181b; border: 1px solid #27272a; text-align: center;">
-          <img src="logo.png" alt="Logo SAKRI" style="width: 160px; margin: 0 auto 20px; display: block; object-fit:contain;">
-          <h3 style="color: #d4af37; margin-bottom: 8px;">SAKRI &amp; Associates</h3>
-          <p style="color: #a1a1aa; margin-bottom: 16px;">Firma Hukum Bisnis Terpercaya</p>
-        </div>
-      </div>
-    </div>
-  </section>
+      <h2 style="color:#0f172a;margin-bottom:1rem">Ajukan Konsultasi Baru</h2>
+      <form onsubmit="return ajukanKonsultasi(event)" class="form" style="max-width:100%">
+        <label>Topik<input id="kTopik" required placeholder="Contoh: Sengketa Tanah"></label>
+        <label>Deskripsi<textarea id="kDesk" rows="3" required></textarea></label>
+        <button class="btn btn-primary" type="submit">Ajukan</button>
+      </form>
+      <h2 style="color:#0f172a;margin:1.5rem 0 1rem">Riwayat Konsultasi</h2>
+      ${myKonsul.length===0 ? '<p style="color:#6b7280">Belum ada konsultasi.</p>' : `<table class="table"><thead><tr><th>Topik</th><th>Deskripsi</th><th>Status</th><th>Tanggal</th></tr></thead><tbody>${myKonsul.map(k=>`<tr><td><strong>${k.topik}</strong></td><td>${k.deskripsi}</td><td><span class="badge badge-${k.status}">${k.status}</span></td><td>${k.created}</td></tr>`).join('')}</tbody></table>`}
+      <h2 style="color:#0f172a;margin:1.5rem 0 1rem">Perkara Saya</h2>
+      ${myPerkara.length===0 ? '<p style="color:#6b7280">Belum ada perkara. Admin akan membuatkan jika diperlukan.</p>' : `<table class="table"><thead><tr><th>No. Perkara</th><th>Jenis</th><th>Deskripsi</th><th>Status</th></tr></thead><tbody>${myPerkara.map(p=>`<tr><td><code>${p.nomor}</code></td><td>${p.jenis}</td><td>${p.deskripsi}</td><td><span class="badge badge-${p.status}">${p.status}</span></td></tr>`).join('')}</tbody></table>`}
+    </div>`;
+}
 
-  <section class="stats-section" style="background: #121212; border-top: 1px solid #27272a; border-bottom: 1px solid #27272a;">
-    <div class="container stats-grid">
-      <div class="stat-item"><h2 style="color: #d4af37;">10+</h2><p style="color: #a1a1aa;">Tahun Pengalaman</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37;">500+</h2><p style="color: #a1a1aa;">Perkara Ditangani</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37;">98%</h2><p style="color: #a1a1aa;">Tingkat Keberhasilan</p></div>
-      <div class="stat-item"><h2 style="color: #d4af37;">24/7</h2><p style="color: #a1a1aa;">Dukungan Klien</p></div>
-    </div>
-  </section>
+function renderForbidden(){
+  return `<section class="section"><div class="container" style="text-align:center;padding:3rem 1rem"><h1 style="color:#dc2626">403 Forbidden</h1><p style="margin:1rem 0">Anda belum login atau tidak memiliki akses.</p><a onclick="go('/login')" class="btn btn-primary">Login</a></div></section>`;
+}
 
-  <section class="section" id="layanan" style="background: #0a0a0a;">
-    <div class="container">
-      <div class="section-head text-center"><span class="eyebrow" style="color: #d4af37;">Bidang Keahlian</span><h2 style="color: #ffffff;">Layanan Hukum Bisnis <span style="color: #d4af37;">Unggulan</span></h2></div>
-      <div class="services-grid">
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🏢</div><h3 style="color: #d4af37;">Hukum Bisnis &amp; Korporasi</h3><p style="color: #a1a1aa;">Pendirian badan usaha, restrukturisasi, legal opinion, serta pendampingan transaksi.</p></div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🚢</div><h3 style="color: #d4af37;">Hukum Pengangkutan</h3><p style="color: #a1a1aa;">Kontrak pengangkutan darat, laut, udara, mitigasi risiko klaim kerugian, demurrage.</p></div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">💡</div><h3 style="color: #d4af37;">Hak Kekayaan Intelektual</h3><p style="color: #a1a1aa;">Pendaftaran merek, hak cipta, desain industri, paten, lisensi waralaba, serta penegakan.</p></div>
-        <div class="service-card" style="background: #18181b; border: 1px solid #27272a;"><div class="service-icon">🤝</div><h3 style="color: #d4af37;">Mediasi &amp; Sengketa (ADR)</h3><p style="color: #a1a1aa;">Mediasi sengketa dagang, arbitrase bisnis, negosiasi win-win solution.</p></div>
-      </div>
-    </div>
-  </section>
+function tambahPerkara(e){
+  e.preventDefault();
+  const list = getPerkara();
+  const id = (list[list.length-1]?.id||0)+1;
+  const jenis = document.getElementById('pJenis').value;
+  const nomor = `KHB/${jenis}/2025/${String(id).padStart(4,'0')}`;
+  list.push({id, nomor, konsumen:document.getElementById('pKonsumen').value, jenis, deskripsi:document.getElementById('pDesk').value, status:'diajukan', created:new Date().toISOString().slice(0,10)});
+  savePerkara(list);
+  alert('✅ Perkara ditambahkan: ' + nomor);
+  route();
+  return false;
+}
+function ubahStatusPerkara(id, status){
+  const list = getPerkara();
+  const p = list.find(x=>x.id===id);
+  if(p){ p.status = status; savePerkara(list); alert('✅ Status diperbarui: ' + status); route(); }
+}
+function ubahStatusKonsul(id, status){
+  const list = getKonsultasi();
+  const k = list.find(x=>x.id===id);
+  if(k){ k.status = status; saveKonsultasi(list); alert('✅ Status diperbarui: ' + status); route(); }
+}
+function ajukanKonsultasi(e){
+  e.preventDefault();
+  const u = getUser();
+  if(!u) return false;
+  const list = getKonsultasi();
+  const id = (list[list.length-1]?.id||0)+1;
+  list.push({id, konsumen:u.nama, topik:document.getElementById('kTopik').value, deskripsi:document.getElementById('kDesk').value, status:'pending', created:new Date().toISOString().slice(0,10)});
+  saveKonsultasi(list);
+  alert('✅ Konsultasi diajukan.');
+  route();
+  return false;
+}
 
-  <footer class="khb-footer">
-    <div class="khb-footer-inner">
-      <div><h5>SAKRI &amp; Associates</h5><p style="font-size:13.5px;margin:0">Advocates, Legal Consultants &amp; Education</p><p style="font-size:13.5px;margin-top:8px">Tangerang, Banten<br>+62 21 1234 5678<br>info@sakri-law.com</p></div>
-      <div><h5>Navigasi</h5><a href="index.html">Beranda</a><a href="profil.html">Profil Kantor</a><a href="layanan.html">Layanan Hukum</a><a href="tim.html">Tim Advokat</a><a href="katalog.html">Katalog Buku</a></div>
-      <div><h5>Informasi</h5><a href="publikasi.html">Publikasi &amp; Berita</a><a href="karier.html">Karier</a><a href="diklat.html">Diklat &amp; Pendidikan</a><a href="klien.html">Klien &amp; Mitra</a></div>
-      <div><h5>Kontak</h5><a href="konsultasi.html">Konsultasi Online</a><a href="kontak.html">Kontak Kami</a><a href="login.html">Login Klien</a><a href="daftar.html">Daftar Akun</a></div>
-    </div>
-    <div class="khb-copyright">© 2026 SAKRI &amp; Associates. All rights reserved.</div>
-  </footer>
+// ============ ROUTER ============
+function go(path){
+  window.location.hash = '#' + path;
+  document.getElementById('nav-toggle').checked = false;
+  window.scrollTo(0,0);
+}
 
-  <script>
-    (function(){
-      var hb=document.getElementById('khbHamburger'); var nav=document.getElementById('khbNavInner');
-      if(hb&&nav){hb.addEventListener('click',function(){nav.classList.toggle('khb-show');});}
-      var items=document.querySelectorAll('.khb-nav-item');
-      items.forEach(function(item){
-        var link=item.querySelector('.khb-nav-link'); if(!link)return;
-        link.addEventListener('click',function(e){
-          e.stopPropagation(); var open=item.classList.contains('khb-open');
-          items.forEach(function(i){i.classList.remove('khb-open');});
-          if(!open)item.classList.add('khb-open');
-        });
-        item.addEventListener('mouseenter',function(){ if(window.innerWidth>980){items.forEach(function(i){i.classList.remove('khb-open');});item.classList.add('khb-open');} });
-        item.addEventListener('mouseleave',function(){ if(window.innerWidth>980)item.classList.remove('khb-open'); });
-      });
-      document.addEventListener('click',function(){items.forEach(function(i){i.classList.remove('khb-open');});});
-    })();
-  </script>
+function route(){
+  const hash = window.location.hash.slice(1) || '/';
+  const p = hash.split('/').filter(Boolean);
+  const sec = p[0] || '';
+  const param = p[1] || '';
+  let html = '';
+  switch(sec){
+    case '': html = renderHome(); break;
+    case 'profil': html = param ? renderProfilSub(param) : renderProfil(); break;
+    case 'layanan': html = param ? renderLayananDetail(param) : renderLayanan(); break;
+    case 'tim': html = param ? renderTimDetail(parseInt(param)) : renderTim(); break;
+    case 'keahlian': html = renderKeahlian(); break;
+    case 'buku': html = param ? renderBukuDetail(param) : renderBuku(); break;
+    case 'diklat': html = param ? renderDiklatDetail(param) : renderDiklat(); break;
+    case 'karier': html = param ? renderKarierDetail(param) : renderKarier(); break;
+    case 'publikasi': html = param ? renderPublikasiDetail(param) : renderPublikasi(); break;
+    case 'klien': html = renderKlien(); break;
+    case 'konsultasi': html = renderKonsultasi(); break;
+    case 'kontak': html = renderKontak(); break;
+    case 'login': html = renderLogin(); break;
+    case 'register': html = renderRegister(); break;
+    case 'admin': html = renderAdmin(); break;
+    case 'konsumen': html = renderKonsumen(); break;
+    default: html = renderHome();
+  }
+  app.innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+document.getElementById('layananMenu').innerHTML = LAYANAN.map(l=>`<li><a onclick="go('/layanan/${l.id}')">${l.nama}</a></li>`).join('');
+window.addEventListener('hashchange', route);
+updateAuthNav();
+route();
+</script>
+
 </body>
 </html>
